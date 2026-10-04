@@ -31,6 +31,7 @@ signal open_load_menu
 
 ## Tracks the currently loaded location scene path for save/load.
 var current_scene_path: String = ""
+var game_main: MainGameFrame
 
 ## Current Scene Context.
 var current_scene_context: SCENE_CONTEXT = SCENE_CONTEXT.IN_MENU:
@@ -74,22 +75,6 @@ func initialize() -> void:
 	current_scene_path = ""
 #endregion
 
-#region Dialogic-targeting Functions
-## Function that will intercept timeline_started events to do stuff.
-func _events_when_timeline_started() -> void:
-	pass
-	#toggle_pause_menu_layer.emit(false)
-
-## Function that will intercept timeline_ended events to do stuff.
-func _events_when_timeline_ended() -> void:
-	pass
-	#toggle_pause_menu_layer.emit(true)
-
-## Helper function to force Dialogic to open history :D
-func show_history(value: bool) -> void:
-	pass
-#endregion
-
 #region Custom Functions
 ## Wait, literally.
 func wait(seconds: float) -> void:
@@ -108,11 +93,6 @@ func show_save_menu() -> void:
 ## Helper function to show load menu.
 func show_load_menu() -> void:
 	open_load_menu.emit()
-
-## Helper function to show/hide the button of the pause menu in game.
-func show_pause_menu_button(value: bool) -> void:
-	#toggle_pause_menu_layer.emit(value)
-	pass
 
 ## Resets everything when going back to main menu.
 func reset()-> void:

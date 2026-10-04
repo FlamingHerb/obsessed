@@ -11,15 +11,16 @@ config_version=5
 [application]
 
 config/name="Obsessed"
+run/main_scene="uid://b1vbk7rml26a8"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DataManager="*uid://btpav26843778"
-AudioManager="*uid://651prkfosia5"
 GameSettings="*uid://bsdau5xeptpbw"
 Events="*uid://fvwe53ifyi40"
+AudioManager="*uid://cqre1d7efrq45"
 
 [display]
 
@@ -27,6 +28,11 @@ window/size/viewport_width=640
 window/size/viewport_height=480
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom="uid://p00l66m1e6yu"
+theme/custom_font="uid://cqim5d4igf6tw"
 
 [physics]
 

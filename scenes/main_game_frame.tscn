@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cr5nocx6pmfrf"]
+
+[ext_resource type="Script" uid="uid://cd6t5nlac4247" path="res://scripts/main_game_frame.gd" id="1_3u0ws"]
+
+[node name="MainGameFrame" type="Node" unique_id=1044994733]
+script = ExtResource("1_3u0ws")
+
+[node name="GameArea" type="Node2D" parent="." unique_id=334518458]
