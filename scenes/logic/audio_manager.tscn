@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cqre1d7efrq45"]
+
+[ext_resource type="Script" uid="uid://651prkfosia5" path="res://scripts/logic/audio_manager.gd" id="1_qxga5"]
+
+[node name="AudioManager" type="Node" unique_id=2086503652]
+process_mode = 3
+script = ExtResource("1_qxga5")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=460801117]
+unique_name_in_owner = true
+
+[node name="BGS" type="AudioStreamPlayer" parent="." unique_id=594709218]
+unique_name_in_owner = true
+
+[node name="SFX" type="Node" parent="." unique_id=899182288]

@@ -14,6 +14,13 @@ config/name="Obsessed"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DataManager="*uid://btpav26843778"
+AudioManager="*uid://651prkfosia5"
+GameSettings="*uid://bsdau5xeptpbw"
+Events="*uid://fvwe53ifyi40"
+
 [display]
 
 window/stretch/mode="canvas_items"

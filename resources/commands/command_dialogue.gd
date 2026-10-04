@@ -1,0 +1,13 @@
+@icon("res://nodes/command_message.svg")
+
+class_name DialogueCommand
+extends Commands
+
+## Dialogic file to target
+@export var dialogue: String
+## Label where to start the entire timeline.
+@export var label: String = ""
+
+@warning_ignore("unused_parameter")
+func execute(node: MapEventBase) -> bool:
+	return true

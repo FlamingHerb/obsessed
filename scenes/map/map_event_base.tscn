@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://s0cgr666xcug"]
+
+[ext_resource type="Script" uid="uid://caufqh88de1xc" path="res://scripts/map/map_event_base.gd" id="1_8cxdh"]
+
+[node name="MapEventBase" type="Area2D" unique_id=861190875]
+script = ExtResource("1_8cxdh")
