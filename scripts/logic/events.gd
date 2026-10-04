@@ -48,24 +48,24 @@ func _init() -> void:
 	pass
 
 #region Virtual functions
-func _ready() -> void:
-	false
+#func _ready() -> void:
+	#false
 
 # For more global handling
 func _unhandled_key_input(event: InputEvent) -> void:
 	# Handle fullscreen toggling.
-	if Input.is_action_just_pressed("shortcut_fullscreen"):
+	if event.is_action_just_pressed("shortcut_fullscreen"):
 		_fullscreen_shortcut_pressed()
 		get_viewport().set_input_as_handled()
 	
-	if Input.is_action_just_pressed("show_menu") and current_scene_context != SCENE_CONTEXT.IN_MENU:
+	if event.is_action_just_pressed("show_menu") and current_scene_context != SCENE_CONTEXT.IN_MENU:
 		get_viewport().set_input_as_handled()
 	
-	if Input.is_action_just_pressed("shortcut_save") and current_scene_context == SCENE_CONTEXT.IN_GAME:
+	if event.is_action_just_pressed("shortcut_save") and current_scene_context == SCENE_CONTEXT.IN_GAME:
 		shortcut_save_pressed.emit()
 		get_viewport().set_input_as_handled()
 	
-	if Input.is_action_just_pressed("shortcut_load") and current_scene_context == SCENE_CONTEXT.IN_GAME:
+	if event.is_action_just_pressed("shortcut_load") and current_scene_context == SCENE_CONTEXT.IN_GAME:
 		shortcut_load_pressed.emit()
 		get_viewport().set_input_as_handled()
 		

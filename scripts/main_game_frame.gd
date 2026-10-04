@@ -74,7 +74,7 @@ func _deferred_change_area(path: String) -> void:
 	var current_scene = get_node(current_area_name)
 	var new_scene = ResourceLoader.load(path)
 	
-	await _fade_out_from_scene(current_scene)
+	await _fade_out_from_scene()
 	
 	current_scene.free()
 	current_scene = new_scene.instantiate()
@@ -90,21 +90,21 @@ func _deferred_change_area(path: String) -> void:
 	# New scene must always be the first.
 	move_child(current_scene, 0)
 	
-	_fade_in_to_scene(current_scene)
+	_fade_in_to_scene()
 	Events.area_change_completed.emit()
 	
 #endregion
 
 #region Custom function
 
-func _fade_out_from_scene(game_area: Node2D) -> void:
+func _fade_out_from_scene() -> void:
 	# Make tween for fade out
 	var tween = create_tween().set_parallel(true)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(game_area, "modulate", Color.BLACK, 0.5)
 	await tween.finished
 
-func _fade_in_to_scene(game_area: Node2D) -> void:
+func _fade_in_to_scene() -> void:
 		# Then fade in again.
 	var new_tween = create_tween().set_parallel(true)
 	new_tween.set_ease(Tween.EASE_IN_OUT)
