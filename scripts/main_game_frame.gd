@@ -31,7 +31,6 @@ var current_area_name: String = "GameArea"
 
 #region Virtual functions
 func _ready() -> void:
-	
 	# INFO: Tell events that you are the GameMainFrame.
 	Events.game_main = self
 	

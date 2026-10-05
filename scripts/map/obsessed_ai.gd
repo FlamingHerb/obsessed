@@ -15,6 +15,13 @@ signal obsessed_exited(current_area: MapNode)
 @export var obsessed_starting_point: MapNode
 ## Usual patrol route, will be ignored during some states.
 @export var patrol_route: Array[MapNode]
+## Game map to reference.
+@export var game_map: GameMap
+## Debug for Pathfinding
+@export var starting_node_debug: MapNode
+## Debug for Pathfinding
+@export var target_node_debug: MapNode
+
 
 ## Current location of the obsession
 var current_location: MapNode
@@ -29,3 +36,27 @@ func _obsession_moving(target_area: MapNode) -> void:
 	
 	current_location = target_area
 	obsessed_entered.emit(target_area)
+
+# I can't believe I'm using BFS now.
+func _pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
+	var parent := {start: null}
+	var queue: Array[MapNode] = [start]
+	
+	while not queue.is_empty():
+		var current_node: MapNode = queue.pop_front()
+		
+		if current_node == target:
+			var path: Array[MapNode] = []
+			while current_node != null:
+				path.append(current_node)
+				current_node = parent[current_node]
+			path.reverse()
+			print(path)
+			return path
+		
+		for child in current_node.map_neighbours:
+			if not parent.has(child): # Check if there's already instances.
+				parent[child] = current_node
+				queue.append(child)
+	
+	return []

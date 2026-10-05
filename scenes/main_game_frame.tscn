@@ -152,6 +152,7 @@ map_name = "FrontDoor"
 map_scene = ExtResource("15_nacsm")
 map_neighbours = [NodePath("../LivingRoom")]
 
-[node name="ObsessedAI" parent="." unique_id=1908456690 node_paths=PackedStringArray("obsessed_starting_point", "patrol_route") instance=ExtResource("3_5gttk")]
+[node name="ObsessedAI" parent="." unique_id=1908456690 node_paths=PackedStringArray("obsessed_starting_point", "patrol_route", "game_map") instance=ExtResource("3_5gttk")]
 obsessed_starting_point = NodePath("../GameMap/Bedroom")
 patrol_route = [NodePath("../GameMap/Bedroom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom"), NodePath("../GameMap/FrontDoor")]
+game_map = NodePath("../GameMap")

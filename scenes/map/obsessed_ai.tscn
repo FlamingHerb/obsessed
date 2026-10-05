@@ -4,3 +4,5 @@
 
 [node name="ObsessedAI" type="Node" unique_id=1908456690]
 script = ExtResource("1_jqmul")
+
+[node name="ActionTimer" type="Timer" parent="." unique_id=1314048613]
