@@ -15,10 +15,10 @@ enum CurrentGameScene {
 	#WIKS
 #}
 
-## INFO: Exported variables
+# INFO: Exported variables
 @export var current_scene: PackedScene
 
-## INFO: Onready variables
+# INFO: Onready variables
 @onready var game_area = $GameArea
 
 

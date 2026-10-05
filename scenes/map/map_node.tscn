@@ -11,8 +11,8 @@ font_color = Color(1, 0, 0, 1)
 [node name="MapNode" type="Control" unique_id=2147084624]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 40.0
+offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("1_y6hvl")
 
