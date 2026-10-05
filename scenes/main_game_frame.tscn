@@ -16,9 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://c5m4nj23k5k4l" path="res://scenes/areas/living_room.tscn" id="14_633l6"]
 [ext_resource type="PackedScene" uid="uid://dwpeamvnd18wr" path="res://scenes/areas/front_door.tscn" id="15_nacsm"]
 
-[node name="MainGameFrame" type="Node" unique_id=1044994733]
+[node name="MainGameFrame" type="Node" unique_id=1044994733 node_paths=PackedStringArray("starting_scene")]
 script = ExtResource("1_3u0ws")
-current_scene = ExtResource("2_cfpp1")
+starting_scene = NodePath("GameMap/Bedroom")
 
 [node name="Backdrop" type="ColorRect" parent="." unique_id=1086744433]
 anchors_preset = 15

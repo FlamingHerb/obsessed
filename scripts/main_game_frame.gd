@@ -4,19 +4,9 @@ class_name MainGameFrame
 extends Node
 
 #region Initialized Variables and Exports
-## INFO: Enums
-enum CurrentGameScene {
-	CURRENT_MAP,
-	MAP_TRAVEL,
-	PAUSE_MENU
-}
-#enum POV_Character {
-	#ADI,
-	#WIKS
-#}
 
 # INFO: Exported variables
-@export var current_scene: PackedScene
+@export var starting_scene: MapNode
 
 # INFO: Onready variables
 @onready var game_area = $GameArea
@@ -24,8 +14,9 @@ enum CurrentGameScene {
 
 ## INFO: Other variables
 ## Sets Adi as the default POV character.
-var current_game_scene = CurrentGameScene.CURRENT_MAP
 var current_area_name: String = "GameArea"
+
+@onready var game_map: GameMap = $GameMap
 
 #endregion
 
@@ -43,23 +34,16 @@ func _ready() -> void:
 	Events.initialize()
 		
 	# INFO: Start game. Kinda funny we're doing loop-de-loops here.
-	Events.change_area(current_scene.resource_path)
-	#Events.show_the_context_menus(false) # By default, as intro will flick it up.
+	Events.change_area(starting_scene)
 #endregion
 
 func _input(_event: InputEvent) -> void:
-	#if event.is_action_pressed("open_map"):
-		#_map_travel_scene_call()
-		#get_viewport().set_input_as_handled()
-		
-	#if event.is_action_pressed("open_scrapbook"):
-		#get_tree().change_scene_to_file("res://scenes/scenes/scrapbook.tscn")
-	
 	pass
 
 #region Area Change Functions
 ## First is path.
-func _goto_area(path: String) -> void:
+func _goto_area(map_node: MapNode) -> void:
+	var path = map_node.map_scene.resource_path
 	if ResourceLoader.exists(path):
 		call_deferred("_deferred_change_area", path)
 	

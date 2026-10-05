@@ -7,7 +7,7 @@ enum SCENE_CONTEXT {
 	IN_MENU
 }
 
-signal change_map(path: String)
+signal change_map(map_node: MapNode)
 signal area_change_completed
 
 # For save/load shortcuts
@@ -30,7 +30,6 @@ signal open_load_menu
 # var save_load_menu: SaveLoadMenu
 
 ## Tracks the currently loaded location scene path for save/load.
-var current_scene_path: String = ""
 var game_main: MainGameFrame
 
 ## Current Scene Context.
@@ -64,7 +63,6 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 ## Initializes Events for a new game.
 func initialize() -> void:
 	current_scene_context = SCENE_CONTEXT.IN_GAME
-	current_scene_path = ""
 #endregion
 
 #region Custom Functions
@@ -74,9 +72,8 @@ func wait(seconds: float) -> void:
 
 ## Changes area to the PackedScene [param path].
 ## Pretty much a helper function for a signal to make code readable.
-func change_area(path: String) -> void:
-	current_scene_path = path
-	change_map.emit(path)
+func change_area(map_node: MapNode) -> void:
+	change_map.emit(map_node)
 
 ## Helper function to show save menu.
 func show_save_menu() -> void:
@@ -88,7 +85,7 @@ func show_load_menu() -> void:
 
 ## Resets everything when going back to main menu.
 func reset()-> void:
-	current_scene_path = ""
+	pass
 
 ## Universal helper function to check if there's any changes for menus elsewhere.
 func any_menu_opened(node: Control) -> void:
