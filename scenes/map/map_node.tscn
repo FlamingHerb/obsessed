@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ctcv3lf58d6vd"]
+
+[ext_resource type="Script" uid="uid://b6702turp7674" path="res://scripts/map/map_node.gd" id="1_y6hvl"]
+[ext_resource type="Texture2D" uid="uid://ba1w7iox1i713" path="res://nodes/item_base.svg" id="2_2wnuj"]
+[ext_resource type="Texture2D" uid="uid://dhd7ama7aact8" path="res://nodes/command_pov_switch.svg" id="3_48hpa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bhyvd"]
+font_size = 12
+font_color = Color(1, 0, 0, 1)
+
+[node name="MapNode" type="Control" unique_id=2147084624]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+script = ExtResource("1_y6hvl")
+
+[node name="Shape" type="Polygon2D" parent="." unique_id=1090133987]
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 40, 0, 40)
+
+[node name="Label" type="Label" parent="." unique_id=114295904]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "R"
+label_settings = SubResource("LabelSettings_bhyvd")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Player" type="TextureRect" parent="." unique_id=2026345630]
+texture_filter = 3
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource("2_2wnuj")
+expand_mode = 3
+
+[node name="Obsessed" type="TextureRect" parent="." unique_id=806772738]
+texture_filter = 3
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("3_48hpa")
+expand_mode = 3

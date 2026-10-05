@@ -1,8 +1,25 @@
 [gd_scene format=3 uid="uid://cr5nocx6pmfrf"]
 
 [ext_resource type="Script" uid="uid://cd6t5nlac4247" path="res://scripts/main_game_frame.gd" id="1_3u0ws"]
+[ext_resource type="PackedScene" uid="uid://btje5tj6gpu6o" path="res://scenes/areas/bed_room.tscn" id="2_cfpp1"]
+[ext_resource type="PackedScene" uid="uid://bn8iosdwnwa0" path="res://scenes/menus/pause_menu.tscn" id="2_vtjbl"]
+[ext_resource type="PackedScene" uid="uid://dra6t5pl04qd1" path="res://scenes/map/obsessed_ai.tscn" id="3_5gttk"]
+[ext_resource type="Script" uid="uid://cl0b3w35t2sxd" path="res://scripts/map/game_map.gd" id="4_onxw4"]
 
 [node name="MainGameFrame" type="Node" unique_id=1044994733]
 script = ExtResource("1_3u0ws")
+current_scene = ExtResource("2_cfpp1")
 
 [node name="GameArea" type="Node2D" parent="." unique_id=334518458]
+
+[node name="PauseMenu" parent="." unique_id=342466922 instance=ExtResource("2_vtjbl")]
+
+[node name="ObsessedAI" parent="." unique_id=1908456690 instance=ExtResource("3_5gttk")]
+
+[node name="GameMap" type="Control" parent="." unique_id=1709275921]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_onxw4")
+metadata/_custom_type_script = "uid://cl0b3w35t2sxd"

@@ -52,21 +52,13 @@ func _init() -> void:
 	#false
 
 # For more global handling
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_key_input(_event: InputEvent) -> void:
 	# Handle fullscreen toggling.
-	if event.is_action_just_pressed("shortcut_fullscreen"):
+	if Input.is_action_just_pressed("shortcut_fullscreen"):
 		_fullscreen_shortcut_pressed()
 		get_viewport().set_input_as_handled()
 	
-	if event.is_action_just_pressed("show_menu") and current_scene_context != SCENE_CONTEXT.IN_MENU:
-		get_viewport().set_input_as_handled()
-	
-	if event.is_action_just_pressed("shortcut_save") and current_scene_context == SCENE_CONTEXT.IN_GAME:
-		shortcut_save_pressed.emit()
-		get_viewport().set_input_as_handled()
-	
-	if event.is_action_just_pressed("shortcut_load") and current_scene_context == SCENE_CONTEXT.IN_GAME:
-		shortcut_load_pressed.emit()
+	if Input.is_action_just_pressed("show_menu") and current_scene_context != SCENE_CONTEXT.IN_MENU:
 		get_viewport().set_input_as_handled()
 		
 ## Initializes Events for a new game.

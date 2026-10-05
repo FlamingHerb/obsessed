@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dra6t5pl04qd1"]
+
+[ext_resource type="Script" uid="uid://b3rj5jspx2w24" path="res://scripts/map/obsessed_ai.gd" id="1_jqmul"]
+
+[node name="ObsessedAI" type="Node" unique_id=1908456690]
+script = ExtResource("1_jqmul")
