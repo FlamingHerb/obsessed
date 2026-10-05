@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bcxlhlvvowy2o"]
+
+[ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_6j0qv"]
+
+[node name="Hall" type="Node2D" unique_id=554868217]
+script = ExtResource("1_6j0qv")
+metadata/_custom_type_script = "uid://cf0du2pssgv47"

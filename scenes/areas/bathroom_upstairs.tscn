@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c623idewl1ask"]
+
+[ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_3utbw"]
+
+[node name="BathroomUpstairs" type="Node2D" unique_id=256729614]
+script = ExtResource("1_3utbw")
+metadata/_custom_type_script = "uid://cf0du2pssgv47"

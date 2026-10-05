@@ -5,6 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://bn8iosdwnwa0" path="res://scenes/menus/pause_menu.tscn" id="2_vtjbl"]
 [ext_resource type="PackedScene" uid="uid://dra6t5pl04qd1" path="res://scenes/map/obsessed_ai.tscn" id="3_5gttk"]
 [ext_resource type="Script" uid="uid://cl0b3w35t2sxd" path="res://scripts/map/game_map.gd" id="4_onxw4"]
+[ext_resource type="PackedScene" uid="uid://ctcv3lf58d6vd" path="res://scenes/map/map_node.tscn" id="6_dqx88"]
+[ext_resource type="PackedScene" uid="uid://c623idewl1ask" path="res://scenes/areas/bathroom_upstairs.tscn" id="7_dq1ta"]
+[ext_resource type="PackedScene" uid="uid://bjjtfdaopnct" path="res://scenes/areas/bathroom_downstairs.tscn" id="8_56g8q"]
+[ext_resource type="PackedScene" uid="uid://b0y3b0kacecix" path="res://scenes/areas/hall_stairs.tscn" id="9_28y4d"]
+[ext_resource type="PackedScene" uid="uid://cfvv1munb3hpd" path="res://scenes/areas/closet_room.tscn" id="10_xs1j4"]
+[ext_resource type="PackedScene" uid="uid://bcxlhlvvowy2o" path="res://scenes/areas/hall.tscn" id="11_qpu3v"]
+[ext_resource type="PackedScene" uid="uid://bvmjkyvpcjxqi" path="res://scenes/areas/garage.tscn" id="12_wafmi"]
+[ext_resource type="PackedScene" uid="uid://cw5svg83rmnde" path="res://scenes/areas/kitchen.tscn" id="13_rfxsm"]
+[ext_resource type="PackedScene" uid="uid://c5m4nj23k5k4l" path="res://scenes/areas/living_room.tscn" id="14_633l6"]
+[ext_resource type="PackedScene" uid="uid://dwpeamvnd18wr" path="res://scenes/areas/front_door.tscn" id="15_nacsm"]
 
 [node name="MainGameFrame" type="Node" unique_id=1044994733]
 script = ExtResource("1_3u0ws")
@@ -13,6 +23,7 @@ current_scene = ExtResource("2_cfpp1")
 [node name="GameArea" type="Node2D" parent="." unique_id=334518458]
 
 [node name="PauseMenu" parent="." unique_id=342466922 instance=ExtResource("2_vtjbl")]
+visible = false
 
 [node name="ObsessedAI" parent="." unique_id=1908456690 instance=ExtResource("3_5gttk")]
 
@@ -23,3 +34,63 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("4_onxw4")
 metadata/_custom_type_script = "uid://cl0b3w35t2sxd"
+
+[node name="Bedroom" parent="GameMap" unique_id=2147084624 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "Bedroom"
+map_scene = ExtResource("2_cfpp1")
+map_neighbours = [NodePath("../HallStairs")]
+
+[node name="HallStairs" parent="GameMap" unique_id=1245628046 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "HallStairs"
+map_scene = ExtResource("9_28y4d")
+map_neighbours = [NodePath("../Bedroom"), NodePath("../BathroomUpstairs"), NodePath("../ClosetRoom"), NodePath("../Hall")]
+
+[node name="BathroomUpstairs" parent="GameMap" unique_id=1427428842 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "BathroomUpstairs"
+map_scene = ExtResource("7_dq1ta")
+map_neighbours = [NodePath("../HallStairs")]
+
+[node name="ClosetRoom" parent="GameMap" unique_id=1937709289 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "ClosetRoom"
+map_scene = ExtResource("10_xs1j4")
+map_neighbours = [NodePath("../HallStairs")]
+
+[node name="BathroomDownstairs" parent="GameMap" unique_id=1477787819 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "BathroomDownstairs"
+map_scene = ExtResource("8_56g8q")
+map_neighbours = [NodePath("../Hall")]
+
+[node name="Hall" parent="GameMap" unique_id=1552257219 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "Hall"
+map_scene = ExtResource("11_qpu3v")
+map_neighbours = [NodePath("../HallStairs"), NodePath("../BathroomDownstairs"), NodePath("../Garage"), NodePath("../LivingRoom")]
+
+[node name="Garage" parent="GameMap" unique_id=1434123341 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "Garage"
+map_scene = ExtResource("12_wafmi")
+map_neighbours = [NodePath("../Hall")]
+
+[node name="Kitchen" parent="GameMap" unique_id=1388720268 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "Kitchen"
+map_scene = ExtResource("13_rfxsm")
+map_neighbours = [NodePath("../LivingRoom")]
+
+[node name="LivingRoom" parent="GameMap" unique_id=513706135 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "LivingRoom"
+map_scene = ExtResource("14_633l6")
+map_neighbours = [NodePath("../Hall"), NodePath("../Kitchen"), NodePath("../FrontDoor")]
+
+[node name="FrontDoor" parent="GameMap" unique_id=1475694425 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+layout_mode = 0
+map_name = "FrontDoor"
+map_scene = ExtResource("15_nacsm")
+map_neighbours = [NodePath("../LivingRoom")]

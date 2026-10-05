@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bvmjkyvpcjxqi"]
+
+[ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_a08om"]
+
+[node name="Garage" type="Node2D" unique_id=1659400209]
+script = ExtResource("1_a08om")
+metadata/_custom_type_script = "uid://cf0du2pssgv47"
