@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://dra6t5pl04qd1"]
 
 [ext_resource type="Script" uid="uid://b3rj5jspx2w24" path="res://scripts/map/obsessed_ai.gd" id="1_jqmul"]
+[ext_resource type="Script" uid="uid://biaf2k1w0j8hq" path="res://scripts/state/state_base.gd" id="2_30c7n"]
 
-[node name="ObsessedAI" type="Node" unique_id=1908456690]
+[node name="ObsessedAI" type="Node" unique_id=1908456690 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_jqmul")
+initial_state = NodePath("StateBase")
 
 [node name="ActionTimer" type="Timer" parent="." unique_id=1314048613]
+
+[node name="StateBase" type="Node" parent="." unique_id=367529352]
+script = ExtResource("2_30c7n")
+metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

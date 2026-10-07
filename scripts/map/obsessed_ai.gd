@@ -3,6 +3,7 @@
 # ** Obsessed AI
 #------------------------------------------------------------------------------
 # The AI for the Obsessed. Self-explanatory.
+# References: https://github.com/gdquest-demos/godot-design-patterns/blob/main/godot/finite_state_machine/node_version/state_machine.gd
 #==============================================================================
 
 class_name ObsessedAI
@@ -10,6 +11,7 @@ extends Node
 
 signal obsessed_entered(target_area: MapNode)
 signal obsessed_exited(current_area: MapNode)
+signal state_changed()
 
 ## Where the obsessed starts in (the bedroom)
 @export var obsessed_starting_point: MapNode
@@ -22,14 +24,24 @@ signal obsessed_exited(current_area: MapNode)
 ## Debug for Pathfinding
 @export var target_node_debug: MapNode
 
+## The initial state of the state machine. If not set, the first child node is used.
+@export var initial_state: StateBase = null
+
+## The current state of the state machine.
+@onready var state: StateBase = (func get_initial_state() -> StateBase:
+	return initial_state if initial_state != null else get_child(0)
+).call()
 
 ## Current location of the obsession
 var current_location: MapNode
 ## Location that the Obsessed AI last visited.
 var last_visited_location: MapNode
 
+
 func _ready() -> void:
 	_obsession_moving(obsessed_starting_point)
+	for state_node: StateBase in find_children("*", "StateBase"):
+		pass
 
 func _obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.
@@ -62,3 +74,19 @@ func _pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
 				queue.append(child)
 	
 	return []
+
+#region State Machine Handlers
+func _transition_to_next_state(target_state: StateBase, data: Dictionary = {}) -> void:
+	if not target_state:
+		printerr(owner.name + ": Trying to transition to state " + target_state.name + " but it does not exist.")
+		return
+
+	var previous_state_path := state.name
+	state.exit()
+	state = target_state
+	state.enter(target_state)
+	state_changed.emit()
+#endregion
+
+func _on_action_timer_timeout() -> void:
+	pass # Replace with function body.

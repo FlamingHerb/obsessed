@@ -21,8 +21,7 @@ func _ready() -> void:
 
 func _player_moving(map_node: MapNode) -> void:
 	# I am so just bored lemaw.
-	for child in get_children():
-		if child is not MapNode: continue
+	for child: MapNode in find_children("*", "MapNode"):
 		if child == map_node: child.player_icon.show()
 		else: child.player_icon.hide()
 
@@ -38,8 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		else: show()
 
 func _generate_line_route() -> void:
-	for child in get_children():
-		if child is not MapNode: continue
+	for child: MapNode in find_children("*", "MapNode"):
 		for node_neighbour: MapNode in child.map_neighbours:
 			var line_2d = Line2D.new()
 			line_2d.default_color = Color(Color.RED)
