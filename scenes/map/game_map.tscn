@@ -11,9 +11,24 @@
 [ext_resource type="PackedScene" uid="uid://bvmjkyvpcjxqi" path="res://scenes/areas/garage.tscn" id="9_yqllf"]
 [ext_resource type="PackedScene" uid="uid://cw5svg83rmnde" path="res://scenes/areas/kitchen.tscn" id="10_smxdv"]
 [ext_resource type="PackedScene" uid="uid://c5m4nj23k5k4l" path="res://scenes/areas/living_room.tscn" id="11_khf7d"]
-[ext_resource type="PackedScene" uid="uid://dwpeamvnd18wr" path="res://scenes/areas/front_door.tscn" id="12_35h1d"]
+[ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="12_d2848"]
 
-[node name="GameMap" type="Control" unique_id=937656268 node_paths=PackedStringArray("obsession_ai")]
+[sub_resource type="PackedScene" id="PackedScene_r3beg"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("FrontDoor", "Node2D", "script", "metadata/_custom_type_script"),
+"node_count": 1,
+"node_ids": PackedInt32Array(1553167147),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0),
+"variants": [ExtResource("12_d2848"), "uid://cf0du2pssgv47"],
+"version": 3
+}
+
+[node name="GameMap" type="Control" unique_id=937656268]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +36,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d2848")
-obsession_ai = NodePath("")
 metadata/_custom_type_script = "uid://cl0b3w35t2sxd"
 
 [node name="Bedroom" parent="." unique_id=2147084624 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("2_r3beg")]
@@ -129,5 +143,5 @@ offset_right = 576.0
 offset_bottom = 296.0
 map_label = "FD"
 map_name = "FrontDoor"
-map_scene = ExtResource("12_35h1d")
+map_scene = SubResource("PackedScene_r3beg")
 map_neighbours = [NodePath("../LivingRoom")]

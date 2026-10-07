@@ -25,6 +25,8 @@ signal obsessed_exited(current_area: MapNode)
 
 ## Current location of the obsession
 var current_location: MapNode
+## Location that the Obsessed AI last visited.
+var last_visited_location: MapNode
 
 func _ready() -> void:
 	_obsession_moving(obsessed_starting_point)
