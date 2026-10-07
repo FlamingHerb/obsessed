@@ -69,8 +69,8 @@ func _deferred_change_area(path: String) -> void:
 	#current_scene.name = "GameArea"
 	current_scene.modulate = Color.BLACK
 	
-	# New scene must always be the first.
-	move_child(current_scene, 0)
+	# New scene must always be the second one.
+	move_child(current_scene, 1)
 	
 	_fade_in_to_scene(current_scene)
 	Events.area_change_completed.emit()
