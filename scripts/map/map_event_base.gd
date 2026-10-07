@@ -38,6 +38,10 @@ func _process(_delta: float) -> void:
 		elif current_page.trigger == EventPage.TRIGGER_TYPE.PARALLEL:
 			_activate_event_page(current_page)
 
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		print(event)
+
 # When DataManager changes, find a better page host.
 func _find_suitable_page() -> void:
 	for i in range(event_page_list.size() - 1, -1, -1):

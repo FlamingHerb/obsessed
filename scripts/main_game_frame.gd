@@ -17,6 +17,8 @@ extends Node
 var current_area_name: String = "GameArea"
 
 @onready var game_map: GameMap = $GameMap
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 #endregion
 

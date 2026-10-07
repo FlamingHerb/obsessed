@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://c5m4nj23k5k4l"]
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_23wmd"]
+[ext_resource type="Texture2D" uid="uid://c3ui8vf4mv3tl" path="res://assets/graphics/bg/living_room.png" id="2_btl2f"]
 
 [node name="LivingRoom" type="Node2D" unique_id=478466405]
 script = ExtResource("1_23wmd")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
+
+[node name="Background" type="TextureRect" parent="." unique_id=1880732555]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_btl2f")

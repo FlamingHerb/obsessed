@@ -39,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("4_onxw4")
 obsession_ai = NodePath("../ObsessedAI")
 metadata/_custom_type_script = "uid://cl0b3w35t2sxd"
@@ -144,3 +145,5 @@ map_neighbours = [NodePath("../Hall"), NodePath("../Kitchen")]
 obsessed_starting_point = NodePath("../GameMap/Bedroom")
 patrol_route = [NodePath("../GameMap/Bedroom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom")]
 game_map = NodePath("../GameMap")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1074598446]

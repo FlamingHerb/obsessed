@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://c623idewl1ask"]
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_3utbw"]
+[ext_resource type="Texture2D" uid="uid://dhwn3pyuk8fp7" path="res://assets/graphics/bg/bathroom_upstairs.png" id="2_4e2xn"]
 
 [node name="BathroomUpstairs" type="Node2D" unique_id=256729614]
 script = ExtResource("1_3utbw")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
+
+[node name="Background" type="TextureRect" parent="." unique_id=1974836241]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_4e2xn")

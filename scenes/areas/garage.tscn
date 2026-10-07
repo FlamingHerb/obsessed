@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://bvmjkyvpcjxqi"]
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_a08om"]
+[ext_resource type="Texture2D" uid="uid://11o77xhdyp4f" path="res://assets/graphics/bg/garage.png" id="2_utxgq"]
 
 [node name="Garage" type="Node2D" unique_id=1659400209]
 script = ExtResource("1_a08om")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
+
+[node name="Background" type="TextureRect" parent="." unique_id=9979129]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_utxgq")

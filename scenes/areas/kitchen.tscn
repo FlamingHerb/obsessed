@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://cw5svg83rmnde"]
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_4sy8e"]
+[ext_resource type="Texture2D" uid="uid://y71no3w8x4ug" path="res://assets/graphics/bg/kitchen.png" id="2_mtfoj"]
 
 [node name="Kitchen" type="Node2D" unique_id=1843081304]
 script = ExtResource("1_4sy8e")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
+
+[node name="Background" type="TextureRect" parent="." unique_id=1717628871]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_mtfoj")
