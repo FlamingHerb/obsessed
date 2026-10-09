@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_a08om"]
 [ext_resource type="Texture2D" uid="uid://11o77xhdyp4f" path="res://assets/graphics/bg/garage.png" id="2_utxgq"]
+[ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_k3tx4"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_l6rr3"]
+[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="5_xrobh"]
 
 [node name="Garage" type="Node2D" unique_id=1659400209]
 script = ExtResource("1_a08om")
@@ -11,3 +14,10 @@ metadata/_custom_type_script = "uid://cf0du2pssgv47"
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_utxgq")
+
+[node name="ToHall" parent="." unique_id=861190875 instance=ExtResource("3_k3tx4")]
+event_page_list = Array[ExtResource("4_l6rr3")]([ExtResource("5_xrobh")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHall" unique_id=579625622]
+position = Vector2(309, -126)
+polygon = PackedVector2Array(283, 126, 286, 606, 331, 607, 331, 126)

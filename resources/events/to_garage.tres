@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://c15p0kg3nucvc"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_7qcle"]
+[ext_resource type="Script" uid="uid://blonaum01aqp7" path="res://resources/commands/command_scene_change.gd" id="2_pbepu"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="3_7bifk"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="4_nhom8"]
+
+[sub_resource type="Resource" id="Resource_7qcle"]
+script = ExtResource("2_pbepu")
+destination = "res://scenes/areas/garage.tscn"
+metadata/_custom_type_script = "uid://blonaum01aqp7"
+
+[resource]
+resource_name = "To Garage"
+script = ExtResource("3_7bifk")
+commands = Array[ExtResource("1_7qcle")]([SubResource("Resource_7qcle")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

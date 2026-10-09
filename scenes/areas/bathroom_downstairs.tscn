@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_mqbqs"]
 [ext_resource type="Texture2D" uid="uid://c8qdqv7clj6nf" path="res://assets/graphics/bg/bathroom_downstairs.png" id="2_4wf2y"]
+[ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_y4lhg"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_cxf5q"]
+[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="5_h8d3f"]
 
 [node name="BathroomDownstairs" type="Node2D" unique_id=783187507]
 script = ExtResource("1_mqbqs")
@@ -11,3 +14,9 @@ metadata/_custom_type_script = "uid://cf0du2pssgv47"
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_4wf2y")
+
+[node name="ToHall" parent="." unique_id=861190875 instance=ExtResource("3_y4lhg")]
+event_page_list = Array[ExtResource("4_cxf5q")]([ExtResource("5_h8d3f")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHall" unique_id=130269186]
+polygon = PackedVector2Array(351, 36, 355, 428, 521, 488, 525, -5)

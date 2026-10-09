@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://bxvsfduxg6uxf"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_ea7h6"]
+[ext_resource type="Script" uid="uid://blonaum01aqp7" path="res://resources/commands/command_scene_change.gd" id="2_c4lmo"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="3_amvv4"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="4_jpmbv"]
+
+[sub_resource type="Resource" id="Resource_ea7h6"]
+script = ExtResource("2_c4lmo")
+destination = "res://scenes/areas/living_room.tscn"
+metadata/_custom_type_script = "uid://blonaum01aqp7"
+
+[resource]
+resource_name = "To Living Room"
+script = ExtResource("3_amvv4")
+commands = Array[ExtResource("1_ea7h6")]([SubResource("Resource_ea7h6")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

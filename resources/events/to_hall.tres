@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://bry6br7jom0f0"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_kx43o"]
+[ext_resource type="Script" uid="uid://blonaum01aqp7" path="res://resources/commands/command_scene_change.gd" id="3_us7ll"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_xa803"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="5_v542o"]
+
+[sub_resource type="Resource" id="Resource_evh43"]
+script = ExtResource("3_us7ll")
+destination = "res://scenes/areas/hall.tscn"
+metadata/_custom_type_script = "uid://blonaum01aqp7"
+
+[resource]
+resource_name = "To Hall"
+script = ExtResource("4_xa803")
+commands = Array[ExtResource("1_kx43o")]([SubResource("Resource_evh43")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

@@ -4,9 +4,9 @@ class_name SceneChangeCommand
 extends Commands
 
 ## Destination of the scene change.
-@export var destination: PackedScene
+@export_file_path var destination: String
 
 @warning_ignore("unused_parameter")
 func execute(node: MapEventBase) -> bool:
-	Events.change_area(destination.resource_path)
+	Events.change_area(destination)
 	return true

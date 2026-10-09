@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_4sy8e"]
 [ext_resource type="Texture2D" uid="uid://y71no3w8x4ug" path="res://assets/graphics/bg/kitchen.png" id="2_mtfoj"]
+[ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_jvgkm"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_ffsgo"]
+[ext_resource type="Resource" uid="uid://bxvsfduxg6uxf" path="res://resources/events/to_living_room.tres" id="5_tnnaj"]
 
 [node name="Kitchen" type="Node2D" unique_id=1843081304]
 script = ExtResource("1_4sy8e")
@@ -11,3 +14,11 @@ metadata/_custom_type_script = "uid://cf0du2pssgv47"
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_mtfoj")
+
+[node name="ToLivingRoom" parent="Background" unique_id=861190875 instance=ExtResource("3_jvgkm")]
+position = Vector2(-164, -67)
+event_page_list = Array[ExtResource("4_ffsgo")]([ExtResource("5_tnnaj")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/ToLivingRoom" unique_id=194208816]
+position = Vector2(254, 230)
+polygon = PackedVector2Array(456, -17, 538, -30, 539, 153, 456, 144)

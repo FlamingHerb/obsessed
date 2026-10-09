@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://dcgjq6tmqcpgv"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_bo1gh"]
+[ext_resource type="Script" uid="uid://blonaum01aqp7" path="res://resources/commands/command_scene_change.gd" id="3_36f64"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_f7mqg"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="5_jfrup"]
+
+[sub_resource type="Resource" id="Resource_cq7hs"]
+script = ExtResource("3_36f64")
+destination = "res://scenes/areas/closet_room.tscn"
+metadata/_custom_type_script = "uid://blonaum01aqp7"
+
+[resource]
+resource_name = "To Closet Room"
+script = ExtResource("4_f7mqg")
+commands = Array[ExtResource("1_bo1gh")]([SubResource("Resource_cq7hs")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

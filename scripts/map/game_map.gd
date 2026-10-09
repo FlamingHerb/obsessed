@@ -23,6 +23,7 @@ func _ready() -> void:
 
 func _player_moving(map_node_path: String) -> void:
 	# I am so just bored lemaw.
+	print("Map Node Path: ", map_node_path)
 	for child: MapNode in find_children("*", "MapNode"):
 		if child.map_scene.resource_path == map_node_path: child.player_icon.show()
 		else: child.player_icon.hide()

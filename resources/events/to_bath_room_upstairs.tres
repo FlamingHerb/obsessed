@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://bq7fpinggvitt"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_es5tq"]
+[ext_resource type="Script" uid="uid://blonaum01aqp7" path="res://resources/commands/command_scene_change.gd" id="2_cwsom"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="3_1wemq"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="4_x0imy"]
+
+[sub_resource type="Resource" id="Resource_7rwvj"]
+script = ExtResource("2_cwsom")
+destination = "res://scenes/areas/bathroom_upstairs.tscn"
+metadata/_custom_type_script = "uid://blonaum01aqp7"
+
+[resource]
+resource_name = "To Bathroom Upstairs"
+script = ExtResource("3_1wemq")
+commands = Array[ExtResource("1_es5tq")]([SubResource("Resource_7rwvj")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

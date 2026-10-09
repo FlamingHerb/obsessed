@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_jtbxd"]
 [ext_resource type="Texture2D" uid="uid://c5w5kj5snnmn0" path="res://assets/graphics/bg/closet_room.png" id="2_o85dr"]
+[ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_6kk2w"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_ei1gx"]
+[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/to_hall_stairs.tres" id="5_qtfh4"]
 
 [node name="ClosetRoom" type="Node2D" unique_id=1985496326]
 script = ExtResource("1_jtbxd")
@@ -11,3 +14,9 @@ metadata/_custom_type_script = "uid://cf0du2pssgv47"
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_o85dr")
+
+[node name="ToHallStairs" parent="." unique_id=861190875 instance=ExtResource("3_6kk2w")]
+event_page_list = Array[ExtResource("4_ei1gx")]([ExtResource("5_qtfh4")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHallStairs" unique_id=513800247]
+polygon = PackedVector2Array(319, 135, 318, 338, 397, 351, 400, 130)

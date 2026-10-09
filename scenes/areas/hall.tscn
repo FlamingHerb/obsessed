@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_6j0qv"]
 [ext_resource type="Texture2D" uid="uid://bc00ytka7xc8o" path="res://assets/graphics/bg/hall.png" id="2_f55t6"]
+[ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_4e5cd"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_p8kip"]
+[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/to_hall_stairs.tres" id="5_f3ugf"]
+[ext_resource type="Resource" uid="uid://c15p0kg3nucvc" path="res://resources/events/to_garage.tres" id="6_fut28"]
+[ext_resource type="Resource" uid="uid://d28sswxfq8lf5" path="res://resources/events/to_bath_room_downstairs.tres" id="7_i6a3y"]
+[ext_resource type="Resource" uid="uid://bxvsfduxg6uxf" path="res://resources/events/to_living_room.tres" id="8_lan0v"]
 
 [node name="Hall" type="Node2D" unique_id=554868217]
 script = ExtResource("1_6j0qv")
@@ -11,3 +17,35 @@ metadata/_custom_type_script = "uid://cf0du2pssgv47"
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_f55t6")
+
+[node name="ToHallStairs" parent="." unique_id=861190875 instance=ExtResource("3_4e5cd")]
+position = Vector2(667, -10)
+event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("5_f3ugf")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHallStairs" unique_id=1115164165]
+position = Vector2(-119.00002, 170)
+polygon = PackedVector2Array(-102, -159, 91, -159, 89, 90, -77, 91)
+
+[node name="ToGarage" parent="." unique_id=305128035 instance=ExtResource("3_4e5cd")]
+position = Vector2(365, 35)
+event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("6_fut28")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToGarage" unique_id=888927308]
+position = Vector2(66.96696, 166.16733)
+polygon = PackedVector2Array(-57.96695, -70.16733, 0.033050537, -81.16733, 7.0330505, 136.83267, -55.96695, 142.83267)
+
+[node name="ToBathroom" parent="." unique_id=2067872573 instance=ExtResource("3_4e5cd")]
+position = Vector2(215, 52)
+event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("7_i6a3y")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToBathroom" unique_id=609053434]
+position = Vector2(66.96696, 166.16733)
+polygon = PackedVector2Array(-118.96695, -156.16733, -1.9669495, -117.16733, -0.96694946, 161.83267, -116.96695, 211.83267)
+
+[node name="ToLivingRoom" parent="." unique_id=1759475502 instance=ExtResource("3_4e5cd")]
+position = Vector2(-164, -67)
+event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("8_lan0v")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToLivingRoom" unique_id=105625256]
+position = Vector2(254, 230)
+polygon = PackedVector2Array(-90, -163, -17, -163, -14, 317, -90, 317)
