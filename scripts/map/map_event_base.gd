@@ -39,8 +39,9 @@ func _process(_delta: float) -> void:
 			_activate_event_page(current_page)
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		print(event)
+	if event is InputEventMouseButton and event.is_pressed():
+		interact()
+		get_viewport().set_input_as_handled()
 
 # When DataManager changes, find a better page host.
 func _find_suitable_page() -> void:

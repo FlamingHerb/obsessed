@@ -7,7 +7,7 @@ enum SCENE_CONTEXT {
 	IN_MENU
 }
 
-signal change_map(map_node: MapNode)
+signal change_map(path: String)
 signal area_change_completed
 
 # For save/load shortcuts
@@ -17,6 +17,9 @@ signal shortcut_load_pressed
 # For opening save/load menu
 signal open_save_menu
 signal open_load_menu
+
+## When you want to force the state change
+signal state_change_force(target_state_path: String)
 
 # For menus opening/closing
 #signal any_menu_opened_closed(node: Control)
@@ -72,20 +75,16 @@ func wait(seconds: float) -> void:
 
 ## Changes area to the PackedScene [param path].
 ## Pretty much a helper function for a signal to make code readable.
-func change_area(map_node: MapNode) -> void:
-	change_map.emit(map_node)
-
-## Helper function to show save menu.
-func show_save_menu() -> void:
-	open_save_menu.emit()
-
-## Helper function to show load menu.
-func show_load_menu() -> void:
-	open_load_menu.emit()
+func change_area(path: String) -> void:
+	change_map.emit(path)
 
 ## Resets everything when going back to main menu.
 func reset()-> void:
 	pass
+
+## Force state change.
+func force_state_change(target_state_path: String) -> void:
+	state_change_force.emit(target_state_path)
 
 ## Universal helper function to check if there's any changes for menus elsewhere.
 func any_menu_opened(node: Control) -> void:

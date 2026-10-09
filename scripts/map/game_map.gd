@@ -19,10 +19,10 @@ func _ready() -> void:
 	
 	_generate_line_route()
 
-func _player_moving(map_node: MapNode) -> void:
+func _player_moving(map_node_path: String) -> void:
 	# I am so just bored lemaw.
 	for child: MapNode in find_children("*", "MapNode"):
-		if child == map_node: child.player_icon.show()
+		if child.map_scene.resource_path == map_node_path: child.player_icon.show()
 		else: child.player_icon.hide()
 
 func _obsession_entering_area(target_area: MapNode) -> void:

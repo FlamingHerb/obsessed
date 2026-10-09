@@ -36,7 +36,7 @@ func _ready() -> void:
 	Events.initialize()
 		
 	# INFO: Start game. Kinda funny we're doing loop-de-loops here.
-	Events.change_area(starting_scene)
+	Events.change_area(starting_scene.map_scene.resource_path)
 #endregion
 
 func _input(_event: InputEvent) -> void:
@@ -44,8 +44,7 @@ func _input(_event: InputEvent) -> void:
 
 #region Area Change Functions
 ## First is path.
-func _goto_area(map_node: MapNode) -> void:
-	var path = map_node.map_scene.resource_path
+func _goto_area(path: String) -> void:
 	if ResourceLoader.exists(path):
 		call_deferred("_deferred_change_area", path)
 	
@@ -60,6 +59,7 @@ func _deferred_change_area(path: String) -> void:
 	
 	await _fade_out_from_scene(current_scene)
 	
+	print("Previous Scene: ", current_area_name)
 	current_scene.free()
 	current_scene = new_scene.instantiate()
 	

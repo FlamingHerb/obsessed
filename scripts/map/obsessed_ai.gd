@@ -27,6 +27,9 @@ signal state_changed()
 ## The initial state of the state machine. If not set, the first child node is used.
 @export var initial_state: StateBase = null
 
+
+## Action timer.
+@onready var action_timer: Timer = $ActionTimer
 ## The current state of the state machine.
 @onready var state: StateBase = (func get_initial_state() -> StateBase:
 	return initial_state if initial_state != null else get_child(0)
@@ -39,9 +42,17 @@ var last_visited_location: MapNode
 
 
 func _ready() -> void:
+	# Connect signals.
+	Events.state_change_force.connect(_transition_to_next_state)
+	
 	_obsession_moving(obsessed_starting_point)
 	for state_node: StateBase in find_children("*", "StateBase"):
 		pass
+		
+	await owner.ready
+	state.enter("")
+	
+	action_timer.start()
 
 func _obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.
@@ -76,17 +87,18 @@ func _pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
 	return []
 
 #region State Machine Handlers
-func _transition_to_next_state(target_state: StateBase, data: Dictionary = {}) -> void:
-	if not target_state:
-		printerr(owner.name + ": Trying to transition to state " + target_state.name + " but it does not exist.")
+func _transition_to_next_state(target_state_path: String) -> void:
+	if not has_node(target_state_path):
+		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
 
 	var previous_state_path := state.name
 	state.exit()
-	state = target_state
-	state.enter(target_state)
+	state = get_node(target_state_path)
+	state.enter(previous_state_path)
 	state_changed.emit()
 #endregion
 
+# Tell current state that the timer has timed out.
 func _on_action_timer_timeout() -> void:
-	pass # Replace with function body.
+	state.action_timer_timeout(action_timer)
