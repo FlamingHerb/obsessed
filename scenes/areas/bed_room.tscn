@@ -12,6 +12,7 @@
 [sub_resource type="Resource" id="Resource_yf5fn"]
 script = ExtResource("9_k2ram")
 window_text = "I don't want to wake her up..."
+seconds = 2.0
 metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
 
 [sub_resource type="Resource" id="Resource_g4v7s"]

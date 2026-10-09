@@ -22,8 +22,9 @@ func _gab_window_text_show(text_to_show: String, seconds: float) -> void:
 
 func hide_text(forced: bool = false) -> void:
 	if not forced: 
-		animation_player.play_backwards("show")
-		await animation_player.animation_finished
+		if not animation_player.is_playing():
+			animation_player.play_backwards("show")
+			await animation_player.animation_finished
 	else:
 		if animation_player.is_playing(): animation_player.stop()
 		modulate = Color(0.0, 0.0, 0.0, 0)
