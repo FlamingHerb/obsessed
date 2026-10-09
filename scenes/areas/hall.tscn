@@ -8,6 +8,20 @@
 [ext_resource type="Resource" uid="uid://c15p0kg3nucvc" path="res://resources/events/to_garage.tres" id="6_fut28"]
 [ext_resource type="Resource" uid="uid://d28sswxfq8lf5" path="res://resources/events/to_bath_room_downstairs.tres" id="7_i6a3y"]
 [ext_resource type="Resource" uid="uid://bxvsfduxg6uxf" path="res://resources/events/to_living_room.tres" id="8_lan0v"]
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="9_lan0v"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="10_ldcdr"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="11_mx2il"]
+
+[sub_resource type="Resource" id="Resource_7numd"]
+script = ExtResource("10_ldcdr")
+window_text = "Phone's not working..."
+seconds = 2.0
+metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
+
+[sub_resource type="Resource" id="Resource_3gngh"]
+script = ExtResource("4_p8kip")
+commands = Array[ExtResource("9_lan0v")]([SubResource("Resource_7numd")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
 
 [node name="Hall" type="Node2D" unique_id=554868217]
 script = ExtResource("1_6j0qv")
@@ -49,3 +63,9 @@ event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("8_lan0v")])
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToLivingRoom" unique_id=105625256]
 position = Vector2(254, 230)
 polygon = PackedVector2Array(-90, -163, -17, -163, -14, 317, -90, 317)
+
+[node name="Phone" parent="." unique_id=1512075390 instance=ExtResource("3_4e5cd")]
+event_page_list = Array[ExtResource("4_p8kip")]([SubResource("Resource_3gngh")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Phone" unique_id=279873468]
+polygon = PackedVector2Array(101, 122, 129, 123, 128, 163, 105, 161)

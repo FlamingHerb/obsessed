@@ -17,14 +17,13 @@ func _gab_window_text_show(text_to_show: String, seconds: float) -> void:
 	
 	rich_text.text = text_to_show
 	animation_player.play("show")
-	await animation_player.animation_finished
+	#await animation_player.animation_finished
 	timer.start(seconds)
 
 func hide_text(forced: bool = false) -> void:
 	if not forced: 
-		if not animation_player.is_playing():
-			animation_player.play_backwards("show")
-			await animation_player.animation_finished
+		animation_player.play_backwards("show")
+		#await animation_player.animation_finished
 	else:
 		if animation_player.is_playing(): animation_player.stop()
 		modulate = Color(0.0, 0.0, 0.0, 0)
