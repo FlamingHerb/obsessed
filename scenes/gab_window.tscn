@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://usdfvojjhy2x"]
+
+[ext_resource type="Script" uid="uid://bxvwi1461y7fp" path="res://scripts/gab_window.gd" id="1_rpjfa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.44313726)
+
+[sub_resource type="Animation" id="Animation_rpjfa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j0jok"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vhn4"]
+_data = {
+&"RESET": SubResource("Animation_rpjfa"),
+&"show": SubResource("Animation_j0jok")
+}
+
+[node name="GabWindow" type="PanelContainer" unique_id=1332034028]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+script = ExtResource("1_rpjfa")
+
+[node name="Timer" type="Timer" parent="." unique_id=192688185]
+wait_time = 20.0
+one_shot = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1594456743]
+layout_mode = 2
+text = "Custom text"
+fit_content = true
+vertical_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1130891217]
+libraries/ = SubResource("AnimationLibrary_3vhn4")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

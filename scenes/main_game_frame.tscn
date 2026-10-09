@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bvmjkyvpcjxqi" path="res://scenes/areas/garage.tscn" id="12_wafmi"]
 [ext_resource type="PackedScene" uid="uid://cw5svg83rmnde" path="res://scenes/areas/kitchen.tscn" id="13_rfxsm"]
 [ext_resource type="PackedScene" uid="uid://c5m4nj23k5k4l" path="res://scenes/areas/living_room.tscn" id="14_633l6"]
+[ext_resource type="PackedScene" uid="uid://usdfvojjhy2x" path="res://scenes/gab_window.tscn" id="15_dq1ta"]
 
 [node name="MainGameFrame" type="Node" unique_id=1044994733 node_paths=PackedStringArray("starting_scene")]
 script = ExtResource("1_3u0ws")
@@ -147,3 +148,5 @@ patrol_route = [NodePath("../GameMap/Bedroom"), NodePath("../GameMap/HallStairs"
 game_map = NodePath("../GameMap")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1074598446]
+
+[node name="GabWindow" parent="." unique_id=37712166 instance=ExtResource("15_dq1ta")]

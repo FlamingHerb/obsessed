@@ -18,7 +18,7 @@ var current_area_name: String = "GameArea"
 
 @onready var game_map: GameMap = $GameMap
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var gab_window: GabWindow = $GabWindow
 
 #endregion
 
@@ -53,6 +53,9 @@ func _deferred_change_area(path: String) -> void:
 	# bc global @export var current_scene at top of file
 	# unless want to rename ofc xD
 	@warning_ignore("shadowed_variable")
+	
+	# When change scenes, make sure to reset gab window regardless.
+	gab_window.hide_text(true)
 	
 	var current_scene = get_node(current_area_name)
 	var new_scene = ResourceLoader.load(path)

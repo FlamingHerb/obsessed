@@ -21,6 +21,9 @@ signal open_load_menu
 ## When you want to force the state change
 signal state_change_force(target_state_path: String)
 
+## Signal for gab window text
+signal gab_window_text(text: String, seconds: float)
+
 # For menus opening/closing
 #signal any_menu_opened_closed(node: Control)
 
@@ -85,6 +88,10 @@ func reset()-> void:
 ## Force state change.
 func force_state_change(target_state_path: String) -> void:
 	state_change_force.emit(target_state_path)
+
+## Show gab window text
+func show_gab_window_text(text: String, seconds: float) -> void:
+	gab_window_text.emit(text, seconds)
 
 ## Universal helper function to check if there's any changes for menus elsewhere.
 func any_menu_opened(node: Control) -> void:
