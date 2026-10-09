@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="6_jt4b5"]
 [ext_resource type="PackedScene" uid="uid://b0y3b0kacecix" path="res://scenes/areas/hall_stairs.tscn" id="6_k2ram"]
 [ext_resource type="Script" uid="uid://blonaum01aqp7" path="res://resources/commands/command_scene_change.gd" id="7_8364p"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="9_k2ram"]
 
 [sub_resource type="Resource" id="Resource_h5xoj"]
 script = ExtResource("7_8364p")
@@ -17,6 +18,16 @@ metadata/_custom_type_script = "uid://blonaum01aqp7"
 [sub_resource type="Resource" id="Resource_sjhue"]
 script = ExtResource("4_h5xoj")
 commands = Array[ExtResource("5_ovx53")]([SubResource("Resource_h5xoj")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
+
+[sub_resource type="Resource" id="Resource_yf5fn"]
+script = ExtResource("9_k2ram")
+window_text = "I don't want to wake her up..."
+metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
+
+[sub_resource type="Resource" id="Resource_g4v7s"]
+script = ExtResource("4_h5xoj")
+commands = Array[ExtResource("5_ovx53")]([SubResource("Resource_yf5fn")])
 metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
 
 [node name="BedRoom" type="Node2D" unique_id=200603411]
@@ -34,3 +45,9 @@ event_page_list = Array[ExtResource("4_h5xoj")]([SubResource("Resource_sjhue")])
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapEventBase" unique_id=2062564969]
 position = Vector2(414, 170)
 polygon = PackedVector2Array(-1, -1, 64, -8, 64, 168, -1, 156)
+
+[node name="MapEventBase2" parent="." unique_id=1159570255 instance=ExtResource("3_3yxs0")]
+event_page_list = Array[ExtResource("4_h5xoj")]([SubResource("Resource_g4v7s")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapEventBase2" unique_id=331543186]
+polygon = PackedVector2Array(290, 293, 206, 390, 492, 392, 387, 291)
