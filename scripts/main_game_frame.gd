@@ -40,6 +40,10 @@ func _ready() -> void:
 		
 	# INFO: Start game. Kinda funny we're doing loop-de-loops here.
 	Events.change_area(starting_scene.map_scene.resource_path)
+	
+	# Some weird stuff to point out.
+	get_viewport().physics_object_picking_first_only = true
+	get_viewport().physics_object_picking_sort = true
 #endregion
 
 func _input(_event: InputEvent) -> void:
