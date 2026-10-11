@@ -3,18 +3,83 @@
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_23wmd"]
 [ext_resource type="Texture2D" uid="uid://c3ui8vf4mv3tl" path="res://assets/graphics/bg/living_room.png" id="2_btl2f"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_ms3w4"]
+[ext_resource type="Texture2D" uid="uid://yk8ufvy16d4e" path="res://assets/graphics/items/wood.png" id="3_pfpmf"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_sva3m"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="5_pfpmf"]
 [ext_resource type="Resource" uid="uid://dufrdpxh73qdy" path="res://resources/events/to_kitchen.tres" id="6_sva3m"]
+
+[sub_resource type="Gradient" id="Gradient_pfpmf"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.8873592, 0.4398922, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_57qmd"]
+gradient = SubResource("Gradient_pfpmf")
+
+[sub_resource type="Gradient" id="Gradient_sva3m"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.12222222, 1)
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pfpmf"]
+gradient = SubResource("Gradient_sva3m")
+width = 640
+height = 480
+fill_from = Vector2(0, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 3
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 3
+tonemap_exposure = 4.0
+tonemap_agx_contrast = 1.0
+glow_enabled = true
+glow_levels/5 = 0.1
+glow_levels/6 = 0.1
+glow_levels/7 = 0.02
 
 [node name="LivingRoom" type="Node2D" unique_id=478466405]
 script = ExtResource("1_23wmd")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
-[node name="Background" type="TextureRect" parent="." unique_id=1880732555]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=660098856]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(562, 200)
+scale = Vector2(0.39843744, 137.99998)
+texture = SubResource("GradientTexture1D_57qmd")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=33705901]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(320, 240)
 texture = ExtResource("2_btl2f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=765492802]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(563, 259)
+rotation = -0.1449411
+texture = ExtResource("3_pfpmf")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1430812474]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(563, 289)
+texture = ExtResource("3_pfpmf")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1023272724]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(565, 218)
+rotation = -0.093478166
+texture = ExtResource("3_pfpmf")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1693263211]
+modulate = Color(0.14509805, 0.14509805, 0.14509805, 1)
+self_modulate = Color(0.14509805, 0.14509805, 0.14509805, 1)
+position = Vector2(320, 240)
+texture = SubResource("GradientTexture2D_pfpmf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1763394430]
+environment = SubResource("Environment_g4v7s")
 
 [node name="ToHall" parent="." unique_id=861190875 instance=ExtResource("3_ms3w4")]
 event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("5_pfpmf")])

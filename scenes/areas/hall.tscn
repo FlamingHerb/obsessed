@@ -12,6 +12,18 @@
 [ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="10_ldcdr"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="11_mx2il"]
 
+[sub_resource type="Gradient" id="Gradient_lan0v"]
+offsets = PackedFloat32Array(0, 0.04074074, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.9222222, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ldcdr"]
+gradient = SubResource("Gradient_lan0v")
+width = 640
+height = 480
+fill = 1
+fill_from = Vector2(0.9967949, 0.021367522)
+fill_to = Vector2(0, 1)
+
 [sub_resource type="Resource" id="Resource_7numd"]
 script = ExtResource("10_ldcdr")
 window_text = "Phone's not working..."
@@ -27,10 +39,14 @@ metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
 script = ExtResource("1_6j0qv")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
-[node name="Background" type="TextureRect" parent="." unique_id=1334207924]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Background" type="Sprite2D" parent="." unique_id=1369667012]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(320, 240)
 texture = ExtResource("2_f55t6")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1939482666]
+position = Vector2(320, 240)
+texture = SubResource("GradientTexture2D_ldcdr")
 
 [node name="ToHallStairs" parent="." unique_id=861190875 instance=ExtResource("3_4e5cd")]
 position = Vector2(667, -10)

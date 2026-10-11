@@ -6,19 +6,34 @@
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_ffsgo"]
 [ext_resource type="Resource" uid="uid://bxvsfduxg6uxf" path="res://resources/events/to_living_room.tres" id="5_tnnaj"]
 
+[sub_resource type="Gradient" id="Gradient_y4lhg"]
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jvgkm"]
+gradient = SubResource("Gradient_y4lhg")
+width = 640
+height = 480
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
 [node name="Kitchen" type="Node2D" unique_id=1843081304]
 script = ExtResource("1_4sy8e")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
-[node name="Background" type="TextureRect" parent="." unique_id=1717628871]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Background" type="Sprite2D" parent="." unique_id=424948802]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(320, 240)
 texture = ExtResource("2_mtfoj")
 
-[node name="ToLivingRoom" parent="Background" unique_id=861190875 instance=ExtResource("3_jvgkm")]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=627173694]
+position = Vector2(320, 240)
+texture = SubResource("GradientTexture2D_jvgkm")
+
+[node name="ToLivingRoom" parent="." unique_id=861190875 instance=ExtResource("3_jvgkm")]
 position = Vector2(-164, -67)
 event_page_list = Array[ExtResource("4_ffsgo")]([ExtResource("5_tnnaj")])
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/ToLivingRoom" unique_id=194208816]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToLivingRoom" unique_id=194208816]
 position = Vector2(254, 230)
 polygon = PackedVector2Array(456, -17, 538, -30, 539, 153, 456, 144)

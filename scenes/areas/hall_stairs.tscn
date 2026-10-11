@@ -9,14 +9,29 @@
 [ext_resource type="Resource" uid="uid://dcgjq6tmqcpgv" path="res://resources/events/to_closet_room.tres" id="7_0vewf"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="8_jca5f"]
 
+[sub_resource type="Gradient" id="Gradient_lan0v"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jca5f"]
+gradient = SubResource("Gradient_lan0v")
+width = 640
+height = 480
+fill = 1
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0.38141027, 0.30769232)
+
 [node name="HallStairs" type="Node2D" unique_id=1517572840]
 script = ExtResource("1_if8en")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
-[node name="Background" type="TextureRect" parent="." unique_id=1292611811]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Background" type="Sprite2D" parent="." unique_id=1685882288]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(320, 240)
 texture = ExtResource("2_sdjyn")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1383897852]
+position = Vector2(320, 240)
+texture = SubResource("GradientTexture2D_jca5f")
 
 [node name="ToBedroom" parent="." unique_id=861190875 instance=ExtResource("3_n7hcf")]
 event_page_list = Array[ExtResource("4_jca5f")]([ExtResource("5_hqxhg")])
