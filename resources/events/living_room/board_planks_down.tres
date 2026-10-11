@@ -16,6 +16,7 @@ resource_name = "Board Planks Down"
 script = ExtResource("3_1rt2g")
 switch_triggers = Array[int]([0])
 self_switch_triggers = Array[String](["BoardDown"])
+offset_issued = Vector2(0, 55)
 graphic = "Sprite"
 commands = Array[ExtResource("1_exmc5")]([SubResource("Resource_3epv6")])
 metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

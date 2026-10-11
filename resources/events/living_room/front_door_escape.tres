@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://d17gyxeaphnva"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_l1nid"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="2_2jdmj"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="3_ubebp"]
+
+[sub_resource type="Resource" id="Resource_pnkdc"]
+script = ExtResource("3_ubebp")
+value = 3
+metadata/_custom_type_script = "uid://b27o0fm3tbj61"
+
+[resource]
+resource_name = "Front Door Escape"
+script = ExtResource("2_2jdmj")
+variable_triggers = Array[ExtResource("3_ubebp")]([SubResource("Resource_pnkdc")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

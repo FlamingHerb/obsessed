@@ -67,7 +67,6 @@ func _deferred_change_area(path: String) -> void:
 	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
 		map_event_base.input_pickable = false
 	
-	
 	await _fade_out_from_scene(current_scene)
 	
 	print("Previous Scene: ", current_area_name)
@@ -77,6 +76,10 @@ func _deferred_change_area(path: String) -> void:
 	# Add child...
 	game_layer.add_child(current_scene)
 	
+	print("DEBUG: Deactivating Map Event Base")
+	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
+		map_event_base.input_pickable = false
+	
 	# Before naming it...!
 	current_area_name = current_scene.name
 	#current_scene.name = "GameArea"
@@ -85,7 +88,12 @@ func _deferred_change_area(path: String) -> void:
 	# New scene must always be the second one.
 	game_layer.move_child(current_scene, 1)
 	
-	_fade_in_to_scene(current_scene)
+	await _fade_in_to_scene(current_scene)
+	
+	print("DEBUG: Activating Map Event Base")
+	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
+		map_event_base.input_pickable = true
+	
 	Events.area_change_completed.emit()
 	
 #endregion

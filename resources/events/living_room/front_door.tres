@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://duaox8gtabyfc"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_5y5p6"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="2_7ug02"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="2_kal15"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="3_7ug02"]
+
+[sub_resource type="Resource" id="Resource_iad2b"]
+script = ExtResource("2_7ug02")
+window_text = "I have to find a way to get out of here..."
+seconds = 2.0
+metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
+
+[resource]
+resource_name = "Front Door"
+script = ExtResource("2_kal15")
+commands = Array[ExtResource("1_5y5p6")]([SubResource("Resource_iad2b")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

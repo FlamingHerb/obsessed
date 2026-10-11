@@ -63,6 +63,10 @@ func _find_suitable_page() -> void:
 	for i in range(event_page_list.size() - 1, -1, -1):
 		var event_page: EventPage = event_page_list[i]
 		if _meets_conditions(event_page):
+			# Once conditions are met, also change visibility of some things.
+			visible = not event_page.transparent
+			position += event_page.offset_issued
+			
 			current_page = event_page
 			break
 

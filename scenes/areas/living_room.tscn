@@ -8,9 +8,14 @@
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_sva3m"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_pfpmf"]
 [ext_resource type="Resource" uid="uid://dufrdpxh73qdy" path="res://resources/events/area_transfer/to_kitchen.tres" id="6_sva3m"]
+[ext_resource type="Resource" uid="uid://duaox8gtabyfc" path="res://resources/events/living_room/front_door.tres" id="8_7cp4x"]
 [ext_resource type="Resource" uid="uid://dx06opxqxx1md" path="res://resources/events/living_room/board_planks.tres" id="8_hgep1"]
+[ext_resource type="Resource" uid="uid://d17gyxeaphnva" path="res://resources/events/living_room/front_door_escape.tres" id="9_0egjx"]
 [ext_resource type="Resource" uid="uid://dlwob5v4g1i2y" path="res://resources/events/living_room/board_planks_interactable.tres" id="9_7s5uc"]
 [ext_resource type="Resource" uid="uid://dw6omwgrg6leb" path="res://resources/events/living_room/board_planks_down.tres" id="10_7s5uc"]
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="12_ee4yb"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="13_7cp4x"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="14_0egjx"]
 
 [sub_resource type="Gradient" id="Gradient_pfpmf"]
 offsets = PackedFloat32Array(0)
@@ -30,6 +35,32 @@ width = 640
 height = 480
 fill_from = Vector2(0, 0.5)
 metadata/_snap_enabled = true
+
+[sub_resource type="Resource" id="Resource_3epv6"]
+script = ExtResource("13_7cp4x")
+window_text = "Just a few more planks..."
+seconds = 2.0
+metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
+
+[sub_resource type="Resource" id="Resource_b1qt6"]
+resource_name = "Board Planks Down"
+script = ExtResource("4_sva3m")
+switch_triggers = Array[int]([0])
+self_switch_triggers = Array[String](["BoardDown"])
+offset_issued = Vector2(0, 96)
+graphic = "Sprite"
+commands = Array[ExtResource("12_ee4yb")]([SubResource("Resource_3epv6")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
+
+[sub_resource type="Resource" id="Resource_ee4yb"]
+resource_name = "Board Planks Down"
+script = ExtResource("4_sva3m")
+switch_triggers = Array[int]([0])
+self_switch_triggers = Array[String](["BoardDown"])
+offset_issued = Vector2(0, 21)
+graphic = "Sprite"
+commands = Array[ExtResource("12_ee4yb")]([SubResource("Resource_3epv6")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
 
 [node name="LivingRoom" type="Node2D" unique_id=478466405]
 script = ExtResource("1_23wmd")
@@ -68,7 +99,15 @@ event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("6_sva3m")])
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToKitchen" unique_id=843016154]
 polygon = PackedVector2Array(420, 167, 501, 166, 501, 359, 420, 357)
 
+[node name="FrontDoor" parent="." unique_id=1333136319 instance=ExtResource("3_ms3w4")]
+event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("8_7cp4x"), ExtResource("9_0egjx")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FrontDoor" unique_id=1897580535]
+polygon = PackedVector2Array(531, 199, 531, 313, 592, 318, 594, 197)
+
 [node name="Plank" parent="." unique_id=1357573954 instance=ExtResource("3_ms3w4")]
+collision_priority = 4.0
+priority = 4
 event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("8_hgep1"), ExtResource("9_7s5uc"), ExtResource("10_7s5uc")])
 
 [node name="Sprite" type="Sprite2D" parent="Plank" unique_id=765492802]
@@ -78,4 +117,36 @@ rotation = -0.1449411
 texture = ExtResource("3_pfpmf")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Plank" unique_id=1600126869]
+polygon = PackedVector2Array(526, 253, 527, 268, 600, 264, 600, 247)
+
+[node name="Plank2" parent="." unique_id=2136442005 instance=ExtResource("3_ms3w4")]
+position = Vector2(15, -75)
+rotation = 0.05783206
+collision_priority = 4.0
+priority = 4
+event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("8_hgep1"), ExtResource("9_7s5uc"), SubResource("Resource_b1qt6")])
+
+[node name="Sprite" type="Sprite2D" parent="Plank2" unique_id=1658879888]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(563, 259)
+rotation = -0.1449411
+texture = ExtResource("3_pfpmf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Plank2" unique_id=271345769]
+polygon = PackedVector2Array(526, 253, 527, 268, 600, 264, 600, 247)
+
+[node name="Plank3" parent="." unique_id=592080237 instance=ExtResource("3_ms3w4")]
+position = Vector2(40, -40.999996)
+rotation = 0.13766517
+collision_priority = 4.0
+priority = 4
+event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("8_hgep1"), ExtResource("9_7s5uc"), SubResource("Resource_ee4yb")])
+
+[node name="Sprite" type="Sprite2D" parent="Plank3" unique_id=1194591502]
+modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
+position = Vector2(563, 259)
+rotation = -0.1449411
+texture = ExtResource("3_pfpmf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Plank3" unique_id=1423527773]
 polygon = PackedVector2Array(526, 253, 527, 268, 600, 264, 600, 247)
