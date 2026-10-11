@@ -19,6 +19,7 @@ var current_area_name: String = "GameArea"
 @onready var game_map: GameMap = $GameMap
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var gab_window: GabWindow = $GabWindow
+@onready var transition_black: ColorRect = $Transition
 
 #endregion
 
@@ -77,7 +78,7 @@ func _deferred_change_area(path: String) -> void:
 	# Before naming it...!
 	current_area_name = current_scene.name
 	#current_scene.name = "GameArea"
-	current_scene.modulate = Color.BLACK
+	#current_scene.modulate = Color.BLACK
 	
 	# New scene must always be the second one.
 	move_child(current_scene, 1)
@@ -90,18 +91,22 @@ func _deferred_change_area(path: String) -> void:
 #region Custom function
 
 func _fade_out_from_scene(new_area: Node2D) -> void:
+	animation_player.play("fade_to_black")
+	await animation_player.animation_finished
 	# Make tween for fade out
-	var tween = create_tween().set_parallel(true)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(new_area, "modulate", Color.BLACK, 0.5)
-	await tween.finished
+	#var tween = create_tween().set_parallel(true)
+	#tween.set_ease(Tween.EASE_IN_OUT)
+	#tween.tween_property(new_area, "modulate", Color.BLACK, 0.5)
+	#await tween.finished
 
 func _fade_in_to_scene(new_area: Node2D) -> void:
+	animation_player.play_backwards("fade_to_black")
+	await animation_player.animation_finished
 		# Then fade in again.
-	var new_tween = create_tween().set_parallel(true)
-	new_tween.set_ease(Tween.EASE_IN_OUT)
-	new_tween.tween_property(new_area, "modulate", Color.WHITE, 0.5)
-	await new_tween.finished
+	#var new_tween = create_tween().set_parallel(true)
+	#new_tween.set_ease(Tween.EASE_IN_OUT)
+	#new_tween.tween_property(new_area, "modulate", Color.WHITE, 0.5)
+	#await new_tween.finished
 
 ## INFO: Does not account for POVSwitch, Camera and MapTravel
 func _any_menu_opened(node: Control) -> void:

@@ -16,6 +16,42 @@
 [ext_resource type="PackedScene" uid="uid://c5m4nj23k5k4l" path="res://scenes/areas/living_room.tscn" id="14_633l6"]
 [ext_resource type="PackedScene" uid="uid://usdfvojjhy2x" path="res://scenes/gab_window.tscn" id="15_dq1ta"]
 
+[sub_resource type="Animation" id="Animation_56g8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dq1ta"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_56g8q"]
+_data = {
+&"RESET": SubResource("Animation_56g8q"),
+&"fade_to_black": SubResource("Animation_dq1ta")
+}
+
 [node name="MainGameFrame" type="Node" unique_id=1044994733 node_paths=PackedStringArray("starting_scene")]
 script = ExtResource("1_3u0ws")
 starting_scene = NodePath("GameMap/Bedroom")
@@ -30,6 +66,15 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="GameArea" type="Node2D" parent="." unique_id=334518458]
+
+[node name="Transition" type="ColorRect" parent="." unique_id=30006257]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [node name="PauseMenu" parent="." unique_id=342466922 instance=ExtResource("2_vtjbl")]
 visible = false
@@ -149,5 +194,6 @@ patrol_route = [NodePath("../GameMap/Bedroom"), NodePath("../GameMap/HallStairs"
 game_map = NodePath("../GameMap")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1074598446]
+libraries/ = SubResource("AnimationLibrary_56g8q")
 
 [node name="GabWindow" parent="." unique_id=37712166 instance=ExtResource("15_dq1ta")]
