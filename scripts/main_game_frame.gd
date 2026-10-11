@@ -9,17 +9,19 @@ extends Node
 @export var starting_scene: MapNode
 
 # INFO: Onready variables
-@onready var game_area = $GameArea
+@onready var game_area = $GameLayer/GameArea
 
 
 ## INFO: Other variables
 ## Sets Adi as the default POV character.
 var current_area_name: String = "GameArea"
 
-@onready var game_map: GameMap = $GameMap
+@onready var game_map: GameMap = $AnythingElse/GameMap
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var gab_window: GabWindow = $GabWindow
-@onready var transition_black: ColorRect = $Transition
+@onready var gab_window: GabWindow = $AnythingElse/GabWindow
+@onready var transition_black: ColorRect = $GameLayer/Transition
+
+@onready var game_layer: CanvasLayer = $GameLayer
 
 #endregion
 
@@ -58,7 +60,7 @@ func _deferred_change_area(path: String) -> void:
 	# When change scenes, make sure to reset gab window regardless.
 	gab_window.hide_text(true)
 	
-	var current_scene = get_node(current_area_name)
+	var current_scene = game_layer.get_node(current_area_name)
 	var new_scene = ResourceLoader.load(path)
 	
 	print("DEBUG: Deleting other Map Event Base")
@@ -73,7 +75,7 @@ func _deferred_change_area(path: String) -> void:
 	current_scene = new_scene.instantiate()
 	
 	# Add child...
-	add_child(current_scene)
+	game_layer.add_child(current_scene)
 	
 	# Before naming it...!
 	current_area_name = current_scene.name
@@ -81,7 +83,7 @@ func _deferred_change_area(path: String) -> void:
 	#current_scene.modulate = Color.BLACK
 	
 	# New scene must always be the second one.
-	move_child(current_scene, 1)
+	game_layer.move_child(current_scene, 1)
 	
 	_fade_in_to_scene(current_scene)
 	Events.area_change_completed.emit()

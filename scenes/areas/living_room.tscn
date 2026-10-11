@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c3ui8vf4mv3tl" path="res://assets/graphics/bg/living_room.png" id="2_btl2f"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_ms3w4"]
 [ext_resource type="Texture2D" uid="uid://yk8ufvy16d4e" path="res://assets/graphics/items/wood.png" id="3_pfpmf"]
+[ext_resource type="Environment" uid="uid://t0buq04dujjp" path="res://resources/new_environment.tres" id="4_2glo6"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_sva3m"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="5_pfpmf"]
 [ext_resource type="Resource" uid="uid://dufrdpxh73qdy" path="res://resources/events/to_kitchen.tres" id="6_sva3m"]
@@ -26,18 +27,6 @@ width = 640
 height = 480
 fill_from = Vector2(0, 0.5)
 metadata/_snap_enabled = true
-
-[sub_resource type="Environment" id="Environment_g4v7s"]
-background_mode = 3
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 3
-tonemap_exposure = 4.0
-tonemap_agx_contrast = 1.0
-glow_enabled = true
-glow_levels/5 = 0.1
-glow_levels/6 = 0.1
-glow_levels/7 = 0.02
 
 [node name="LivingRoom" type="Node2D" unique_id=478466405]
 script = ExtResource("1_23wmd")
@@ -79,7 +68,7 @@ position = Vector2(320, 240)
 texture = SubResource("GradientTexture2D_pfpmf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1763394430]
-environment = SubResource("Environment_g4v7s")
+environment = ExtResource("4_2glo6")
 
 [node name="ToHall" parent="." unique_id=861190875 instance=ExtResource("3_ms3w4")]
 event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("5_pfpmf")])

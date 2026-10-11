@@ -1,0 +1,14 @@
+[gd_resource type="Environment" format=3 uid="uid://t0buq04dujjp"]
+
+[resource]
+background_mode = 3
+background_canvas_max_layer = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 3
+tonemap_exposure = 4.0
+tonemap_agx_contrast = 1.0
+glow_enabled = true
+glow_levels/5 = 0.1
+glow_levels/6 = 0.1
+glow_levels/7 = 0.02
