@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://dx06opxqxx1md"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_juiat"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="2_7goek"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="2_wv3hf"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="3_7goek"]
+
+[sub_resource type="Resource" id="Resource_2glo6"]
+script = ExtResource("2_7goek")
+window_text = "She boarded this up. I have to find something to break this..."
+metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
+
+[resource]
+resource_name = "Board Planks"
+script = ExtResource("2_wv3hf")
+graphic = "Sprite"
+commands = Array[ExtResource("1_juiat")]([SubResource("Resource_2glo6")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

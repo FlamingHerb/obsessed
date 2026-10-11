@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://dlwob5v4g1i2y"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_mo30u"]
+[ext_resource type="Script" uid="uid://cngduwe42kdaq" path="res://resources/commands/command_set_self_switch.gd" id="2_mo30u"]
+[ext_resource type="Script" uid="uid://bpadn0u8qkeif" path="res://resources/commands/command_set_variable.gd" id="2_us0c1"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="3_coih2"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="4_dylwi"]
+
+[sub_resource type="Resource" id="Resource_hgep1"]
+script = ExtResource("2_us0c1")
+value = 1
+operation = 0
+metadata/_custom_type_script = "uid://bpadn0u8qkeif"
+
+[sub_resource type="Resource" id="Resource_2glo6"]
+script = ExtResource("2_mo30u")
+switch = "BoardDown"
+metadata/_custom_type_script = "uid://cngduwe42kdaq"
+
+[resource]
+resource_name = "Board Planks Active"
+script = ExtResource("3_coih2")
+switch_triggers = Array[int]([0])
+graphic = "Sprite"
+commands = Array[ExtResource("1_mo30u")]([SubResource("Resource_hgep1"), SubResource("Resource_2glo6")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

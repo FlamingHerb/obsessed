@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ci0qflmohaa4b" path="res://assets/graphics/bg/bed_room.png" id="2_0tygs"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_3yxs0"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_h5xoj"]
-[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/to_hall_stairs.tres" id="5_jt4b5"]
+[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_jt4b5"]
 [ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="5_ovx53"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="6_jt4b5"]
 [ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="9_k2ram"]

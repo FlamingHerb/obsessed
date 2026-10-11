@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c8qdqv7clj6nf" path="res://assets/graphics/bg/bathroom_downstairs.png" id="2_4wf2y"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_y4lhg"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_cxf5q"]
-[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="5_h8d3f"]
+[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_h8d3f"]
 
 [sub_resource type="Gradient" id="Gradient_y4lhg"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)

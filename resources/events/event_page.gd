@@ -28,8 +28,17 @@ enum TRIGGER_TYPE {
 ## Self-switches required to activate this event page.
 @export var self_switch_triggers: Array[String]
 
+
 @export_category("Properties")
+## Type of Trigger to show.
 @export var trigger: TRIGGER_TYPE
+## Offset to issue for this specific event page.
+@export var offset_issued: Vector2
+## Turn this transparent after the triggers.
+@export var transparent: bool
+## Graphic node to refer to. Must be inside MapEventBase.
+## Will only show when specific conditions are set.
+@export var graphic: String
 
 @export_category("Commands")
 ## Commands to run for this event page.

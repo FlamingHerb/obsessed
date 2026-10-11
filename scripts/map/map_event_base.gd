@@ -22,6 +22,10 @@ var lock: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Connect in case other events may clash.
+	Events.event_running.connect(_another_event_running)
+	
+	# Connect for any data changes.
 	DataManager.data_changed.connect(_find_suitable_page)
 	
 	# Making sure every map event has at least a page, even if it is empty.
@@ -30,6 +34,10 @@ func _ready() -> void:
 	# In the possibility that, when you load in and there's no triggers, it will
 	# activate the following.
 	_find_suitable_page()
+
+func _another_event_running(running: bool) -> void:
+	pass
+
 
 func _process(_delta: float) -> void:
 	if current_page:
@@ -40,8 +48,15 @@ func _process(_delta: float) -> void:
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		interact()
-		get_viewport().set_input_as_handled()
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				interact()
+				get_viewport().set_input_as_handled()
+			MOUSE_BUTTON_MASK_RIGHT:
+				if not OS.is_debug_build(): return
+				print("[DEBUG] Current active page: ", current_page.resource_name)
+				get_viewport().set_input_as_handled()
+		
 
 # When DataManager changes, find a better page host.
 func _find_suitable_page() -> void:
@@ -68,16 +83,20 @@ func _activate_event_page(event_page: EventPage) -> void:
 	lock = true
 	index = 0
 	
-	for command in event_page.commands:
-		index += 1 
+	# REFACTOR this.
+	
+	while index < len(event_page.commands):
+		var command = event_page.commands[index]
 		if command is EndEventCommand: break
 		
 		# Debugging
-		print("Running command: ", command.get_script().get_global_name())
+		print("Running command #", index, ": " , command.get_script().get_global_name())
 		
 		@warning_ignore("redundant_await")
 		await command.execute(self)
+		index += 1 
 	
+	print("DEBUG: Event ended.")
 	lock = false
 
 # Run the interaction.

@@ -10,11 +10,11 @@
 extends Node
 
 enum SWCH_NAME {
-	LOC_1_STALL,
+	HAMMER_GOTTEN,
 }
 
 enum VAR_NAME {
-	VAR_1,
+	BOARDS_BROKEN,
 	VAR_2,
 }
 

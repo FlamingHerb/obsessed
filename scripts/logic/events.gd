@@ -18,6 +18,9 @@ signal shortcut_load_pressed
 signal open_save_menu
 signal open_load_menu
 
+# An event is running. Stop any other events from running.
+signal event_running(running: bool)
+
 ## When you want to force the state change
 signal state_change_force(target_state_path: String)
 

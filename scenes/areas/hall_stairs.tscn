@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b4y78hphu7aac" path="res://assets/graphics/bg/hall_stairs.png" id="2_sdjyn"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_n7hcf"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_jca5f"]
-[ext_resource type="Resource" uid="uid://dgxdn1mgdju1y" path="res://resources/events/to_bed_room.tres" id="5_hqxhg"]
-[ext_resource type="Resource" uid="uid://bq7fpinggvitt" path="res://resources/events/to_bath_room_upstairs.tres" id="6_hqxhg"]
-[ext_resource type="Resource" uid="uid://dcgjq6tmqcpgv" path="res://resources/events/to_closet_room.tres" id="7_0vewf"]
-[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="8_jca5f"]
+[ext_resource type="Resource" uid="uid://dgxdn1mgdju1y" path="res://resources/events/area_transfer/to_bed_room.tres" id="5_hqxhg"]
+[ext_resource type="Resource" uid="uid://bq7fpinggvitt" path="res://resources/events/area_transfer/to_bath_room_upstairs.tres" id="6_hqxhg"]
+[ext_resource type="Resource" uid="uid://dcgjq6tmqcpgv" path="res://resources/events/area_transfer/to_closet_room.tres" id="7_0vewf"]
+[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="8_jca5f"]
 
 [sub_resource type="Gradient" id="Gradient_lan0v"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)

@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://11o77xhdyp4f" path="res://assets/graphics/bg/garage.png" id="2_utxgq"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_k3tx4"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_l6rr3"]
-[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/to_hall.tres" id="5_xrobh"]
+[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_xrobh"]
 
-[sub_resource type="Gradient" id="Gradient_y4lhg"]
+[sub_resource type="Gradient" id="Gradient_k3tx4"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_k3tx4"]
-gradient = SubResource("Gradient_y4lhg")
+gradient = SubResource("Gradient_k3tx4")
 width = 640
 height = 480
 fill_from = Vector2(0.5, 0)

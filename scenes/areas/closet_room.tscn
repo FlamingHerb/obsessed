@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c5w5kj5snnmn0" path="res://assets/graphics/bg/closet_room.png" id="2_o85dr"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_6kk2w"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_ei1gx"]
-[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/to_hall_stairs.tres" id="5_qtfh4"]
+[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_qtfh4"]
 
-[sub_resource type="Gradient" id="Gradient_jt4b5"]
+[sub_resource type="Gradient" id="Gradient_6kk2w"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6kk2w"]
-gradient = SubResource("Gradient_jt4b5")
+gradient = SubResource("Gradient_6kk2w")
 width = 640
 height = 480
 fill_from = Vector2(0.5, 0.1)
