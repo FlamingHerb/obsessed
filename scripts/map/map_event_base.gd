@@ -58,6 +58,12 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 				get_viewport().set_input_as_handled()
 		
 
+func _on_mouse_entered() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+
+func _on_mouse_exited() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
 # When DataManager changes, find a better page host.
 func _find_suitable_page() -> void:
 	for i in range(event_page_list.size() - 1, -1, -1):
