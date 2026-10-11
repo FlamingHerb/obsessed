@@ -60,6 +60,11 @@ func _deferred_change_area(path: String) -> void:
 	var current_scene = get_node(current_area_name)
 	var new_scene = ResourceLoader.load(path)
 	
+	print("DEBUG: Deleting other Map Event Base")
+	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
+		map_event_base.input_pickable = false
+	
+	
 	await _fade_out_from_scene(current_scene)
 	
 	print("Previous Scene: ", current_area_name)
