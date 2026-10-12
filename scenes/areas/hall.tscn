@@ -11,9 +11,11 @@
 [ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="9_lan0v"]
 [ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="10_ldcdr"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="11_mx2il"]
+[ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="12_mx2il"]
+[ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="13_xu1fw"]
 
 [sub_resource type="Gradient" id="Gradient_lan0v"]
-offsets = PackedFloat32Array(0, 0.04074074, 1)
+offsets = PackedFloat32Array(0, 0.25925925, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.9222222, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ldcdr"]
@@ -35,14 +37,29 @@ script = ExtResource("4_p8kip")
 commands = Array[ExtResource("9_lan0v")]([SubResource("Resource_7numd")])
 metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
 
-[node name="Hall" type="Node2D" unique_id=554868217]
+[node name="Hall" type="Node2D" unique_id=554868217 node_paths=PackedStringArray("obsessed_avatar")]
 script = ExtResource("1_6j0qv")
+obsessed_avatar = NodePath("ObsessedAvatar")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1369667012]
 modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
 position = Vector2(320, 240)
 texture = ExtResource("2_f55t6")
+
+[node name="ObsessedAvatar" parent="." unique_id=1264146040 node_paths=PackedStringArray("sprite") instance=ExtResource("12_mx2il")]
+position = Vector2(612, 222.00002)
+scale = Vector2(0.9, 0.9)
+sprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=1068270420]
+position = Vector2(-116, 46)
+scale = Vector2(0.35115424, 0.3511542)
+texture = ExtResource("13_xu1fw")
+polygon = PackedVector2Array(244.90662, 175.92773, 229.08582, 242.3753, 418.9359, 270.85272, 418.9359, 198.07684)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=456393303]
+polygon = PackedVector2Array(30, 116.66664, 31.111084, 139.99998, -22.222229, 131.1111, -20, 109.999985)
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1939482666]
 position = Vector2(320, 240)

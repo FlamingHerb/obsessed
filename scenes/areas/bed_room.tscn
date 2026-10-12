@@ -3,36 +3,28 @@
 [ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="1_3k651"]
 [ext_resource type="Texture2D" uid="uid://ci0qflmohaa4b" path="res://assets/graphics/bg/bed_room.png" id="2_0tygs"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_3yxs0"]
+[ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="3_8364p"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_h5xoj"]
+[ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="4_pg4vr"]
 [ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_jt4b5"]
-[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="5_ovx53"]
-[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="6_jt4b5"]
-[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="9_k2ram"]
+[ext_resource type="Resource" uid="uid://tdhb0k1xllgt" path="res://resources/events/bed_room/obsessed_sleeping.tres" id="10_pg4vr"]
+[ext_resource type="Resource" uid="uid://dyj3ml4djf8s5" path="res://resources/events/bed_room/obsessed_awake.tres" id="11_2120d"]
+[ext_resource type="Texture2D" uid="uid://cf0cau3x6pb0r" path="res://assets/graphics/obsessed/obsessed-sleeping.png" id="11_pg4vr"]
 
 [sub_resource type="Gradient" id="Gradient_jt4b5"]
-colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+colors = PackedColorArray(0, 0, 0, 0.9019608, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
 gradient = SubResource("Gradient_jt4b5")
 width = 640
 height = 480
-fill_from = Vector2(0, 0.5)
+fill_from = Vector2(0.2, 0.5)
 fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
-[sub_resource type="Resource" id="Resource_yf5fn"]
-script = ExtResource("9_k2ram")
-window_text = "I don't want to wake her up..."
-seconds = 2.0
-metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
-
-[sub_resource type="Resource" id="Resource_g4v7s"]
-script = ExtResource("4_h5xoj")
-commands = Array[ExtResource("5_ovx53")]([SubResource("Resource_yf5fn")])
-metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
-
-[node name="BedRoom" type="Node2D" unique_id=200603411]
+[node name="BedRoom" type="Node2D" unique_id=200603411 node_paths=PackedStringArray("obsessed_avatar")]
 script = ExtResource("1_3k651")
+obsessed_avatar = NodePath("ObsessedAvatar")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Background" type="Sprite2D" parent="." unique_id=457884897]
@@ -40,19 +32,40 @@ modulate = Color(0.38857287, 0.38857287, 0.38857287, 1)
 position = Vector2(320, 240)
 texture = ExtResource("2_0tygs")
 
+[node name="ObsessedAvatar" parent="." unique_id=966668314 node_paths=PackedStringArray("sprite") instance=ExtResource("3_8364p")]
+sprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=971770042]
+position = Vector2(-116, 46)
+scale = Vector2(0.35115424, 0.3511542)
+texture = ExtResource("4_pg4vr")
+polygon = PackedVector2Array(112.14453, 112.14453, -284.77515, 1440.9623, 918.18335, 1338.7256, 504.6504, 56.072266)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=124300715]
+polygon = PackedVector2Array(0, 88, 24, 88, 32, 152, 48, 168, 56, 248, 56, 320, 32, 336, 24, 480, 24, 496, -16, 488, -32, 328, -56, 312, -48, 224, -48, 160, -24, 152, -16, 88)
+
+[node name="ObsessedSleeping" parent="." unique_id=1159570255 instance=ExtResource("3_3yxs0")]
+event_page_list = Array[ExtResource("4_h5xoj")]([ExtResource("10_pg4vr"), ExtResource("11_2120d")])
+metadata/_edit_lock_ = true
+
+[node name="SleepingSprite" type="Sprite2D" parent="ObsessedSleeping" unique_id=396857298]
+modulate = Color(1.2237577, 1.2237577, 1.2237577, 1)
+position = Vector2(320, 240)
+scale = Vector2(0.32, 0.32000002)
+texture = ExtResource("11_pg4vr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedSleeping" unique_id=331543186]
+polygon = PackedVector2Array(290, 293, 206, 390, 492, 392, 387, 291)
+
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1994053211]
 position = Vector2(320, 240)
 texture = SubResource("GradientTexture2D_yf5fn")
+metadata/_edit_lock_ = true
 
 [node name="ToHallStairs" parent="." unique_id=861190875 instance=ExtResource("3_3yxs0")]
 event_page_list = Array[ExtResource("4_h5xoj")]([ExtResource("5_jt4b5")])
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHallStairs" unique_id=2062564969]
 position = Vector2(414, 170)
 polygon = PackedVector2Array(-1, -1, 64, -8, 64, 168, -1, 156)
-
-[node name="MapEventBase2" parent="." unique_id=1159570255 instance=ExtResource("3_3yxs0")]
-event_page_list = Array[ExtResource("4_h5xoj")]([SubResource("Resource_g4v7s")])
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapEventBase2" unique_id=331543186]
-polygon = PackedVector2Array(290, 293, 206, 390, 492, 392, 387, 291)

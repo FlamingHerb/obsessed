@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_y4lhg"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_cxf5q"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_h8d3f"]
+[ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_vfpaq"]
+[ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="9_fcdbf"]
 
 [sub_resource type="Gradient" id="Gradient_y4lhg"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -13,12 +15,13 @@ colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 gradient = SubResource("Gradient_y4lhg")
 width = 640
 height = 480
-fill_from = Vector2(0.5, 0)
+fill_from = Vector2(0.5, 0.2)
 fill_to = Vector2(0.5, 1)
 metadata/_snap_enabled = true
 
-[node name="BathroomDownstairs" type="Node2D" unique_id=783187507]
+[node name="BathroomDownstairs" type="Node2D" unique_id=783187507 node_paths=PackedStringArray("obsessed_avatar")]
 script = ExtResource("1_mqbqs")
+obsessed_avatar = NodePath("ObsessedAvatar")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Background" type="Sprite2D" parent="." unique_id=549186324]
@@ -35,3 +38,18 @@ event_page_list = Array[ExtResource("4_cxf5q")]([ExtResource("5_h8d3f")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHall" unique_id=130269186]
 polygon = PackedVector2Array(351, 36, 355, 428, 521, 488, 525, -5)
+
+[node name="ObsessedAvatar" parent="." unique_id=1761139385 node_paths=PackedStringArray("sprite") instance=ExtResource("6_vfpaq")]
+position = Vector2(72.000015, 319.99997)
+rotation = 3.1415927
+scale = Vector2(2.4, 2.4)
+sprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=2085541065]
+position = Vector2(-116, 46)
+scale = Vector2(0.35115424, 0.3511542)
+texture = ExtResource("9_fcdbf")
+polygon = PackedVector2Array(112.14453, 112.14453, -284.77515, 1440.9623, 918.18335, 1338.7256, 504.6504, 56.072266)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=826211016]
+polygon = PackedVector2Array(0, 88, 24, 88, 32, 152, 48, 168, 56, 248, 56, 320, 32, 336, 24, 480, 24, 496, -16, 488, -32, 328, -56, 312, -48, 224, -48, 160, -24, 152, -16, 88)

@@ -11,6 +11,7 @@ extends Node
 
 enum SWCH_NAME {
 	HAMMER_GOTTEN,
+	OBSESSED_AWAKE,
 }
 
 enum VAR_NAME {

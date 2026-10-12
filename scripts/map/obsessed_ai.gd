@@ -27,7 +27,6 @@ signal state_changed()
 ## The initial state of the state machine. If not set, the first child node is used.
 @export var initial_state: StateBase = null
 
-
 ## Action timer.
 @onready var action_timer: Timer = $ActionTimer
 ## The current state of the state machine.
@@ -39,7 +38,9 @@ signal state_changed()
 var current_location: MapNode
 ## Location that the Obsessed AI last visited.
 var last_visited_location: MapNode
-
+## It MUST have an idea the current GameArea loaded.
+## This is only a variable that the MAINGAMEFRAME will touch.
+var current_game_area: GameArea
 
 func _ready() -> void:
 	# Connect signals.
@@ -97,8 +98,8 @@ func _transition_to_next_state(target_state_path: String) -> void:
 	state = get_node(target_state_path)
 	state.enter(previous_state_path)
 	state_changed.emit()
-#endregion
 
 # Tell current state that the timer has timed out.
 func _on_action_timer_timeout() -> void:
 	state.action_timer_timeout(action_timer)
+#endregion

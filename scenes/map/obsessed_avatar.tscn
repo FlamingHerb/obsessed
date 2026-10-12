@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://8ui030fqevgy"]
+
+[ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="1_17qq6"]
+[ext_resource type="Script" uid="uid://bvdp8hv3y5lbx" path="res://scripts/map/obsessed_avatar.gd" id="2_3peb3"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="3_a6ib4"]
+[ext_resource type="Resource" uid="uid://cr5msjtihep2h" path="res://resources/events/obsessed/default_interact.tres" id="4_0h1sk"]
+
+[node name="ObsessedAvatar" unique_id=861190875 instance=ExtResource("1_17qq6")]
+script = ExtResource("2_3peb3")
+event_page_list = Array[ExtResource("3_a6ib4")]([ExtResource("4_0h1sk")])

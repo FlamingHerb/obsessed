@@ -10,14 +10,6 @@ enum SCENE_CONTEXT {
 signal change_map(path: String)
 signal area_change_completed
 
-# For save/load shortcuts
-signal shortcut_save_pressed
-signal shortcut_load_pressed
-
-# For opening save/load menu
-signal open_save_menu
-signal open_load_menu
-
 # An event is running. Stop any other events from running.
 signal event_running(running: bool)
 

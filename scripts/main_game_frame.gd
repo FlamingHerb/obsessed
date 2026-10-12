@@ -7,14 +7,10 @@ extends Node
 
 # INFO: Exported variables
 @export var starting_scene: MapNode
+@export var obsessed_ai: ObsessedAI
 
 # INFO: Onready variables
 @onready var game_area = $GameLayer/GameArea
-
-
-## INFO: Other variables
-## Sets Adi as the default POV character.
-var current_area_name: String = "GameArea"
 
 @onready var game_map: GameMap = $AnythingElse/GameMap
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -22,6 +18,10 @@ var current_area_name: String = "GameArea"
 @onready var transition_black: ColorRect = $GameLayer/Transition
 
 @onready var game_layer: CanvasLayer = $GameLayer
+
+## INFO: Other variables
+## Sets Adi as the default POV character.
+var current_area_name: String = "GameArea"
 
 #endregion
 
@@ -76,6 +76,9 @@ func _deferred_change_area(path: String) -> void:
 	print("Previous Scene: ", current_area_name)
 	current_scene.free()
 	current_scene = new_scene.instantiate()
+	
+	# Obsessed AI will now consider this as the new game area.
+	obsessed_ai.current_game_area = current_scene
 	
 	# Add child...
 	game_layer.add_child(current_scene)

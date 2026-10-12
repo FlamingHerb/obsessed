@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="12_ee4yb"]
 [ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="13_7cp4x"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="14_0egjx"]
+[ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="17_mosko"]
+[ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="18_c02dm"]
 
 [sub_resource type="Gradient" id="Gradient_pfpmf"]
 offsets = PackedFloat32Array(0)
@@ -62,8 +64,9 @@ graphic = "Sprite"
 commands = Array[ExtResource("12_ee4yb")]([SubResource("Resource_3epv6")])
 metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"
 
-[node name="LivingRoom" type="Node2D" unique_id=478466405]
+[node name="LivingRoom" type="Node2D" unique_id=478466405 node_paths=PackedStringArray("obsessed_avatar")]
 script = ExtResource("1_23wmd")
+obsessed_avatar = NodePath("ObsessedAvatar")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=660098856]
@@ -77,6 +80,20 @@ texture = SubResource("GradientTexture1D_57qmd")
 modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
 position = Vector2(320, 240)
 texture = ExtResource("2_btl2f")
+
+[node name="ObsessedAvatar" parent="." unique_id=114282325 node_paths=PackedStringArray("sprite") instance=ExtResource("17_mosko")]
+position = Vector2(73, 32)
+sprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=721971378]
+position = Vector2(-123.00001, 70.00001)
+scale = Vector2(0.35115424, 0.3511542)
+texture = ExtResource("18_c02dm")
+polygon = PackedVector2Array(210.73361, 469.879, 421.46722, 464.1835, 435.706, 617.96204, 478.42224, 612.2666, 492.661, 501.20425, 506.89978, 495.50876, 498.35648, 76.88928, 162.32182, 71.19379)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=1296504]
+position = Vector2(-8, 21)
+polygon = PackedVector2Array(-16, 87, 27, 91, 28, 153, 50, 171, 54, 242, 54, 263, 38, 266, 33, 211, -42, 215, -47, 175, -25, 150)
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1693263211]
 modulate = Color(0.14509805, 0.14509805, 0.14509805, 1)

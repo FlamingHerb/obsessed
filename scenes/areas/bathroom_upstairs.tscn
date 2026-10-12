@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_1fm6j"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_cvae2"]
 [ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_37km5"]
+[ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_5aqx1"]
+[ext_resource type="Texture2D" uid="uid://c5mkqh6q207vk" path="res://assets/graphics/obsessed/obsessed-stalk-no-eyes.png" id="7_1fm6j"]
 
 [sub_resource type="Gradient" id="Gradient_y4lhg"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -13,18 +15,32 @@ colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 gradient = SubResource("Gradient_y4lhg")
 width = 640
 height = 480
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 1)
+fill_from = Vector2(0, 0.8)
 metadata/_snap_enabled = true
 
-[node name="BathroomUpstairs" type="Node2D" unique_id=256729614]
+[node name="BathroomUpstairs" type="Node2D" unique_id=256729614 node_paths=PackedStringArray("obsessed_avatar")]
 script = ExtResource("1_3utbw")
+obsessed_avatar = NodePath("ObsessedAvatar")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Background" type="Sprite2D" parent="." unique_id=889847000]
 modulate = Color(0.2627451, 0.2627451, 0.2627451, 1)
 position = Vector2(320, 240)
 texture = ExtResource("2_4e2xn")
+
+[node name="ObsessedAvatar" parent="." unique_id=77851537 node_paths=PackedStringArray("sprite") instance=ExtResource("6_5aqx1")]
+position = Vector2(24, 221)
+scale = Vector2(1.5, 1.5)
+sprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=1156369839]
+position = Vector2(-116, 46)
+scale = Vector2(0.35115424, 0.3511542)
+texture = ExtResource("7_1fm6j")
+polygon = PackedVector2Array(284.77515, 288.5722, 280.97815, -20.883484, 493.61023, 239.21118)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=2064745452]
+polygon = PackedVector2Array(0, 88, 24, 88, 32, 152, 48, 168, 56, 248, 56, 320, 32, 336, 41, 484, 44, 532, -35, 535, -32, 328, -56, 312, -48, 224, -48, 160, -24, 152, -16, 88)
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=373202629]
 position = Vector2(320, 240)

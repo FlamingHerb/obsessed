@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_k3tx4"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_l6rr3"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_xrobh"]
+[ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_sbbe3"]
+[ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="9_gvfhf"]
 
 [sub_resource type="Gradient" id="Gradient_k3tx4"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -17,18 +19,35 @@ fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 metadata/_snap_enabled = true
 
-[node name="Garage" type="Node2D" unique_id=1659400209]
+[node name="Garage" type="Node2D" unique_id=1659400209 node_paths=PackedStringArray("obsessed_avatar")]
 script = ExtResource("1_a08om")
+obsessed_avatar = NodePath("ObsessedAvatar")
 metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1704008127]
 modulate = Color(0.22369123, 0.22369123, 0.22369123, 1)
 position = Vector2(320, 240)
 texture = ExtResource("2_utxgq")
+metadata/_edit_lock_ = true
+
+[node name="ObsessedAvatar" parent="." unique_id=313747128 node_paths=PackedStringArray("sprite") instance=ExtResource("6_sbbe3")]
+position = Vector2(312, 162)
+scale = Vector2(0.45, 0.45)
+sprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=2119111798]
+position = Vector2(-116, 46)
+scale = Vector2(0.35115424, 0.3511542)
+texture = ExtResource("9_gvfhf")
+polygon = PackedVector2Array(305.02588, 115.80859, 298.6975, 470.19556, 361.98096, 546.1356, 406.2793, 679.03064, 488.5476, 679.03064, 741.68115, 58.853638, 298.6975, 52.52527)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=1850699719]
+polygon = PackedVector2Array(-8.888916, 84.44443, 15.555542, 88.888885, 31.111084, 106.66666, 28.888855, 153.33334, 44.444458, 162.2222, 53.333313, 179.99997, 51.111084, 231.11111, 57.77777, 284.44443, 24.444458, 284.44443, 11.111084, 237.7778, -11.111145, 211.11111)
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=747783949]
 position = Vector2(320, 240)
 texture = SubResource("GradientTexture2D_k3tx4")
+metadata/_edit_lock_ = true
 
 [node name="ToHall" parent="." unique_id=861190875 instance=ExtResource("3_k3tx4")]
 event_page_list = Array[ExtResource("4_l6rr3")]([ExtResource("5_xrobh")])

@@ -38,7 +38,6 @@ func _ready() -> void:
 func _another_event_running(running: bool) -> void:
 	pass
 
-
 func _process(_delta: float) -> void:
 	if current_page:
 		if current_page.trigger == EventPage.TRIGGER_TYPE.AUTORUN:
@@ -46,7 +45,7 @@ func _process(_delta: float) -> void:
 		elif current_page.trigger == EventPage.TRIGGER_TYPE.PARALLEL:
 			_activate_event_page(current_page)
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
@@ -56,7 +55,6 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 				if not OS.is_debug_build(): return
 				print("[DEBUG] Current active page: ", current_page.resource_name)
 				get_viewport().set_input_as_handled()
-		
 
 func _on_mouse_entered() -> void:
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)

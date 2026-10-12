@@ -52,9 +52,10 @@ _data = {
 &"fade_to_black": SubResource("Animation_dq1ta")
 }
 
-[node name="MainGameFrame" type="Node" unique_id=1044994733 node_paths=PackedStringArray("starting_scene")]
+[node name="MainGameFrame" type="Node" unique_id=1044994733 node_paths=PackedStringArray("starting_scene", "obsessed_ai")]
 script = ExtResource("1_3u0ws")
 starting_scene = NodePath("AnythingElse/GameMap/Bedroom")
+obsessed_ai = NodePath("AnythingElse/ObsessedAI")
 
 [node name="GameLayer" type="CanvasLayer" parent="." unique_id=1495418]
 
