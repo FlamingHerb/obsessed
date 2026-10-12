@@ -1,33 +1,36 @@
 [gd_scene format=3 uid="uid://dra6t5pl04qd1"]
 
 [ext_resource type="Script" uid="uid://b3rj5jspx2w24" path="res://scripts/map/obsessed_ai.gd" id="1_jqmul"]
-[ext_resource type="Script" uid="uid://biaf2k1w0j8hq" path="res://scripts/state/state_base.gd" id="2_30c7n"]
+[ext_resource type="Script" uid="uid://ct7ocvsosx7d0" path="res://scripts/map/states/sleeping.gd" id="2_252wt"]
+[ext_resource type="Script" uid="uid://c41uanawcrg84" path="res://scripts/map/states/idle.gd" id="3_sthe2"]
+[ext_resource type="Script" uid="uid://bv03s1tq8fudw" path="res://scripts/map/states/stalking.gd" id="4_aie84"]
+[ext_resource type="Script" uid="uid://71r6hnnxa6up" path="res://scripts/map/states/aggressive.gd" id="5_jltei"]
+[ext_resource type="Script" uid="uid://dkm0nxheo1o3a" path="res://scripts/map/states/fight_route.gd" id="6_fuxim"]
 
 [node name="ObsessedAI" type="Node" unique_id=1908456690 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_jqmul")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Sleeping")
 
 [node name="ActionTimer" type="Timer" parent="." unique_id=1314048613]
-one_shot = true
-
-[node name="Idle" type="Node" parent="." unique_id=1084771201]
-script = ExtResource("2_30c7n")
-metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Sleeping" type="Node" parent="." unique_id=569402701]
-script = ExtResource("2_30c7n")
+script = ExtResource("2_252wt")
+metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
+
+[node name="Idle" type="Node" parent="." unique_id=1084771201]
+script = ExtResource("3_sthe2")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Stalking" type="Node" parent="." unique_id=2060034014]
-script = ExtResource("2_30c7n")
+script = ExtResource("4_aie84")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Aggressive" type="Node" parent="." unique_id=1883091544]
-script = ExtResource("2_30c7n")
+script = ExtResource("5_jltei")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="FightRoute" type="Node" parent="." unique_id=241303799]
-script = ExtResource("2_30c7n")
+script = ExtResource("6_fuxim")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

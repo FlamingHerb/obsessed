@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cr5nocx6pmfrf"]
 
 [ext_resource type="Script" uid="uid://cd6t5nlac4247" path="res://scripts/main_game_frame.gd" id="1_3u0ws"]
+[ext_resource type="Script" uid="uid://cf0du2pssgv47" path="res://scripts/map/game_area_base.gd" id="2_56g8q"]
 [ext_resource type="PackedScene" uid="uid://btje5tj6gpu6o" path="res://scenes/areas/bed_room.tscn" id="2_cfpp1"]
 [ext_resource type="PackedScene" uid="uid://bn8iosdwnwa0" path="res://scenes/menus/pause_menu.tscn" id="2_vtjbl"]
 [ext_resource type="PackedScene" uid="uid://dra6t5pl04qd1" path="res://scenes/map/obsessed_ai.tscn" id="3_5gttk"]
@@ -54,7 +55,7 @@ _data = {
 
 [node name="MainGameFrame" type="Node" unique_id=1044994733 node_paths=PackedStringArray("starting_scene", "obsessed_ai")]
 script = ExtResource("1_3u0ws")
-starting_scene = NodePath("AnythingElse/GameMap/Bedroom")
+starting_scene = NodePath("AnythingElse/GameMap/BedRoom")
 obsessed_ai = NodePath("AnythingElse/ObsessedAI")
 
 [node name="GameLayer" type="CanvasLayer" parent="." unique_id=1495418]
@@ -68,7 +69,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="GameArea" type="Node2D" parent="GameLayer" unique_id=334518458]
+[node name="GameArea" type="Node2D" parent="GameLayer" unique_id=1611861989]
+script = ExtResource("2_56g8q")
+metadata/_custom_type_script = "uid://cf0du2pssgv47"
 
 [node name="Transition" type="ColorRect" parent="GameLayer" unique_id=30006257]
 anchors_preset = 15
@@ -97,12 +100,12 @@ script = ExtResource("4_onxw4")
 obsession_ai = NodePath("../ObsessedAI")
 metadata/_custom_type_script = "uid://cl0b3w35t2sxd"
 
-[node name="Bedroom" parent="AnythingElse/GameMap" unique_id=2147084624 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
+[node name="BedRoom" parent="AnythingElse/GameMap" unique_id=2147084624 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
 layout_mode = 0
 offset_left = 536.0
 offset_right = 576.0
 map_label = "B"
-map_name = "Bedroom"
+map_name = "BedRoom"
 map_scene = ExtResource("2_cfpp1")
 map_neighbours = [NodePath("../HallStairs")]
 
@@ -115,7 +118,7 @@ offset_bottom = 104.0
 map_label = "HS"
 map_name = "HallStairs"
 map_scene = ExtResource("9_28y4d")
-map_neighbours = [NodePath("../Bedroom"), NodePath("../BathroomUpstairs"), NodePath("../ClosetRoom"), NodePath("../Hall")]
+map_neighbours = [NodePath("../BedRoom"), NodePath("../BathroomUpstairs"), NodePath("../ClosetRoom"), NodePath("../Hall")]
 
 [node name="BathroomUpstairs" parent="AnythingElse/GameMap" unique_id=1427428842 node_paths=PackedStringArray("map_neighbours") instance=ExtResource("6_dqx88")]
 layout_mode = 0
@@ -194,9 +197,10 @@ map_name = "LivingRoom"
 map_scene = ExtResource("14_633l6")
 map_neighbours = [NodePath("../Hall"), NodePath("../Kitchen")]
 
-[node name="ObsessedAI" parent="AnythingElse" unique_id=1908456690 node_paths=PackedStringArray("obsessed_starting_point", "patrol_route", "game_map") instance=ExtResource("3_5gttk")]
-obsessed_starting_point = NodePath("../GameMap/Bedroom")
-patrol_route = [NodePath("../GameMap/Bedroom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom")]
+[node name="ObsessedAI" parent="AnythingElse" unique_id=1908456690 node_paths=PackedStringArray("obsessed_starting_point", "patrol_route", "sleep_guard", "game_map") instance=ExtResource("3_5gttk")]
+obsessed_starting_point = NodePath("../GameMap/BedRoom")
+patrol_route = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom")]
+sleep_guard = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/ClosetRoom")]
 game_map = NodePath("../GameMap")
 
 [node name="GabWindow" parent="AnythingElse" unique_id=37712166 instance=ExtResource("15_dq1ta")]

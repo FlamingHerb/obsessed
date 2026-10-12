@@ -17,6 +17,8 @@ signal state_changed()
 @export var obsessed_starting_point: MapNode
 ## Usual patrol route, will be ignored during some states.
 @export var patrol_route: Array[MapNode]
+## These rooms are considered safe for sleeping... until they venture down.
+@export var sleep_guard: Array[MapNode]
 ## Game map to reference.
 @export var game_map: GameMap
 ## Debug for Pathfinding
@@ -40,7 +42,7 @@ var current_location: MapNode
 var last_visited_location: MapNode
 ## It MUST have an idea the current GameArea loaded.
 ## This is only a variable that the MAINGAMEFRAME will touch.
-var current_game_area: GameArea
+var player_game_area: GameArea
 
 func _ready() -> void:
 	# Connect signals.

@@ -21,7 +21,7 @@ func _ready() -> void:
 	# Defaults to stalking
 	sprite.texture = stalking_sprite
 	
-	#hide()	
+	hide()	
 
 ## Override for maximum scares.
 func _on_mouse_entered() -> void:

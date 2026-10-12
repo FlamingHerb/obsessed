@@ -27,6 +27,8 @@ var current_area_name: String = "GameArea"
 
 #region Virtual functions
 func _ready() -> void:
+	obsessed_ai.player_game_area = $GameLayer/GameArea
+	
 	# INFO: Tell events that you are the GameMainFrame.
 	Events.game_main = self
 	
@@ -78,7 +80,7 @@ func _deferred_change_area(path: String) -> void:
 	current_scene = new_scene.instantiate()
 	
 	# Obsessed AI will now consider this as the new game area.
-	obsessed_ai.current_game_area = current_scene
+	obsessed_ai.player_game_area = current_scene
 	
 	# Add child...
 	game_layer.add_child(current_scene)

@@ -8,6 +8,12 @@ extends Node
 
 signal transition_to(next_state_path: String)
 
+## The state's parent.
+@onready var parent: ObsessedAI
+
+func _ready() -> void:
+	parent = get_parent()
+
 ## Called by the state machine when receiving unhandled input events.
 func handle_input(_event: InputEvent) -> void:
 	pass
@@ -22,8 +28,8 @@ func physics_update(_delta: float) -> void:
 
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
-func enter(next_state_path: String) -> void:
-	print("Entering: ", next_state_path)
+func enter(previous_state_path: String) -> void:
+	print("From: ", previous_state_path)
 
 ## Called by the state machine before changing the active state. Use this function
 ## to clean up the state.
