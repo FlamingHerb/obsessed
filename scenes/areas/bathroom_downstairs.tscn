@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_cxf5q"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_h8d3f"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_vfpaq"]
-[ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="9_fcdbf"]
+[ext_resource type="Texture2D" uid="uid://c5mkqh6q207vk" path="res://assets/graphics/obsessed/obsessed-stalk-no-eyes.png" id="7_h8d3f"]
 
 [sub_resource type="Gradient" id="Gradient_y4lhg"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -39,16 +39,16 @@ event_page_list = Array[ExtResource("4_cxf5q")]([ExtResource("5_h8d3f")])
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHall" unique_id=130269186]
 polygon = PackedVector2Array(351, 36, 355, 428, 521, 488, 525, -5)
 
-[node name="ObsessedAvatar" parent="." unique_id=1761139385 node_paths=PackedStringArray("sprite") instance=ExtResource("6_vfpaq")]
+[node name="ObsessedAvatar" parent="." unique_id=1761139385 node_paths=PackedStringArray("poly_sprite") instance=ExtResource("6_vfpaq")]
 position = Vector2(72.000015, 319.99997)
 rotation = 3.1415927
 scale = Vector2(2.4, 2.4)
-sprite = NodePath("Sprite2D2")
+poly_sprite = NodePath("Sprite2D2")
 
 [node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=2085541065]
 position = Vector2(-116, 46)
 scale = Vector2(0.35115424, 0.3511542)
-texture = ExtResource("9_fcdbf")
+texture = ExtResource("7_h8d3f")
 polygon = PackedVector2Array(112.14453, 112.14453, -284.77515, 1440.9623, 918.18335, 1338.7256, 504.6504, 56.072266)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=826211016]

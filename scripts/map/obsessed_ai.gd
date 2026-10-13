@@ -31,8 +31,10 @@ signal state_changed()
 @export var patrol_time: float
 ## How long the Obsessed idles.
 @export var idle_time: float
-## How long the Obsessed becomes aggressive.
+## How long the Obsessed becomes aggressive after stalking.
 @export var aggressive_time: float
+## How long the Obsessed attacks the player after loading into the map.
+@export var aggression_reaction_time: float
 @export_category("Debugging")
 ## Debug for Pathfinding
 @export var starting_node_debug: MapNode
@@ -46,6 +48,8 @@ signal state_changed()
 @onready var state: StateBase = (func get_initial_state() -> StateBase:
 	return initial_state if initial_state != null else get_child(0)
 ).call()
+## Expose Stalking state
+@onready var stalking_state: Stalking = $Stalking
 
 ## Current location of the obsession
 var current_location: MapNode
@@ -58,6 +62,7 @@ var previous_state: StateBase
 var player_game_area: GameArea
 
 func _ready() -> void:
+	stalking_state.waiting_period = aggressive_time
 	# Connect signals.
 	Events.state_change_force.connect(_transition_to_next_state)
 	
@@ -108,18 +113,27 @@ func check_to_show_obsessed_avatar() -> void:
 		print("OBSESSION DEBUG: She's sleeping.")
 		return
 	
+	# NOTE: The only thing that shows the sprite!
 	# Check if the player is in the area.
 	if player_game_area.name == current_location.map_name:
 		print("OBSESSION DEBUG: She's here.")
-		player_game_area.obsessed_avatar.show()
-		player_game_area.obsessed_avatar.modulate = Color(0, 0, 0, 0)
 		
 		# If she's there, turn her into stalking.
-		_transition_to_next_state("Stalking")
+		if stalking_state.waiting_period > 0:
+			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
+			_transition_to_next_state("Stalking")
+		else:
+			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.AGGRESSIVE)
+			_transition_to_next_state("Aggressive")
 		
-		var tween = create_tween().set_parallel(true)
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 1), 0.33)
+		# Only do this if the obsessed avatar is not visible yet.
+		if not player_game_area.obsessed_avatar.visible:
+			player_game_area.obsessed_avatar.show()
+			player_game_area.obsessed_avatar.modulate = Color(1, 1, 1, 0)
+		
+			var tween = create_tween().set_parallel(true)
+			tween.set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(1, 1, 1, 1), 0.33)
 	else: 
 		print("OBSESSION DEBUG: She's not here.")
 		
@@ -127,11 +141,11 @@ func check_to_show_obsessed_avatar() -> void:
 		if player_game_area.obsessed_avatar.visible:
 			var new_tween = create_tween().set_parallel(true)
 			new_tween.set_ease(Tween.EASE_IN_OUT)
-			new_tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 0), 0.33)
+			new_tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(1, 1, 1, 0), 0.33)
 			#await new_tween.finished
 		
 		# Check if currently stalking.
-		if state is Stalking and state is not FightRoute:
+		if (state is Stalking or state is Aggressive) and state is not FightRoute:
 			if previous_state is Patrolling:
 				var continue_patrol: PatrolData = PatrolData.new()
 				continue_patrol.continue_patrol = true
@@ -169,6 +183,10 @@ func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
 func _transition_to_next_state(target_state_path: String, data: StateData = null) -> void:
 	if not has_node(target_state_path):
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
+		return
+
+	if target_state_path == state.name:
+		print("Uh, what are you doing? You're just entering another state.")
 		return
 
 	var previous_state_path := state.name

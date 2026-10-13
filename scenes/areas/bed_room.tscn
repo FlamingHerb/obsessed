@@ -32,8 +32,8 @@ modulate = Color(0.38857287, 0.38857287, 0.38857287, 1)
 position = Vector2(320, 240)
 texture = ExtResource("2_0tygs")
 
-[node name="ObsessedAvatar" parent="." unique_id=966668314 node_paths=PackedStringArray("sprite") instance=ExtResource("3_8364p")]
-sprite = NodePath("Sprite2D2")
+[node name="ObsessedAvatar" parent="." unique_id=966668314 node_paths=PackedStringArray("poly_sprite") instance=ExtResource("3_8364p")]
+poly_sprite = NodePath("Sprite2D2")
 
 [node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=971770042]
 position = Vector2(-116, 46)

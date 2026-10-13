@@ -205,7 +205,8 @@ game_map = NodePath("../GameMap")
 sleeping_period = 10.0
 patrol_time = 3.5
 idle_time = 5.0
-aggressive_time = 30.0
+aggressive_time = 10.0
+aggression_reaction_time = 2.0
 
 [node name="GabWindow" parent="AnythingElse" unique_id=37712166 instance=ExtResource("15_dq1ta")]
 
