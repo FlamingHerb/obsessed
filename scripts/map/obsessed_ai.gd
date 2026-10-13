@@ -51,6 +51,8 @@ signal state_changed()
 var current_location: MapNode
 ## Location that the Obsessed AI last visited.
 var last_visited_location: MapNode
+## Previous state that the AI was in.
+var previous_state: StateBase
 ## It MUST have an idea the current GameArea loaded.
 ## This is only a variable that the MAINGAMEFRAME will touch.
 var player_game_area: GameArea
@@ -112,6 +114,9 @@ func check_to_show_obsessed_avatar() -> void:
 		player_game_area.obsessed_avatar.show()
 		player_game_area.obsessed_avatar.modulate = Color(0, 0, 0, 0)
 		
+		# If she's there, turn her into stalking.
+		_transition_to_next_state("Stalking")
+		
 		var tween = create_tween().set_parallel(true)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 1), 0.33)
@@ -124,6 +129,16 @@ func check_to_show_obsessed_avatar() -> void:
 			new_tween.set_ease(Tween.EASE_IN_OUT)
 			new_tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 0), 0.33)
 			#await new_tween.finished
+		
+		# Check if currently stalking.
+		if state is Stalking and state is not FightRoute:
+			if previous_state is Patrolling:
+				var continue_patrol: PatrolData = PatrolData.new()
+				continue_patrol.continue_patrol = true
+				_transition_to_next_state("Patrolling", continue_patrol)
+			else:
+				_transition_to_next_state("Idle")
+		
 		player_game_area.obsessed_avatar.hide()
 
 # I can't believe I'm using BFS now.
@@ -157,6 +172,7 @@ func _transition_to_next_state(target_state_path: String, data: StateData = null
 		return
 
 	var previous_state_path := state.name
+	previous_state = state
 	state.exit()
 	state = get_node(target_state_path)
 	state.enter(previous_state_path, data)

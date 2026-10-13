@@ -11,9 +11,17 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 	
 	# Check if we have to force due to sound that will alert the obsessed.
 	if data and data is PatrolData:
+		print("PATROL DEBUG: Getting them data.")
+		# Type checking in a new world order type beat
 		var new_data: PatrolData = data
-		var target: MapNode = parent.game_map.find_child(new_data.target_area)
-		patrol_line = parent.pathfind(parent.current_location, target)
+		
+		# Check if it is going to continue a patrol or not.
+		if new_data.continue_patrol:
+			print("PATROL DEBUG: Continuing patrol")
+		if new_data.target_area:
+			print("PATROL DEBUG: Traversing to new target.")
+			var target: MapNode = parent.game_map.find_child(new_data.target_area)
+			patrol_line = parent.pathfind(parent.current_location, target)
 	else:
 		_natural_route_generation()
 	
