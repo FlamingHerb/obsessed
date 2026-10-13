@@ -6,7 +6,7 @@ extends StateBase
 
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
-func enter(previous_state_path: String) -> void:
+func enter(previous_state_path: String, data: StateData = null) -> void:
 	# Change action timer to appropriate amount.
 	parent.action_timer.stop()
 	#parent.action_timer.wait_time = parent.idle_time

@@ -5,10 +5,17 @@ var patrol_line: Array[MapNode]
 
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
-func enter(previous_state_path: String) -> void:
+func enter(previous_state_path: String, data: StateData = null) -> void:
 	# Change action timer to appropriate amount.
 	parent.action_timer.stop()
 	
+	# Check if we have to force due to sound that will alert the obsessed.
+	_natural_route_generation()
+	
+	# Resume patrol time.
+	parent.action_timer.start(parent.patrol_time)
+
+func _natural_route_generation() -> void:
 	# Plot out route. Cannot be its current position.
 	var possible_route: Array[MapNode] = parent.patrol_route.duplicate_deep()
 	# Remove its current location from its possible route.
@@ -26,9 +33,6 @@ func enter(previous_state_path: String) -> void:
 	patrol_line.erase(parent.current_location)
 	
 	print("Patrol: ", patrol_line)
-	
-	# Resume patrol time.
-	parent.action_timer.start(parent.patrol_time)
 
 ## Map route generator
 func _map_route_generator(target_node: MapNode) -> Array[MapNode]:

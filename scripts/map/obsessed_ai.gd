@@ -58,6 +58,7 @@ var player_game_area: GameArea
 func _ready() -> void:
 	# Connect signals.
 	Events.state_change_force.connect(_transition_to_next_state)
+	
 	# It should know if a transition occurs.
 	Events.change_map.connect(_map_changing)
 	# And it should know when it ends.
@@ -141,7 +142,7 @@ func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
 	return []
 
 #region State Machine Handlers
-func _transition_to_next_state(target_state_path: String) -> void:
+func _transition_to_next_state(target_state_path: String, data: StateData = null) -> void:
 	if not has_node(target_state_path):
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
@@ -149,7 +150,7 @@ func _transition_to_next_state(target_state_path: String) -> void:
 	var previous_state_path := state.name
 	state.exit()
 	state = get_node(target_state_path)
-	state.enter(previous_state_path)
+	state.enter(previous_state_path, data)
 	
 	print(state.name, " is now active!")
 	state_changed.emit()

@@ -6,7 +6,7 @@
 class_name StateBase
 extends Node
 
-signal transition_to(next_state_path: String)
+signal transition_to(next_state_path: String, data: Dictionary)
 
 ## The state's parent.
 @onready var parent: ObsessedAI
@@ -28,7 +28,7 @@ func physics_update(_delta: float) -> void:
 
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
-func enter(previous_state_path: String) -> void:
+func enter(previous_state_path: String, data: StateData = null) -> void:
 	print("From: ", previous_state_path)
 
 ## Called by the state machine before changing the active state. Use this function

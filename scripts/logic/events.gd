@@ -13,8 +13,11 @@ signal area_change_completed
 # An event is running. Stop any other events from running.
 signal event_running(running: bool)
 
+#region Obsessed signals
 ## When you want to force the state change
-signal state_change_force(target_state_path: String)
+signal state_change_force(target_state_path: String, data: StateData)
+signal alert_obsessed_of_happening(target_area: String, fight_route_initiate: bool)
+#endregion
 
 ## Signal for gab window text
 signal gab_window_text(text: String, seconds: float)
@@ -81,8 +84,13 @@ func reset()-> void:
 	pass
 
 ## Force state change.
-func force_state_change(target_state_path: String) -> void:
-	state_change_force.emit(target_state_path)
+func force_state_change(target_state_path: String, data: StateData = null) -> void:
+	state_change_force.emit(target_state_path, data)
+
+## Tell the obsessed to do jack by telling where to go [target_area] and
+## if fight route actually starts.
+func obsessed_alert(target_area: String, fight_route_initiate: bool) -> void:
+	alert_obsessed_of_happening.emit(target_area, fight_route_initiate)
 
 ## Show gab window text
 func show_gab_window_text(text: String, seconds: float) -> void:
