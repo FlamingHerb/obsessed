@@ -113,6 +113,7 @@ func check_to_show_obsessed_avatar() -> void:
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 1), 0.33)
 	else: 
+		print("OBSESSION DEBUG: She's not here.")
 		player_game_area.obsessed_avatar.hide()
 
 # I can't believe I'm using BFS now.

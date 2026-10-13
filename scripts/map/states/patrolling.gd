@@ -13,9 +13,15 @@ func enter(previous_state_path: String) -> void:
 	var possible_route: Array[MapNode] = parent.patrol_route.duplicate_deep()
 	# Remove its current location from its possible route.
 	possible_route.erase(parent.current_location)
-	print("Possible Routes: ", len(possible_route), " - ", possible_route)
+	#print("Possible Routes: ", len(possible_route), " - ", possible_route)
+	
+	var route_generator = possible_route.map(_map_route_generator)
+	#var biggest = route_generator.reduce(func(a, b): return a if a.size() >= b.size() else b)
+	#print("Biggest: ", find_largest_arrays(route_generator).pick_random())
+	
 	# Then, from its current route, pathfind to its new route randomly chosen.
-	patrol_line = parent.pathfind(parent.current_location, possible_route.pick_random())
+	#patrol_line = parent.pathfind(parent.current_location, possible_route.pick_random())
+	patrol_line = find_largest_arrays(route_generator).pick_random()
 	# And for some reason remove current route.
 	patrol_line.erase(parent.current_location)
 	
@@ -24,9 +30,28 @@ func enter(previous_state_path: String) -> void:
 	# Resume patrol time.
 	parent.action_timer.start(parent.patrol_time)
 
+## Map route generator
+func _map_route_generator(target_node: MapNode) -> Array[MapNode]:
+	return parent.pathfind(parent.current_location, target_node)
+
+## Find the largest one.
+func find_largest_arrays(grid: Array) -> Array:
+	var largest: Array = []  # array of arrays
+	var best_size := -1
+	for row in grid:
+		if row.size() > best_size:
+			best_size = row.size()
+			largest = [row]
+		elif row.size() == best_size:
+			largest.append(row)
+	print("Largest Arrays: ", largest)
+	return largest
+
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 
 	if patrol_line.is_empty():
 		transition_to.emit("Idle")
 	else:
+		# Add variance
 		parent.obsession_moving(patrol_line.pop_front())
+		parent.action_timer.start(parent.patrol_time - randf_range(-1.5, 1.5))
