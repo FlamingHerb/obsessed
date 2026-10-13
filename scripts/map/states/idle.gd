@@ -1,11 +1,24 @@
 class_name Idle
 extends StateBase
 
+## The probability for the obsessed to idle.
+@export var idling_probability: float = 0.4
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+## Called by the state machine upon changing the active state. The `data` parameter
+## is a dictionary with arbitrary data the state can use to initialize itself.
+func enter(previous_state_path: String) -> void:
+	# Change action timer to appropriate amount.
+	parent.action_timer.stop()
+	#parent.action_timer.wait_time = parent.idle_time
+	parent.action_timer.start(parent.idle_time)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+## Called when the action timer from the Obsessed AI parent is calling.
+func action_timer_timeout(action_timer: Timer) -> void: 
+	# if lower than idling probability, start patrolling.
+	if randf() < idling_probability:
+		# Change switch.
+		DataManager.set_switch(DataManager.SWCH_NAME.OBSESSED_AWAKE, true)
+		
+		transition_to.emit("Patrolling")
+	else:
+		print("Currently idling")

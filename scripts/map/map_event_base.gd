@@ -68,7 +68,10 @@ func _find_suitable_page() -> void:
 		var event_page: EventPage = event_page_list[i]
 		if _meets_conditions(event_page):
 			# Once conditions are met, also change visibility of some things.
-			visible = not event_page.transparent
+			if event_page.transparent:
+				var hidden_node := get_node(event_page.graphic)
+				hidden_node.visible = not event_page.transparent
+			
 			position += event_page.offset_issued
 			
 			current_page = event_page
@@ -79,7 +82,7 @@ func _meets_conditions(event_page: EventPage) -> bool:
 	var switches_ok = event_page.switch_triggers.all(func(s): return DataManager.get_switch(s))
 	var variables_ok = event_page.variable_triggers.all(func(v: VariableCondition): return v.is_met())
 	var self_switches_ok = event_page.self_switch_triggers.all(func(s): return DataManager.get_self_switch(self.get_parent().name + name + s))
-	print(name, ": ", switches_ok, " ", variables_ok, " ", self_switches_ok)
+	#print(name, ": ", switches_ok, " ", variables_ok, " ", self_switches_ok)
 	return switches_ok and variables_ok and self_switches_ok
 
 # Runs the event itself.

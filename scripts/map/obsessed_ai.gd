@@ -13,6 +13,7 @@ signal obsessed_entered(target_area: MapNode)
 signal obsessed_exited(current_area: MapNode)
 signal state_changed()
 
+@export_category("Required")
 ## Where the obsessed starts in (the bedroom)
 @export var obsessed_starting_point: MapNode
 ## Usual patrol route, will be ignored during some states.
@@ -21,13 +22,23 @@ signal state_changed()
 @export var sleep_guard: Array[MapNode]
 ## Game map to reference.
 @export var game_map: GameMap
+## The initial state of the state machine. If not set, the first child node is used.
+@export var initial_state: StateBase = null
+@export_category("Obsessed Stats")
+## How long the Obsessed will sleep until she wakes up.
+@export var sleeping_period: float 
+## How long the Obsessed patrols (moves between maps).
+@export var patrol_time: float
+## How long the Obsessed idles.
+@export var idle_time: float
+## How long the Obsessed becomes aggressive.
+@export var aggressive_time: float
+@export_category("Debugging")
 ## Debug for Pathfinding
 @export var starting_node_debug: MapNode
 ## Debug for Pathfinding
 @export var target_node_debug: MapNode
 
-## The initial state of the state machine. If not set, the first child node is used.
-@export var initial_state: StateBase = null
 
 ## Action timer.
 @onready var action_timer: Timer = $ActionTimer
@@ -47,26 +58,42 @@ var player_game_area: GameArea
 func _ready() -> void:
 	# Connect signals.
 	Events.state_change_force.connect(_transition_to_next_state)
+	# It should know if a transition occurs.
+	Events.change_map.connect(_map_changing)
+	# And it should know when it ends.
+	Events.area_change_completed.connect(_map_changing_end)
 	
-	_obsession_moving(obsessed_starting_point)
+	obsession_moving(obsessed_starting_point)
 	for state_node: StateBase in find_children("*", "StateBase"):
-		pass
+		state_node.transition_to.connect(_transition_to_next_state)
 		
 	await owner.ready
 	state.enter("")
 	
 	action_timer.start()
 
-func _obsession_moving(target_area: MapNode) -> void:
+## Happens when a map is changing.
+func _map_changing(_path: String) -> void:
+	# Pauses timer for a while.
+	print("DEBUG: Action timer paused by ", action_timer.time_left)
+	action_timer.paused = true
+	
+## Happens when a map is not changing.
+func _map_changing_end() -> void:
+	print("DEBUG: Action timer resumed with ", action_timer.time_left)
+	action_timer.paused = false
+
+func obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.
 	if current_location:
 		obsessed_exited.emit(current_location)
 	
 	current_location = target_area
+	print("OBSESSION DEBUG: Moving to ", current_location)
 	obsessed_entered.emit(target_area)
 
 # I can't believe I'm using BFS now.
-func _pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
+func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
 	var parent := {start: null}
 	var queue: Array[MapNode] = [start]
 	
@@ -99,9 +126,12 @@ func _transition_to_next_state(target_state_path: String) -> void:
 	state.exit()
 	state = get_node(target_state_path)
 	state.enter(previous_state_path)
+	
+	print(state.name, " is now active!")
 	state_changed.emit()
 
 # Tell current state that the timer has timed out.
 func _on_action_timer_timeout() -> void:
+	# Finally, call the current state.
 	state.action_timer_timeout(action_timer)
 #endregion

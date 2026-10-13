@@ -14,5 +14,6 @@ metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
 [resource]
 resource_name = "Obsessed Sleeping"
 script = ExtResource("2_wfmib")
+graphic = "SleepingSprite"
 commands = Array[ExtResource("1_1k7lb")]([SubResource("Resource_1k7lb")])
 metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

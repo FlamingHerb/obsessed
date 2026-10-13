@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bv03s1tq8fudw" path="res://scripts/map/states/stalking.gd" id="4_aie84"]
 [ext_resource type="Script" uid="uid://71r6hnnxa6up" path="res://scripts/map/states/aggressive.gd" id="5_jltei"]
 [ext_resource type="Script" uid="uid://dkm0nxheo1o3a" path="res://scripts/map/states/fight_route.gd" id="6_fuxim"]
+[ext_resource type="Script" uid="uid://61qntvgb24dh" path="res://scripts/map/states/patrolling.gd" id="7_sthe2"]
 
 [node name="ObsessedAI" type="Node" unique_id=1908456690 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_jqmul")
@@ -27,6 +28,10 @@ metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Aggressive" type="Node" parent="." unique_id=1883091544]
 script = ExtResource("5_jltei")
+metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
+
+[node name="Patrolling" type="Node" parent="." unique_id=2120431814]
+script = ExtResource("7_sthe2")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="FightRoute" type="Node" parent="." unique_id=241303799]
