@@ -78,7 +78,7 @@ func _map_changing(_path: String) -> void:
 	print("DEBUG: Action timer paused by ", action_timer.time_left)
 	action_timer.paused = true
 	
-## Happens when a map is not changing.
+## Happens when a map is finishing changing.
 func _map_changing_end() -> void:
 	print("DEBUG: Action timer resumed with ", action_timer.time_left)
 	action_timer.paused = false
@@ -87,10 +87,28 @@ func obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.
 	if current_location:
 		obsessed_exited.emit(current_location)
-	
+		
 	current_location = target_area
 	print("OBSESSION DEBUG: Moving to ", current_location)
+	
+	# Check if obsessed is going to that location.
+	check_to_show_obsessed_avatar()
+	
 	obsessed_entered.emit(target_area)
+
+## Checks where it is good to show the obsessed's avatar
+func check_to_show_obsessed_avatar() -> void:	
+	# Null check
+	if not player_game_area: return
+	# If state is Sleeping, ignore.
+	if state is Sleeping:
+		print("OBSESSION DEBUG: She's sleeping.")
+		return
+	if player_game_area.name == current_location.map_name:
+		print("OBSESSION DEBUG: She's here.")
+		player_game_area.obsessed_avatar.show()
+	else: 
+		player_game_area.obsessed_avatar.hide()
 
 # I can't believe I'm using BFS now.
 func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:

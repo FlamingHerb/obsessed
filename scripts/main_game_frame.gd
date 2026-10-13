@@ -97,6 +97,9 @@ func _deferred_change_area(path: String) -> void:
 	# New scene must always be the second one.
 	game_layer.move_child(current_scene, 1)
 	
+	## Check if there's a need to show the obsessed's avatar.
+	obsessed_ai.check_to_show_obsessed_avatar()
+	
 	await _fade_in_to_scene(current_scene)
 	
 	print("DEBUG: Activating Map Event Base")
@@ -130,5 +133,7 @@ func _fade_in_to_scene(new_area: Node2D) -> void:
 ## INFO: Does not account for POVSwitch, Camera and MapTravel
 func _any_menu_opened(node: Control) -> void:
 	Events.any_menu_opened(node)
-	
+
+
+
 #endregion
