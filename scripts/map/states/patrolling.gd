@@ -10,7 +10,12 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 	parent.action_timer.stop()
 	
 	# Check if we have to force due to sound that will alert the obsessed.
-	_natural_route_generation()
+	if data and data is PatrolData:
+		var new_data: PatrolData = data
+		var target: MapNode = parent.game_map.find_child(new_data.target_area)
+		patrol_line = parent.pathfind(parent.current_location, target)
+	else:
+		_natural_route_generation()
 	
 	# Resume patrol time.
 	parent.action_timer.start(parent.patrol_time)

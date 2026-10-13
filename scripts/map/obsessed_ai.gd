@@ -105,6 +105,8 @@ func check_to_show_obsessed_avatar() -> void:
 	if state is Sleeping:
 		print("OBSESSION DEBUG: She's sleeping.")
 		return
+	
+	# Check if the player is in the area.
 	if player_game_area.name == current_location.map_name:
 		print("OBSESSION DEBUG: She's here.")
 		player_game_area.obsessed_avatar.show()
@@ -115,6 +117,13 @@ func check_to_show_obsessed_avatar() -> void:
 		tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 1), 0.33)
 	else: 
 		print("OBSESSION DEBUG: She's not here.")
+		
+		# Hide her again if she's there.
+		if player_game_area.obsessed_avatar.visible:
+			var new_tween = create_tween().set_parallel(true)
+			new_tween.set_ease(Tween.EASE_IN_OUT)
+			new_tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 0), 0.33)
+			#await new_tween.finished
 		player_game_area.obsessed_avatar.hide()
 
 # I can't believe I'm using BFS now.
