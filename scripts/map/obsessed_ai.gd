@@ -107,6 +107,11 @@ func check_to_show_obsessed_avatar() -> void:
 	if player_game_area.name == current_location.map_name:
 		print("OBSESSION DEBUG: She's here.")
 		player_game_area.obsessed_avatar.show()
+		player_game_area.obsessed_avatar.modulate = Color(0, 0, 0, 0)
+		
+		var tween = create_tween().set_parallel(true)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(0, 0, 0, 1), 0.33)
 	else: 
 		player_game_area.obsessed_avatar.hide()
 
