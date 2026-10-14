@@ -69,13 +69,13 @@ func _deferred_change_area(path: String) -> void:
 	var current_scene = game_layer.get_node(current_area_name)
 	var new_scene = ResourceLoader.load(path)
 	
-	print("DEBUG: Deleting other Map Event Base")
+	#print("DEBUG: Deleting other Map Event Base")
 	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
 		map_event_base.input_pickable = false
 	
 	await _fade_out_from_scene(current_scene)
 	
-	print("Previous Scene: ", current_area_name)
+	#print("Previous Scene: ", current_area_name)
 	current_scene.free()
 	current_scene = new_scene.instantiate()
 	
@@ -85,7 +85,7 @@ func _deferred_change_area(path: String) -> void:
 	# Add child...
 	game_layer.add_child(current_scene)
 	
-	print("DEBUG: Deactivating Map Event Base")
+	#print("DEBUG: Deactivating Map Event Base")
 	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
 		map_event_base.input_pickable = false
 	
@@ -102,7 +102,7 @@ func _deferred_change_area(path: String) -> void:
 	
 	await _fade_in_to_scene(current_scene)
 	
-	print("DEBUG: Activating Map Event Base")
+	#print("DEBUG: Activating Map Event Base")
 	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
 		map_event_base.input_pickable = true
 	

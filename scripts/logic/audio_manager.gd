@@ -24,7 +24,7 @@ func bgm_play(path: String, volume: float = 0):
 	
 	# Check if BGM is the same
 	if background_music.stream == new_music:
-		print("The same music.")
+		#print("The same music.")
 		return
 	
 	# Switches BGM.
@@ -71,7 +71,7 @@ func bgs_play(path: String):
 	
 	# Check if BGM is the same
 	if background_sound.stream == new_music:
-		print("The same music.")
+		#print("The same music.")
 		return
 	
 	# Switches BGM.

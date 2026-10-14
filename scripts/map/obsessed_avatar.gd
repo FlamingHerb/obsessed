@@ -34,7 +34,6 @@ func change_sprite(sprite_enum: SPRITE_NUM) -> void:
 		SPRITE_NUM.STALKING:
 			poly_sprite.texture = stalking_sprite
 		SPRITE_NUM.AGGRESSIVE:
-			print("Aggression check")
 			poly_sprite.texture = aggressive_sprite
 	
 func _process(_delta: float) -> void:

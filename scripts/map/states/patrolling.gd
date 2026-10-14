@@ -11,7 +11,7 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 	
 	# Check if we have to force due to sound that will alert the obsessed.
 	if data and data is PatrolData:
-		print("PATROL DEBUG: Getting them data.")
+		#print("PATROL DEBUG: Getting them data.")
 		# Type checking in a new world order type beat
 		var new_data: PatrolData = data
 		
@@ -45,7 +45,7 @@ func _natural_route_generation() -> void:
 	# And for some reason remove current route.
 	patrol_line.erase(parent.current_location)
 	
-	print("Patrol: ", patrol_line)
+	#print("Patrol: ", patrol_line)
 
 ## Map route generator
 func _map_route_generator(target_node: MapNode) -> Array[MapNode]:
@@ -61,7 +61,7 @@ func find_largest_arrays(grid: Array) -> Array:
 			largest = [row]
 		elif row.size() == best_size:
 			largest.append(row)
-	print("Largest Arrays: ", largest)
+	#print("Largest Arrays: ", largest)
 	return largest
 
 ## Called when the action timer from the Obsessed AI parent is calling.
