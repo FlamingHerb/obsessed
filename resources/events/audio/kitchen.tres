@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://ds0gxigj4qtei"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="1_jan66"]
+[ext_resource type="Script" uid="uid://2gi86n01lf6j" path="res://resources/commands/templates/command_play_bgs.gd" id="2_1ic1x"]
+[ext_resource type="Script" uid="uid://pcgukgrjcann" path="res://resources/commands/templates/command_erase_event.gd" id="3_s87jk"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_8gp7i"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="5_0it4y"]
+
+[sub_resource type="Resource" id="Resource_8k1lo"]
+script = ExtResource("2_1ic1x")
+audio_file = "uid://d28idfjk83pl"
+volume = 0.5
+metadata/_custom_type_script = "uid://2gi86n01lf6j"
+
+[sub_resource type="Resource" id="Resource_kbmah"]
+script = ExtResource("3_s87jk")
+metadata/_custom_type_script = "uid://pcgukgrjcann"
+
+[resource]
+resource_name = "Kitchen Audio"
+script = ExtResource("4_8gp7i")
+trigger = 1
+commands = Array[ExtResource("1_jan66")]([SubResource("Resource_8k1lo"), SubResource("Resource_kbmah")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

@@ -13,11 +13,12 @@
 [ext_resource type="Resource" uid="uid://d17gyxeaphnva" path="res://resources/events/living_room/front_door_escape.tres" id="9_0egjx"]
 [ext_resource type="Resource" uid="uid://dlwob5v4g1i2y" path="res://resources/events/living_room/board_planks_interactable.tres" id="9_7s5uc"]
 [ext_resource type="Resource" uid="uid://dw6omwgrg6leb" path="res://resources/events/living_room/board_planks_down.tres" id="10_7s5uc"]
-[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="12_ee4yb"]
-[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="13_7cp4x"]
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="12_ee4yb"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/templates/command_message.gd" id="13_7cp4x"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="14_0egjx"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="17_mosko"]
 [ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="18_c02dm"]
+[ext_resource type="Resource" uid="uid://b3gyykg0ohasl" path="res://resources/events/audio/living_room.tres" id="19_c02dm"]
 
 [sub_resource type="Gradient" id="Gradient_pfpmf"]
 offsets = PackedFloat32Array(0)
@@ -167,3 +168,6 @@ texture = ExtResource("3_pfpmf")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Plank3" unique_id=1423527773]
 polygon = PackedVector2Array(526, 253, 527, 268, 600, 264, 600, 247)
+
+[node name="Audio" parent="." unique_id=1350464472 instance=ExtResource("3_ms3w4")]
+event_page_list = Array[ExtResource("4_sva3m")]([ExtResource("19_c02dm")])

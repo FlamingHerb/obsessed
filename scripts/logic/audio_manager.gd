@@ -88,7 +88,8 @@ func bgs_stop():
 	background_sound.stream = null
 
 func bgs_volume(volume: float):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGS"),linear_to_db(volume))
+	background_sound.volume_db = linear_to_db(volume)
+	#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGS"),linear_to_db(volume))
 #endregion
 
 #region SFX

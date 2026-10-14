@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_cvae2"]
 [ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_37km5"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_5aqx1"]
+[ext_resource type="Resource" uid="uid://b4konv4qn8wg4" path="res://resources/events/audio/bathroom_upstairs.tres" id="8_cvae2"]
 
 [sub_resource type="Gradient" id="Gradient_y4lhg"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -52,3 +53,6 @@ event_page_list = Array[ExtResource("4_cvae2")]([ExtResource("5_37km5")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHallStairs" unique_id=1855468441]
 polygon = PackedVector2Array(224, 105, 226, 388, 327, 362, 330, 127)
+
+[node name="Audio" parent="." unique_id=762938404 instance=ExtResource("3_1fm6j")]
+event_page_list = Array[ExtResource("4_cvae2")]([ExtResource("8_cvae2")])

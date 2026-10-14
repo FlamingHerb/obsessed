@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://b3gyykg0ohasl"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="1_p3yau"]
+[ext_resource type="Script" uid="uid://2gi86n01lf6j" path="res://resources/commands/templates/command_play_bgs.gd" id="2_3tt01"]
+[ext_resource type="Script" uid="uid://pcgukgrjcann" path="res://resources/commands/templates/command_erase_event.gd" id="3_kcufq"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_3ke2n"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="5_s6unn"]
+
+[sub_resource type="Resource" id="Resource_d0rdo"]
+script = ExtResource("2_3tt01")
+audio_file = "uid://d2lin83s5pi10"
+volume = 0.5
+metadata/_custom_type_script = "uid://2gi86n01lf6j"
+
+[sub_resource type="Resource" id="Resource_gcpr7"]
+script = ExtResource("3_kcufq")
+metadata/_custom_type_script = "uid://pcgukgrjcann"
+
+[resource]
+resource_name = "Living Room Audio"
+script = ExtResource("4_3ke2n")
+trigger = 1
+commands = Array[ExtResource("1_p3yau")]([SubResource("Resource_d0rdo"), SubResource("Resource_gcpr7")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

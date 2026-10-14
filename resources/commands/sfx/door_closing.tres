@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlaySFXCommand" format=3 uid="uid://cf7jv5jb4m66t"]
+
+[ext_resource type="Script" uid="uid://djca7h6fbbg8c" path="res://resources/commands/templates/command_play_sfx.gd" id="1_754ek"]
+
+[resource]
+resource_name = "Door Closing"
+script = ExtResource("1_754ek")
+audio_file = "uid://cgd1fxrc38csa"
+metadata/_custom_type_script = "uid://djca7h6fbbg8c"

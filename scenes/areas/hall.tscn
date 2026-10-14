@@ -8,11 +8,12 @@
 [ext_resource type="Resource" uid="uid://c15p0kg3nucvc" path="res://resources/events/area_transfer/to_garage.tres" id="6_fut28"]
 [ext_resource type="Resource" uid="uid://d28sswxfq8lf5" path="res://resources/events/area_transfer/to_bath_room_downstairs.tres" id="7_i6a3y"]
 [ext_resource type="Resource" uid="uid://bxvsfduxg6uxf" path="res://resources/events/area_transfer/to_living_room.tres" id="8_lan0v"]
-[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="9_lan0v"]
-[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/command_message.gd" id="10_ldcdr"]
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="9_lan0v"]
+[ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/templates/command_message.gd" id="10_ldcdr"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="11_mx2il"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="12_mx2il"]
 [ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="13_xu1fw"]
+[ext_resource type="Resource" uid="uid://cymafey3skx8h" path="res://resources/events/audio/hall.tres" id="14_xu1fw"]
 
 [sub_resource type="Gradient" id="Gradient_lan0v"]
 offsets = PackedFloat32Array(0, 0.25925925, 1)
@@ -102,3 +103,6 @@ event_page_list = Array[ExtResource("4_p8kip")]([SubResource("Resource_3gngh")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Phone" unique_id=279873468]
 polygon = PackedVector2Array(101, 122, 129, 123, 128, 163, 105, 161)
+
+[node name="Audio" parent="." unique_id=384320464 instance=ExtResource("3_4e5cd")]
+event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("14_xu1fw")])

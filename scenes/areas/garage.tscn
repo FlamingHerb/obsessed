@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_l6rr3"]
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_xrobh"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_sbbe3"]
+[ext_resource type="Resource" uid="uid://s7cxdounm58q" path="res://resources/events/audio/garage.tres" id="8_0mkm4"]
 [ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="9_gvfhf"]
 
 [sub_resource type="Gradient" id="Gradient_k3tx4"]
@@ -55,3 +56,6 @@ event_page_list = Array[ExtResource("4_l6rr3")]([ExtResource("5_xrobh")])
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHall" unique_id=579625622]
 position = Vector2(309, -126)
 polygon = PackedVector2Array(283, 126, 286, 606, 331, 607, 331, 126)
+
+[node name="Audio" parent="." unique_id=604887719 instance=ExtResource("3_k3tx4")]
+event_page_list = Array[ExtResource("4_l6rr3")]([ExtResource("8_0mkm4")])

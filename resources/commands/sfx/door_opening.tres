@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlaySFXCommand" format=3 uid="uid://dqto8jrrwts8a"]
+
+[ext_resource type="Script" uid="uid://djca7h6fbbg8c" path="res://resources/commands/templates/command_play_sfx.gd" id="1_mpfye"]
+
+[resource]
+resource_name = "Door Opening Quiet"
+script = ExtResource("1_mpfye")
+audio_file = "uid://dcike60pw68xf"
+metadata/_custom_type_script = "uid://djca7h6fbbg8c"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://dg1bpjh81rk0s"]
+
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="1_7iqji"]
+[ext_resource type="Script" uid="uid://2gi86n01lf6j" path="res://resources/commands/templates/command_play_bgs.gd" id="2_cxwcc"]
+[ext_resource type="Script" uid="uid://pcgukgrjcann" path="res://resources/commands/templates/command_erase_event.gd" id="3_xyh0r"]
+[ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_khmnd"]
+[ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="5_ilf6o"]
+
+[sub_resource type="Resource" id="Resource_xqh3f"]
+script = ExtResource("2_cxwcc")
+audio_file = "uid://bf2im26dl7a5i"
+volume = 0.5
+metadata/_custom_type_script = "uid://2gi86n01lf6j"
+
+[sub_resource type="Resource" id="Resource_rqt4r"]
+script = ExtResource("3_xyh0r")
+metadata/_custom_type_script = "uid://pcgukgrjcann"
+
+[resource]
+resource_name = "Bathroom Down Audio"
+script = ExtResource("4_khmnd")
+trigger = 1
+commands = Array[ExtResource("1_7iqji")]([SubResource("Resource_xqh3f"), SubResource("Resource_rqt4r")])
+metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

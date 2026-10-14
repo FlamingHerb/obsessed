@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://dlwob5v4g1i2y"]
 
-[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_mo30u"]
-[ext_resource type="Script" uid="uid://cngduwe42kdaq" path="res://resources/commands/command_set_self_switch.gd" id="2_mo30u"]
-[ext_resource type="Script" uid="uid://bpadn0u8qkeif" path="res://resources/commands/command_set_variable.gd" id="2_us0c1"]
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="1_mo30u"]
+[ext_resource type="Script" uid="uid://cngduwe42kdaq" path="res://resources/commands/templates/command_set_self_switch.gd" id="2_mo30u"]
+[ext_resource type="Script" uid="uid://bpadn0u8qkeif" path="res://resources/commands/templates/command_set_variable.gd" id="2_us0c1"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="3_coih2"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="4_dylwi"]
 

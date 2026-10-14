@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="5_h8d3f"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="6_vfpaq"]
 [ext_resource type="Texture2D" uid="uid://c5mkqh6q207vk" path="res://assets/graphics/obsessed/obsessed-stalk-no-eyes.png" id="7_h8d3f"]
+[ext_resource type="Resource" uid="uid://dg1bpjh81rk0s" path="res://resources/events/audio/bathroom_downstairs.tres" id="8_bc6m3"]
 
 [sub_resource type="Gradient" id="Gradient_y4lhg"]
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
@@ -53,3 +54,6 @@ polygon = PackedVector2Array(112.14453, 112.14453, -284.77515, 1440.9623, 918.18
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObsessedAvatar" unique_id=826211016]
 polygon = PackedVector2Array(0, 88, 24, 88, 32, 152, 48, 168, 56, 248, 56, 320, 32, 336, 24, 480, 24, 496, -16, 488, -32, 328, -56, 312, -48, 224, -48, 160, -24, 152, -16, 88)
+
+[node name="Audio" parent="." unique_id=1706901236 instance=ExtResource("3_y4lhg")]
+event_page_list = Array[ExtResource("4_cxf5q")]([ExtResource("8_bc6m3")])

@@ -6,7 +6,7 @@ extends Commands
 ## Audio file to play
 @export_file("*.mp3","*.wav","*.ogg") var audio_file
 ## Volume to use
-@export var volume: float = 0.0
+@export var volume: float = 1.0
 
 @warning_ignore("unused_parameter")
 func execute(node: MapEventBase) -> bool:

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EventPage" format=3 uid="uid://d17gyxeaphnva"]
 
-[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/command_template.gd" id="1_l1nid"]
+[ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="1_l1nid"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="2_2jdmj"]
 [ext_resource type="Script" uid="uid://b27o0fm3tbj61" path="res://resources/conditions/variable_condition.gd" id="3_ubebp"]
 

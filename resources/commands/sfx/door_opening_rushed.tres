@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlaySFXCommand" format=3 uid="uid://c40x47r1sr6wl"]
+
+[ext_resource type="Script" uid="uid://djca7h6fbbg8c" path="res://resources/commands/templates/command_play_sfx.gd" id="1_87atl"]
+
+[resource]
+script = ExtResource("1_87atl")
+audio_file = "uid://dcike60pw68xf"
+metadata/_custom_type_script = "uid://djca7h6fbbg8c"

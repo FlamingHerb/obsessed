@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_jt4b5"]
 [ext_resource type="Resource" uid="uid://tdhb0k1xllgt" path="res://resources/events/bed_room/obsessed_sleeping.tres" id="10_pg4vr"]
 [ext_resource type="Resource" uid="uid://dyj3ml4djf8s5" path="res://resources/events/bed_room/obsessed_awake.tres" id="11_2120d"]
+[ext_resource type="Resource" uid="uid://dvn77wj57gibg" path="res://resources/events/audio/bed_room.tres" id="11_jbiis"]
 [ext_resource type="Texture2D" uid="uid://cf0cau3x6pb0r" path="res://assets/graphics/obsessed/obsessed-sleeping.png" id="11_pg4vr"]
 
 [sub_resource type="Gradient" id="Gradient_jt4b5"]
@@ -69,3 +70,6 @@ metadata/_edit_lock_ = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHallStairs" unique_id=2062564969]
 position = Vector2(414, 170)
 polygon = PackedVector2Array(-1, -1, 64, -8, 64, 168, -1, 156)
+
+[node name="Audio" parent="." unique_id=1621535131 instance=ExtResource("3_3yxs0")]
+event_page_list = Array[ExtResource("4_h5xoj")]([ExtResource("11_jbiis")])
