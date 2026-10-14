@@ -16,9 +16,6 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 func action_timer_timeout(action_timer: Timer) -> void: 
 	# if lower than idling probability, start patrolling.
 	if randf() < idling_probability:
-		# Change switch.
-		DataManager.set_switch(DataManager.SWCH_NAME.OBSESSED_AWAKE, true)
-		
 		transition_to.emit("Patrolling")
 	else:
 		print("Currently idling")

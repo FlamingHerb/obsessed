@@ -13,4 +13,6 @@ func action_timer_timeout(action_timer: Timer) -> void:
 	
 	# If no longer threshold, wake her up.
 	if parent.sleeping_period < 0:
+		# Change switch.
+		DataManager.set_switch(DataManager.SWCH_NAME.OBSESSED_AWAKE, true)
 		transition_to.emit("Idle")
