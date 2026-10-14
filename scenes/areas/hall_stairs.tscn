@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://dgxdn1mgdju1y" path="res://resources/events/area_transfer/to_bed_room.tres" id="5_hqxhg"]
 [ext_resource type="Resource" uid="uid://bq7fpinggvitt" path="res://resources/events/area_transfer/to_bath_room_upstairs.tres" id="6_hqxhg"]
 [ext_resource type="Resource" uid="uid://dcgjq6tmqcpgv" path="res://resources/events/area_transfer/to_closet_room.tres" id="7_0vewf"]
-[ext_resource type="Resource" uid="uid://bry6br7jom0f0" path="res://resources/events/area_transfer/to_hall.tres" id="8_jca5f"]
 [ext_resource type="PackedScene" uid="uid://8ui030fqevgy" path="res://scenes/map/obsessed_avatar.tscn" id="9_0vewf"]
+[ext_resource type="Resource" uid="uid://c61n8k7g0k03a" path="res://resources/events/area_transfer/to_hall_audio_stairs.tres" id="10_hqxhg"]
 [ext_resource type="Resource" uid="uid://c437sp0ik6ixo" path="res://resources/events/audio/hall_stairs.tres" id="11_hqxhg"]
 [ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="12_26awk"]
 
@@ -73,7 +73,7 @@ event_page_list = Array[ExtResource("4_jca5f")]([ExtResource("7_0vewf")])
 polygon = PackedVector2Array(437, 132, 438, 351, 473, 343, 470, 263, 500, 261, 501, 148)
 
 [node name="ToHall" parent="." unique_id=1423741917 instance=ExtResource("3_n7hcf")]
-event_page_list = Array[ExtResource("4_jca5f")]([ExtResource("8_jca5f")])
+event_page_list = Array[ExtResource("4_jca5f")]([ExtResource("10_hqxhg")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHall" unique_id=175948901]
 visible = false

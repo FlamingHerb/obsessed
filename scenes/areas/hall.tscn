@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bc00ytka7xc8o" path="res://assets/graphics/bg/hall.png" id="2_f55t6"]
 [ext_resource type="PackedScene" uid="uid://s0cgr666xcug" path="res://scenes/map/map_event_base.tscn" id="3_4e5cd"]
 [ext_resource type="Script" uid="uid://bdpj5h4j8eq0h" path="res://resources/events/event_page.gd" id="4_p8kip"]
-[ext_resource type="Resource" uid="uid://b5kql52cus4kh" path="res://resources/events/area_transfer/to_hall_stairs.tres" id="5_f3ugf"]
 [ext_resource type="Resource" uid="uid://c15p0kg3nucvc" path="res://resources/events/area_transfer/to_garage.tres" id="6_fut28"]
 [ext_resource type="Resource" uid="uid://d28sswxfq8lf5" path="res://resources/events/area_transfer/to_bath_room_downstairs.tres" id="7_i6a3y"]
+[ext_resource type="Resource" uid="uid://dlo0dsncx3108" path="res://resources/events/area_transfer/to_hall_stairs_audio_stairs.tres" id="7_xu1fw"]
 [ext_resource type="Resource" uid="uid://bxvsfduxg6uxf" path="res://resources/events/area_transfer/to_living_room.tres" id="8_lan0v"]
 [ext_resource type="Script" uid="uid://biefknbxbqcq2" path="res://resources/commands/templates/command_template.gd" id="9_lan0v"]
 [ext_resource type="Script" uid="uid://dg2l4x6x7w44q" path="res://resources/commands/templates/command_message.gd" id="10_ldcdr"]
@@ -68,7 +68,7 @@ texture = SubResource("GradientTexture2D_ldcdr")
 
 [node name="ToHallStairs" parent="." unique_id=861190875 instance=ExtResource("3_4e5cd")]
 position = Vector2(667, -10)
-event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("5_f3ugf")])
+event_page_list = Array[ExtResource("4_p8kip")]([ExtResource("7_xu1fw")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ToHallStairs" unique_id=1115164165]
 position = Vector2(-119.00002, 170)
