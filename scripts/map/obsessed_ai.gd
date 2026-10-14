@@ -185,7 +185,7 @@ func check_if_sound_emitted() -> void:
 	# If the obsessed is in the room, announce itself depending on its state.
 	if _check_if_player_obsessed_in_same_room():
 		if state is Stalking:
-			AudioManager.sfx_play(obsessed_enter_sfx.pick_random(), 0.5)
+			AudioManager.sfx_play(obsessed_enter_sfx.pick_random(), 0.05)
 		if state is Aggressive:
 			pass
 		
@@ -202,8 +202,8 @@ func check_if_sound_emitted() -> void:
 			pass
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling:
-			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * 16)))
-			AudioManager.sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * 16))
+			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * 32)))
+			AudioManager.sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * 32))
 		
 
 #region Helper functions
