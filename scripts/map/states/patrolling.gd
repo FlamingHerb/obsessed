@@ -19,14 +19,16 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 		if new_data.continue_patrol:
 			print("PATROL DEBUG: Continuing patrol")
 		if new_data.target_area:
-			print("PATROL DEBUG: Traversing to new target.")
+			print("PATROL DEBUG: SNIFFING NEW TARGGET")
 			var target: MapNode = parent.game_map.find_child(new_data.target_area)
 			patrol_line = parent.pathfind(parent.current_location, target)
+		
+		parent.action_timer.start(parent.patrol_reaction)
 	else:
 		_natural_route_generation()
 	
-	# Resume patrol time.
-	parent.action_timer.start(parent.patrol_time)
+		# Resume patrol time.
+		parent.action_timer.start(parent.patrol_time)
 
 func _natural_route_generation() -> void:
 	# Plot out route. Cannot be its current position.

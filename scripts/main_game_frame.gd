@@ -97,6 +97,8 @@ func _deferred_change_area(path: String) -> void:
 	# New scene must always be the second one.
 	game_layer.move_child(current_scene, 1)
 	
+	## Check if there's a need to change the obsessed's state.
+	obsessed_ai.check_for_next_state()
 	## Check if there's a need to show the obsessed's avatar.
 	obsessed_ai.check_to_show_obsessed_avatar()
 	

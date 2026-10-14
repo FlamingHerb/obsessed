@@ -204,6 +204,7 @@ sleep_guard = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs")
 game_map = NodePath("../GameMap")
 sleeping_period = 10.0
 patrol_time = 3.5
+patrol_reaction = 1.0
 idle_time = 5.0
 aggressive_time = 10.0
 aggression_reaction_time = 2.0

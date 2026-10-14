@@ -29,6 +29,8 @@ signal state_changed()
 @export var sleeping_period: float 
 ## How long the Obsessed patrols (moves between maps).
 @export var patrol_time: float
+## How long the Obsessed immediately hones in on player after something occurs.
+@export var patrol_reaction: float
 ## How long the Obsessed idles.
 @export var idle_time: float
 ## How long the Obsessed becomes aggressive after stalking.
@@ -83,12 +85,12 @@ func _ready() -> void:
 ## Happens when a map is changing.
 func _map_changing(_path: String) -> void:
 	# Pauses timer for a while.
-	print("DEBUG: Action timer paused by ", action_timer.time_left)
+	#print("DEBUG: Action timer paused by ", action_timer.time_left)
 	action_timer.paused = true
 	
 ## Happens when a map is finishing changing.
 func _map_changing_end() -> void:
-	print("DEBUG: Action timer resumed with ", action_timer.time_left)
+	#print("DEBUG: Action timer resumed with ", action_timer.time_left)
 	action_timer.paused = false
 
 func obsession_moving(target_area: MapNode) -> void:
@@ -97,7 +99,10 @@ func obsession_moving(target_area: MapNode) -> void:
 		obsessed_exited.emit(current_location)
 		
 	current_location = target_area
-	print("OBSESSION DEBUG: Moving to ", current_location)
+	#print("OBSESSION DEBUG: Moving to ", current_location)
+	
+	# Check obsessed's possible state.
+	check_for_next_state()
 	
 	# Check if obsessed is going to that location.
 	check_to_show_obsessed_avatar()
@@ -110,22 +115,13 @@ func check_to_show_obsessed_avatar() -> void:
 	if not player_game_area: return
 	# If state is Sleeping, ignore.
 	if state is Sleeping:
-		print("OBSESSION DEBUG: She's sleeping.")
 		return
 	
 	# NOTE: The only thing that shows the sprite!
 	# Check if the player is in the area.
 	if player_game_area.name == current_location.map_name:
-		print("OBSESSION DEBUG: She's here.")
-		
-		# If she's there, turn her into stalking.
-		if stalking_state.waiting_period > 0:
-			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
-			_transition_to_next_state("Stalking")
-		else:
-			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.AGGRESSIVE)
-			_transition_to_next_state("Aggressive")
-		
+		#print("OBSESSION DEBUG: She's here.")
+				
 		# Only do this if the obsessed avatar is not visible yet.
 		if not player_game_area.obsessed_avatar.visible:
 			player_game_area.obsessed_avatar.show()
@@ -135,7 +131,7 @@ func check_to_show_obsessed_avatar() -> void:
 			tween.set_ease(Tween.EASE_IN_OUT)
 			tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(1, 1, 1, 1), 0.33)
 	else: 
-		print("OBSESSION DEBUG: She's not here.")
+		#print("OBSESSION DEBUG: She's not here.")
 		
 		# Hide her again if she's there.
 		if player_game_area.obsessed_avatar.visible:
@@ -144,16 +140,39 @@ func check_to_show_obsessed_avatar() -> void:
 			new_tween.tween_property(player_game_area.obsessed_avatar, "modulate", Color(1, 1, 1, 0), 0.33)
 			#await new_tween.finished
 		
-		# Check if currently stalking.
-		if (state is Stalking or state is Aggressive) and state is not FightRoute:
-			if previous_state is Patrolling:
-				var continue_patrol: PatrolData = PatrolData.new()
-				continue_patrol.continue_patrol = true
-				_transition_to_next_state("Patrolling", continue_patrol)
-			else:
-				_transition_to_next_state("Idle")
-		
 		player_game_area.obsessed_avatar.hide()
+
+## Separate instead for checking.
+func check_for_next_state() -> void:
+	# Null check
+	if not player_game_area: return
+	# If state is Sleeping, ignore.
+	if state is Sleeping:
+		return
+	
+	if player_game_area.name == current_location.map_name:
+		# If she's there, turn her into stalking.
+		if stalking_state.waiting_period > 0:
+			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
+			_transition_to_next_state("Stalking")
+		else:
+			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.AGGRESSIVE)
+			_transition_to_next_state("Aggressive")
+	else:
+		# If the Obsessed managed to find the player...
+		if (state is Stalking or state is Aggressive) and state is not FightRoute:
+			# Target player's last known location.
+			var stalk_patrol: PatrolData = PatrolData.new()
+			stalk_patrol.target_area = player_game_area.name
+			_transition_to_next_state("Patrolling", stalk_patrol)
+			
+			# NOTE: Originally, after finding the player, it would patrol again.
+			#if previous_state is Patrolling:
+				#var continue_patrol: PatrolData = PatrolData.new()
+				#continue_patrol.continue_patrol = true
+				#_transition_to_next_state("Patrolling", continue_patrol)
+			#else:
+				#_transition_to_next_state("Idle")
 
 # I can't believe I'm using BFS now.
 func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
