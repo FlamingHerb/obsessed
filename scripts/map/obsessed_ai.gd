@@ -184,22 +184,27 @@ func check_if_sound_emitted() -> void:
 	
 	# If the obsessed is in the room, announce itself depending on its state.
 	if _check_if_player_obsessed_in_same_room():
-		pass
+		if state is Stalking:
+			AudioManager.sfx_play(obsessed_enter_sfx.pick_random(), 0.5)
+		if state is Aggressive:
+			pass
+		
 	# If not, check if it is hovering over a neighbouring area.
 	else:
 		# Get the player's map node.
 		var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
 		# Get distance from player. Also turn it to float for division.
 		var obsessed_distance := float(len(pathfind(player_map_node, current_location)))
+		print("Obsessed Distance from player: ", obsessed_distance)
 		
 		# If idle, play the sounds specific to that room.
 		if state is Idle:
 			pass
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling:
-			pass
+			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * 16)))
+			AudioManager.sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * 16))
 		
-		pass
 
 #region Helper functions
 # Helper function

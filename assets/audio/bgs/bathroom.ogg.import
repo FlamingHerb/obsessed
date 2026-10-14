@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/bathroom.ogg-8691f504660cce4d011b9949cc439454
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

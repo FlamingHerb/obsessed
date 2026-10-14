@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/living_room.ogg-5c5a236aa99a08ec43c2abba1f320
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
