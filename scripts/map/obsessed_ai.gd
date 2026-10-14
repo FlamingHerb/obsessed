@@ -43,7 +43,6 @@ signal state_changed()
 ## Debug for Pathfinding
 @export var target_node_debug: MapNode
 
-
 ## Action timer.
 @onready var action_timer: Timer = $ActionTimer
 ## The current state of the state machine.
@@ -52,6 +51,16 @@ signal state_changed()
 ).call()
 ## Expose Stalking state
 @onready var stalking_state: Stalking = $Stalking
+
+const obsessed_enter_sfx := [
+	"res://assets/audio/se/obsessed_in_room_1.ogg",
+	"res://assets/audio/se/obsessed_in_room_2.ogg"
+]
+
+const obsessed_patrol_sfx := [
+	"res://assets/audio/se/obsessed_patrol_1.ogg",
+	"res://assets/audio/se/obsessed_patrol_2.ogg"
+]
 
 ## Current location of the obsession
 var current_location: MapNode
@@ -107,19 +116,18 @@ func obsession_moving(target_area: MapNode) -> void:
 	# Check if obsessed is going to that location.
 	check_to_show_obsessed_avatar()
 	
+	# Check to see if sound will be emitted when moving.
+	check_if_sound_emitted()
+	
 	obsessed_entered.emit(target_area)
 
-## Checks where it is good to show the obsessed's avatar
+## Checks where it is good to show the Obsessed's avatar
 func check_to_show_obsessed_avatar() -> void:	
-	# Null check
-	if not player_game_area: return
-	# If state is Sleeping, ignore.
-	if state is Sleeping:
-		return
+	if not _null_check(): return
 	
 	# NOTE: The only thing that shows the sprite!
 	# Check if the player is in the area.
-	if player_game_area.name == current_location.map_name:
+	if _check_if_player_obsessed_in_same_room():
 		#print("OBSESSION DEBUG: She's here.")
 				
 		# Only do this if the obsessed avatar is not visible yet.
@@ -144,13 +152,9 @@ func check_to_show_obsessed_avatar() -> void:
 
 ## Separate instead for checking.
 func check_for_next_state() -> void:
-	# Null check
-	if not player_game_area: return
-	# If state is Sleeping, ignore.
-	if state is Sleeping:
-		return
+	if not _null_check(): return
 	
-	if player_game_area.name == current_location.map_name:
+	if _check_if_player_obsessed_in_same_room():
 		# If she's there, turn her into stalking.
 		if stalking_state.waiting_period > 0:
 			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
@@ -173,6 +177,44 @@ func check_for_next_state() -> void:
 				#_transition_to_next_state("Patrolling", continue_patrol)
 			#else:
 				#_transition_to_next_state("Idle")
+
+## Checks if a sound should be emitted if the Obsessed is anywhere.
+func check_if_sound_emitted() -> void:
+	if not _null_check(): return
+	
+	# If the obsessed is in the room, announce itself depending on its state.
+	if _check_if_player_obsessed_in_same_room():
+		pass
+	# If not, check if it is hovering over a neighbouring area.
+	else:
+		# Get the player's map node.
+		var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
+		# Get distance from player. Also turn it to float for division.
+		var obsessed_distance := float(len(pathfind(player_map_node, current_location)))
+		
+		# If idle, play the sounds specific to that room.
+		if state is Idle:
+			pass
+		# If patrolling, play the sounds specific to patrolling.
+		if state is Patrolling:
+			pass
+		
+		pass
+
+#region Helper functions
+# Helper function
+func _null_check() -> bool:
+	# Null check
+	if not player_game_area: return false
+	# If state is Sleeping, ignore.
+	if state is Sleeping: return false
+	
+	# Truthy moment
+	return true
+
+func _check_if_player_obsessed_in_same_room() -> bool:
+	return player_game_area.name == current_location.map_name
+#endregion Helper functions
 
 # I can't believe I'm using BFS now.
 func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:

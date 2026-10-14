@@ -93,7 +93,8 @@ func bgs_volume(volume: float):
 #endregion
 
 #region SFX
-func sfx_play(path):
+## Path and float from 0.0 to 1.0
+func sfx_play(path, vol: float = 1.0):
 	var sfx = AudioStreamPlayer.new()
 	sound_effect_queue.add_child(sfx)
 	sfx.finished.connect(_sfx_free.bind(sfx))
@@ -104,6 +105,8 @@ func sfx_play(path):
 		sfx.stream = load(path)
 	else: 
 		sfx.stream = path
+	
+	sfx.volume_db = linear_to_db(vol)
 	sfx.play()
 
 func sfx_stop_all():
