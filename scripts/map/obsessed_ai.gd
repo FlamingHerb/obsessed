@@ -202,8 +202,8 @@ func check_if_sound_emitted() -> void:
 			pass
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling:
-			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * 32)))
-			AudioManager.sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * 32))
+			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * obsessed_distance)))
+			AudioManager.sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
 		
 
 #region Helper functions

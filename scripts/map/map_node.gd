@@ -14,6 +14,7 @@ signal obsessed_exited
 signal player_entered
 signal player_exited
 
+@export_category("Map Specifications")
 ## Shows as the character for the label.
 @export var map_label: String
 ## Name to display in debug.
@@ -22,6 +23,9 @@ signal player_exited
 @export var map_scene: PackedScene
 ## Used by the Obsessed AI's traversal.
 @export var map_neighbours: Array[MapNode]
+@export_category("Audio Specifications")
+## Used for the idling audio for the Obsessed.
+@export var idle_audio_pack: Array[AudioStream]
 
 @onready var char_label: Label = $Label
 @onready var player_icon: TextureRect = $Player
