@@ -51,6 +51,10 @@ signal state_changed()
 ).call()
 ## Expose Stalking state
 @onready var stalking_state: Stalking = $Stalking
+## Sprite2D that we will manipulate
+@onready var obsessed_sprite: Sprite2D = $ObsessedSprite
+## Animation player only for us.
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const obsessed_enter_sfx := [
 	"res://assets/audio/se/obsessed_in_room_1.ogg",
@@ -199,7 +203,9 @@ func check_if_sound_emitted() -> void:
 		
 		# If idle, play the sounds specific to that room.
 		if state is Idle:
-			pass
+			# If it is empty, don't bother.
+			if current_location.idle_audio_pack.is_empty(): return
+			
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling:
 			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * obsessed_distance)))

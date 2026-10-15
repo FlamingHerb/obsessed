@@ -7,6 +7,156 @@
 [ext_resource type="Script" uid="uid://71r6hnnxa6up" path="res://scripts/map/states/aggressive.gd" id="5_jltei"]
 [ext_resource type="Script" uid="uid://dkm0nxheo1o3a" path="res://scripts/map/states/fight_route.gd" id="6_fuxim"]
 [ext_resource type="Script" uid="uid://61qntvgb24dh" path="res://scripts/map/states/patrolling.gd" id="7_sthe2"]
+[ext_resource type="Texture2D" uid="uid://chgo2x4d1p1m7" path="res://assets/graphics/obsessed/obsessed-attack.PNG" id="8_jltei"]
+[ext_resource type="Texture2D" uid="uid://d0kyhjbgw1oqs" path="res://assets/graphics/obsessed/obsessed-stare.PNG" id="9_fuxim"]
+[ext_resource type="AudioStream" uid="uid://b3wq7cpf4lhis" path="res://assets/audio/se/obsessed_scream.ogg" id="10_fuxim"]
+[ext_resource type="AudioStream" uid="uid://dje2psfd82cob" path="res://assets/audio/se/obsessed_stinger.ogg" id="11_feyml"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_fuxim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jltei")
+}],
+"loop": 1,
+"name": &"slow_death",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_feyml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ObsessedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ObsessedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scream:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ObsessedSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.31925002, 0.32033333)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ObsessedSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320.75, 239.75002)]
+}
+
+[sub_resource type="Animation" id="Animation_jltei"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ObsessedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ObsessedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scream:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ObsessedSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.5, 0.3),
+"update": 0,
+"values": [Vector2(0.31925002, 0.32033333), Vector2(2.67, 2.682)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ObsessedSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5000211, 1),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(320.75, 239.75002), Vector2(320.75, -40.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fuxim"]
+_data = {
+&"RESET": SubResource("Animation_feyml"),
+&"death": SubResource("Animation_jltei")
+}
 
 [node name="ObsessedAI" type="Node" unique_id=1908456690 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_jqmul")
@@ -37,5 +187,21 @@ metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 [node name="FightRoute" type="Node" parent="." unique_id=241303799]
 script = ExtResource("6_fuxim")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
+
+[node name="ObsessedSprite" type="AnimatedSprite2D" parent="." unique_id=707655160]
+modulate = Color(0, 0, 0, 0)
+position = Vector2(320.75, 239.75002)
+scale = Vector2(0.31925002, 0.32033333)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"slow_death"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=591711390]
+libraries/ = SubResource("AnimationLibrary_fuxim")
+
+[node name="Scream" type="AudioStreamPlayer" parent="." unique_id=856242709]
+stream = ExtResource("10_fuxim")
+
+[node name="Stinger" type="AudioStreamPlayer" parent="." unique_id=1316675862]
+stream = ExtResource("11_feyml")
 
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
