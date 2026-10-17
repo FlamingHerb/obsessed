@@ -13,7 +13,9 @@ func _ready() -> void:
 
 func _gab_window_text_show(text_to_show: String, seconds: float) -> void:
 	# Force stop animation player.
-	if animation_player.is_playing(): animation_player.stop()
+	if animation_player.is_playing(): 
+		animation_player.stop()
+		timer.stop()
 	
 	rich_text.text = text_to_show
 	animation_player.play("show")
@@ -25,7 +27,10 @@ func hide_text(forced: bool = false) -> void:
 		animation_player.play_backwards("show")
 		#await animation_player.animation_finished
 	else:
-		if animation_player.is_playing(): animation_player.stop()
+		if animation_player.is_playing(): 
+			animation_player.stop()
+			timer.stop()
+			
 		modulate = Color(0.0, 0.0, 0.0, 0)
 		
 	rich_text.text = ""
