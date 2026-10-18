@@ -204,11 +204,11 @@ obsessed_starting_point = NodePath("../GameMap/BedRoom")
 patrol_route = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom")]
 sleep_guard = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/ClosetRoom")]
 game_map = NodePath("../GameMap")
-sleeping_period = 10.0
+sleeping_period = 30.0
 patrol_time = 3.5
-patrol_reaction = 1.0
-idle_time = 5.0
-aggressive_time = 10.0
+patrol_reaction = 0.5
+idle_time = 2.5
+aggressive_time = 20.0
 aggression_reaction_time = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1074598446]
