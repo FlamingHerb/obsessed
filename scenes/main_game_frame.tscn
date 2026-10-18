@@ -201,7 +201,7 @@ map_neighbours = [NodePath("../Hall"), NodePath("../Kitchen")]
 
 [node name="ObsessedAI" parent="AnythingElse" unique_id=1908456690 node_paths=PackedStringArray("obsessed_starting_point", "patrol_route", "sleep_guard", "game_map") instance=ExtResource("3_5gttk")]
 obsessed_starting_point = NodePath("../GameMap/BedRoom")
-patrol_route = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom")]
+patrol_route = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/Hall"), NodePath("../GameMap/Kitchen"), NodePath("../GameMap/LivingRoom"), NodePath("../GameMap/Garage")]
 sleep_guard = [NodePath("../GameMap/BedRoom"), NodePath("../GameMap/HallStairs"), NodePath("../GameMap/BathroomUpstairs"), NodePath("../GameMap/ClosetRoom")]
 game_map = NodePath("../GameMap")
 sleeping_period = 30.0
