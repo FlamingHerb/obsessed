@@ -18,7 +18,7 @@ resource_name = "Phaser"
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_8sfew"]
 resource_name = "LowPassFilter"
-cutoff_hz = 300.0
+cutoff_hz = 500.0
 
 [resource]
 bus/1/name = &"BGM"
@@ -47,7 +47,15 @@ bus/3/name = &"SFX"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = -0.923751
+bus/3/volume_db = -0.12827492
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectLowPassFilter_8sfew")
 bus/3/effect/0/enabled = false
+bus/4/name = &"OutsideSFX"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0694828
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectLowPassFilter_8sfew")
+bus/4/effect/0/enabled = true

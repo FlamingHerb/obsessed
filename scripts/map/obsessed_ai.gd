@@ -213,9 +213,9 @@ func check_if_sound_emitted() -> void:
 			if current_location.idle_audio_pack.is_empty(): return
 			
 		# If patrolling, play the sounds specific to patrolling.
-		if state is Patrolling:
+		if state is Patrolling and obsessed_distance <= 2:
 			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * obsessed_distance)))
-			AudioManager.sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
+			AudioManager.outside_sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
 		
 
 #region Helper functions

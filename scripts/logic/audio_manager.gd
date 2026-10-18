@@ -117,6 +117,22 @@ func sfx_stop_all():
 
 func _sfx_free(sfx_node):
 	sfx_node.queue_free()
+
+# Play for effects that are outside of the room.
+func outside_sfx_play(path, vol: float = 1.0):
+	var sfx = AudioStreamPlayer.new()
+	sound_effect_queue.add_child(sfx)
+	sfx.finished.connect(_sfx_free.bind(sfx))
+	sfx.bus = &"OutsideSFX"
+	
+	#print("Working")
+	if path is String:
+		sfx.stream = load(path)
+	else: 
+		sfx.stream = path
+	
+	sfx.volume_db = linear_to_db(vol)
+	sfx.play()
 #endregion
 
 func pause_game() -> void:

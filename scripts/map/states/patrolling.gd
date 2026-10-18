@@ -56,14 +56,18 @@ func _map_route_generator(target_node: MapNode) -> Array[MapNode]:
 	return parent.pathfind(parent.current_location, target_node)
 
 ## Find the largest one.
+## The minimum is, at most, 4.
 func find_largest_arrays(grid: Array) -> Array:
 	var largest: Array = []  # array of arrays
 	var best_size := -1
 	for row in grid:
-		if row.size() > best_size:
-			best_size = row.size()
-			largest = [row]
-		elif row.size() == best_size:
+		# DEPRECATED: Originally
+		#if row.size() > best_size: 
+			#best_size = row.size()
+			#largest = [row]
+		#elif row.size() == best_size:
+			#largest.append(row)
+		if row.size() > 3: 
 			largest.append(row)
 	#print("Largest Arrays: ", largest)
 	return largest
