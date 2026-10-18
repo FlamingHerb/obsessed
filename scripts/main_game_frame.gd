@@ -29,6 +29,9 @@ var current_area_name: String = "GameArea"
 func _ready() -> void:
 	obsessed_ai.player_game_area = $GameLayer/GameArea
 	
+	# Needed to initiated an actual game over.
+	obsessed_ai.initiate_game_over.connect(_initiate_game_over)
+	
 	# INFO: Tell events that you are the GameMainFrame.
 	Events.game_main = self
 	
@@ -70,8 +73,10 @@ func _deferred_change_area(path: String) -> void:
 	var new_scene = ResourceLoader.load(path)
 	
 	#print("DEBUG: Deleting other Map Event Base")
-	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
-		map_event_base.input_pickable = false
+	#for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
+		#map_event_base.input_pickable = false
+	for node: Node in current_scene.find_children("*"):
+		node.set_process_input(false)
 	
 	await _fade_out_from_scene(current_scene)
 	
@@ -136,6 +141,12 @@ func _fade_in_to_scene(new_area: Node2D) -> void:
 func _any_menu_opened(node: Control) -> void:
 	Events.any_menu_opened(node)
 
-
+## Info initated when the Obsessed AI can do a game over.
+func _initiate_game_over() -> void:
+	var current_scene = game_layer.get_node(current_area_name)
+	
+	# Disable process inputting.
+	for node: Node in current_scene.find_children("*"):
+		node.set_process_input(false)
 
 #endregion

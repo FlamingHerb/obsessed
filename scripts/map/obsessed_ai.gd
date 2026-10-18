@@ -12,6 +12,7 @@ extends Node
 signal obsessed_entered(target_area: MapNode)
 signal obsessed_exited(current_area: MapNode)
 signal state_changed()
+signal initiate_game_over()
 
 @export_category("Required")
 ## Where the obsessed starts in (the bedroom)
@@ -225,6 +226,16 @@ func _null_check() -> bool:
 
 func _check_if_player_obsessed_in_same_room() -> bool:
 	return player_game_area.name == current_location.map_name
+	
+## The impassable start. Forces timer action shutdown, and then kills the player.
+func start_game_over() -> void:
+	action_timer.stop() # Shuts down action timer.
+	
+	# NOTE: Might be faulty.
+	#get_viewport().set_process_input(false) # Disable player input.
+	
+	
+
 #endregion Helper functions
 
 # I can't believe I'm using BFS now.
