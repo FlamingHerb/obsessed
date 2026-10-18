@@ -101,7 +101,7 @@ func _activate_event_page(event_page: EventPage) -> void:
 		if command is EndEventCommand: break
 		
 		# Debugging
-		print("Running command #", index, ": " , command.get_script().get_global_name())
+		#print("Running command #", index, ": " , command.get_script().get_global_name())
 		
 		@warning_ignore("redundant_await")
 		await command.execute(self)

@@ -36,6 +36,10 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 func exit() -> void:
 	pass
 
+## Reset the timer given that a move has been force.
+func state_timer_reset() -> void:
+	pass
+
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 
 	print(name, ": Action Timer Expiring")

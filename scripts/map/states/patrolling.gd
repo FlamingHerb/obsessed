@@ -23,6 +23,7 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 			var target: MapNode = parent.game_map.find_child(new_data.target_area)
 			patrol_line = parent.pathfind(parent.current_location, target)
 		
+		# NOTE: Check first if this will be affected.
 		parent.action_timer.wait_time = parent.patrol_reaction
 		parent.action_timer.start(parent.patrol_reaction)
 	else:
@@ -71,6 +72,13 @@ func find_largest_arrays(grid: Array) -> Array:
 			largest.append(row)
 	#print("Largest Arrays: ", largest)
 	return largest
+
+## Reset the timer given that a move has been force.
+func state_timer_reset() -> void:
+	# Change action timer to appropriate amount.
+	parent.action_timer.stop()
+	parent.action_timer.wait_time = parent.patrol_time
+	parent.action_timer.start()
 
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 

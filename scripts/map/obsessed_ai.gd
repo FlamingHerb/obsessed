@@ -96,16 +96,37 @@ func _ready() -> void:
 	
 	action_timer.start()
 
+## Allow the obsession to make a move during transition.
+## NOTE: Only when Idle and Patrolling!
+func _obsession_drain_time_from_move() -> void:
+	# If Aggressive or Stalking, stop.
+	if state is Aggressive or state is Stalking or state is Sleeping: return
+	# Specific only to a patrol issue.
+	if action_timer.time_left <= 0.5: return
+	
+	# Force a move.
+	if action_timer.time_left - 1.0 > 0.0:
+		action_timer.wait_time -= 0.5
+	else:
+		# Reset everything first.
+		state.state_timer_reset()
+		# Then, emit the following.
+		action_timer.timeout.emit()
+		print("DEBUG: MOVE HAVE BEEN FORCED!")
+	print("Time left: ", action_timer.time_left)
+
 ## Happens when a map is changing.
 func _map_changing(_path: String) -> void:
-	# Pauses timer for a while.
-	#print("DEBUG: Action timer paused by ", action_timer.time_left)
 	action_timer.paused = true
-	
+
 ## Happens when a map is finishing changing.
 func _map_changing_end() -> void:
 	#print("DEBUG: Action timer resumed with ", action_timer.time_left)
+	# INFO: This is a way to force a move from the Obsessed so the player cannot
+	# take advantage of moving around.
+	print("State after map ended: ", state.name)
 	action_timer.paused = false
+	_obsession_drain_time_from_move()
 
 func obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.
@@ -301,6 +322,6 @@ func _transition_to_next_state(target_state_path: String, data: StateData = null
 # Tell current state that the timer has timed out.
 func _on_action_timer_timeout() -> void:
 	# Finally, call the current state.
-	print("State: ", state.name, " | Time: ", action_timer.wait_time)
+	#print("State: ", state.name, " | Time: ", action_timer.wait_time)
 	state.action_timer_timeout(action_timer)
 #endregion

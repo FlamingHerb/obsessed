@@ -19,9 +19,7 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 		print("")
 		
 	# Change action timer to appropriate amount.
-	parent.action_timer.stop()
-	parent.action_timer.wait_time = parent.idle_time
-	parent.action_timer.start()
+	state_timer_reset()
 
 ## Called by the state machine before changing the active state. Use this function
 ## to clean up the state.
@@ -33,13 +31,20 @@ func exit_chance(s: int) -> float:
 	print(the_value)
 	return the_value
 
+## Reset the timer given that a move has been force.
+func state_timer_reset() -> void:
+	# Change action timer to appropriate amount.
+	parent.action_timer.stop()
+	parent.action_timer.wait_time = parent.idle_time
+	parent.action_timer.start()
+
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 
 	# if lower than idling probability, start patrolling.
 	var randomizer := randf()
-	print("Idling chance: ", randomizer)
+	#print("Idling chance: ", randomizer)
 	if randomizer < exit_chance(idle_steps):
 		transition_to.emit("Patrolling")
 	else:
 		idle_steps += 1
-		print("Currently idling")
+		#print("Currently idling")
