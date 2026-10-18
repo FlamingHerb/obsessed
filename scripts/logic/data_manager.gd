@@ -29,6 +29,13 @@ signal data_changed
 
 ## Initializes everything.
 func _init() -> void:
+	reset()
+	
+	print(_switches)
+	print(_variables)
+
+## Resets everything.
+func reset() -> void:
 	# Initialize _switches
 	for id in SWCH_NAME.values():
 		_switches[id] = false
@@ -36,9 +43,6 @@ func _init() -> void:
 	# Initialize _variables
 	for id in VAR_NAME.values():
 		_variables[id] = 0
-	
-	print(_switches)
-	print(_variables)
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not OS.is_debug_build(): return

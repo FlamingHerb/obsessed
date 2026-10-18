@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://b3mmdpvhsxh4y"]
+
+[ext_resource type="Script" uid="uid://cakun8vyljmr3" path="res://scripts/game_over.gd" id="1_xeevv"]
+[ext_resource type="Texture2D" uid="uid://c3ui8vf4mv3tl" path="res://assets/graphics/bg/living_room.png" id="2_tbwuq"]
+[ext_resource type="Environment" uid="uid://t0buq04dujjp" path="res://resources/new_environment.tres" id="3_racf3"]
+[ext_resource type="AudioStream" uid="uid://ddwtjfw7f0bod" path="res://assets/audio/bgs/nightmare_over.ogg" id="4_racf3"]
+
+[sub_resource type="Gradient" id="Gradient_pfpmf"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7m3ot"]
+gradient = SubResource("Gradient_pfpmf")
+
+[sub_resource type="Gradient" id="Gradient_sva3m"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.12222222, 1)
+colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v3hpu"]
+gradient = SubResource("Gradient_sva3m")
+width = 640
+height = 480
+fill_from = Vector2(0, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.44313726)
+
+[sub_resource type="Animation" id="Animation_tbwuq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_racf3"]
+resource_name = "free"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7m3ot"]
+_data = {
+&"RESET": SubResource("Animation_tbwuq"),
+&"free": SubResource("Animation_racf3")
+}
+
+[node name="GameOver" type="Node2D" unique_id=1103860144]
+script = ExtResource("1_xeevv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=361866674]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(562, 200)
+scale = Vector2(0.39843744, 137.99998)
+texture = SubResource("GradientTexture1D_7m3ot")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=520213151]
+modulate = Color(0.3829562, 0.3829562, 0.3829562, 1)
+position = Vector2(320, 240)
+texture = ExtResource("2_tbwuq")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1155122072]
+visible = false
+modulate = Color(0.14509805, 0.14509805, 0.14509805, 1)
+self_modulate = Color(0.14509805, 0.14509805, 0.14509805, 1)
+position = Vector2(320, 240)
+texture = SubResource("GradientTexture2D_v3hpu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=402113008]
+environment = ExtResource("3_racf3")
+
+[node name="GabWindow" type="PanelContainer" parent="." unique_id=1332034028]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 428.0
+offset_right = 640.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GabWindow" unique_id=1594456743]
+layout_mode = 2
+text = "The nightmare is over."
+fit_content = true
+vertical_alignment = 2
+
+[node name="Transition" type="ColorRect" parent="." unique_id=11526342]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=897803246]
+libraries/ = SubResource("AnimationLibrary_7m3ot")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1702252533]
+stream = ExtResource("4_racf3")
+autoplay = true

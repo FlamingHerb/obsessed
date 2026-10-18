@@ -20,20 +20,20 @@
 [ext_resource type="Texture2D" uid="uid://cdqjqi67jglyt" path="res://assets/graphics/obsessed/obsessed-stalk.png" id="18_c02dm"]
 [ext_resource type="Resource" uid="uid://b3gyykg0ohasl" path="res://resources/events/audio/living_room.tres" id="19_c02dm"]
 
-[sub_resource type="Gradient" id="Gradient_pfpmf"]
+[sub_resource type="Gradient" id="Gradient_c02dm"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.8873592, 0.4398922, 1.92523e-07, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_57qmd"]
-gradient = SubResource("Gradient_pfpmf")
+gradient = SubResource("Gradient_c02dm")
 
-[sub_resource type="Gradient" id="Gradient_sva3m"]
+[sub_resource type="Gradient" id="Gradient_kj25d"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.12222222, 1)
 colors = PackedColorArray(0, 0, 0, 0.8235294, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_pfpmf"]
-gradient = SubResource("Gradient_sva3m")
+gradient = SubResource("Gradient_kj25d")
 width = 640
 height = 480
 fill_from = Vector2(0, 0.5)

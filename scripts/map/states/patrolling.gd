@@ -23,11 +23,13 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 			var target: MapNode = parent.game_map.find_child(new_data.target_area)
 			patrol_line = parent.pathfind(parent.current_location, target)
 		
+		parent.action_timer.wait_time = parent.patrol_reaction
 		parent.action_timer.start(parent.patrol_reaction)
 	else:
 		_natural_route_generation()
 	
 		# Resume patrol time.
+		parent.action_timer.wait_time = parent.patrol_time
 		parent.action_timer.start(parent.patrol_time)
 
 func _natural_route_generation() -> void:
@@ -73,4 +75,3 @@ func action_timer_timeout(action_timer: Timer) -> void:
 	else:
 		# Add variance
 		parent.obsession_moving(patrol_line.pop_front())
-		parent.action_timer.start(parent.patrol_time - randf_range(-1.5, 1.5))

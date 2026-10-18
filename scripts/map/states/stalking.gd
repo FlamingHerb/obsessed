@@ -13,7 +13,8 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 	if waiting_period <= 0:
 		waiting_period = parent.aggressive_time
 	
-	parent.action_timer.start(1.0)
+	parent.action_timer.wait_time = 1.0
+	parent.action_timer.start()
 	
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 

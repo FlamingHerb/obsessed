@@ -53,7 +53,7 @@ signal initiate_game_over()
 ## Expose Stalking state
 @onready var stalking_state: Stalking = $Stalking
 ## Sprite2D that we will manipulate
-@onready var obsessed_sprite: Sprite2D = $ObsessedSprite
+@onready var obsessed_sprite: AnimatedSprite2D = $ObsessedSprite
 ## Animation player only for us.
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -134,7 +134,12 @@ func check_to_show_obsessed_avatar() -> void:
 	# Check if the player is in the area.
 	if _check_if_player_obsessed_in_same_room():
 		#print("OBSESSION DEBUG: She's here.")
-				
+		
+		if stalking_state.waiting_period > 0:
+			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
+		else:
+			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.AGGRESSIVE)
+		
 		# Only do this if the obsessed avatar is not visible yet.
 		if not player_game_area.obsessed_avatar.visible:
 			player_game_area.obsessed_avatar.show()
@@ -162,10 +167,10 @@ func check_for_next_state() -> void:
 	if _check_if_player_obsessed_in_same_room():
 		# If she's there, turn her into stalking.
 		if stalking_state.waiting_period > 0:
-			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
+			#player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.STALKING)
 			_transition_to_next_state("Stalking")
 		else:
-			player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.AGGRESSIVE)
+			#player_game_area.obsessed_avatar.change_sprite(ObsessedAvatar.SPRITE_NUM.AGGRESSIVE)
 			_transition_to_next_state("Aggressive")
 	else:
 		# If the Obsessed managed to find the player...
@@ -229,12 +234,24 @@ func _check_if_player_obsessed_in_same_room() -> bool:
 	
 ## The impassable start. Forces timer action shutdown, and then kills the player.
 func start_game_over() -> void:
+	initiate_game_over.emit() # Emit first.
+	
 	action_timer.stop() # Shuts down action timer.
 	
 	# NOTE: Might be faulty.
 	#get_viewport().set_process_input(false) # Disable player input.
 	
+	# Either quick death or not.
+	if randf() < 0.5:
+		animation_player.play("death")
+	else:
+		animation_player.play("quick_death")
+		
+	await animation_player.animation_finished # Wait.
+	await Events.wait(1)
 	
+	get_tree().change_scene_to_packed(preload("res://scenes/game_over.tscn"))
+		
 
 #endregion Helper functions
 
@@ -284,5 +301,6 @@ func _transition_to_next_state(target_state_path: String, data: StateData = null
 # Tell current state that the timer has timed out.
 func _on_action_timer_timeout() -> void:
 	# Finally, call the current state.
+	print("State: ", state.name, " | Time: ", action_timer.wait_time)
 	state.action_timer_timeout(action_timer)
 #endregion

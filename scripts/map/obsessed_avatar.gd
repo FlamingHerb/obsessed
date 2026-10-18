@@ -36,6 +36,8 @@ func change_sprite(sprite_enum: SPRITE_NUM) -> void:
 		SPRITE_NUM.AGGRESSIVE:
 			poly_sprite.texture = aggressive_sprite
 	
+	poly_sprite.queue_redraw()
+	
 func _process(_delta: float) -> void:
 	pass
 

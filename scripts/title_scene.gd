@@ -5,7 +5,12 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_new_game_pressed() -> void:
+	# Change stuff first.
+	DataManager.reset()
+	
+	# Then change scene.
 	get_tree().change_scene_to_packed(preload("res://scenes/main_game_frame.tscn"))
+	
 
 func _on_options_pressed() -> void:
 	pass # Replace with function body.

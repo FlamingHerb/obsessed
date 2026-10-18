@@ -358,6 +358,7 @@ metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Aggressive" type="Node" parent="." unique_id=1883091544]
 script = ExtResource("5_jltei")
+activate_debug = true
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Patrolling" type="Node" parent="." unique_id=2120431814]
