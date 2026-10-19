@@ -82,10 +82,10 @@ func _ready() -> void:
 	# Connect signals.
 	Events.state_change_force.connect(_transition_to_next_state)
 	
-	# It should know if a transition occurs.
-	Events.change_map.connect(_map_changing)
-	# And it should know when it ends.
-	Events.area_change_completed.connect(_map_changing_end)
+	# DEPRECATED: It should know if a transition occurs.
+	#Events.change_map.connect(_map_changing)
+	# DEPRECATED: And it should know when it ends.
+	#Events.area_change_completed.connect(_map_changing_end)
 	
 	obsession_moving(obsessed_starting_point)
 	for state_node: StateBase in find_children("*", "StateBase"):
@@ -100,33 +100,44 @@ func _ready() -> void:
 ## NOTE: Only when Idle and Patrolling!
 func _obsession_drain_time_from_move() -> void:
 	# If Aggressive or Stalking, stop.
-	if state is Aggressive or state is Stalking or state is Sleeping: return
-	# Specific only to a patrol issue.
-	if action_timer.time_left <= 0.5: return
+	if state is Aggressive or state is Stalking: return
 	
 	# Force a move.
 	if action_timer.time_left - 1.0 > 0.0:
-		action_timer.wait_time -= 0.5
+		action_timer.start(action_timer.time_left - 1.0)
 	else:
-		# Reset everything first.
-		state.state_timer_reset()
 		# Then, emit the following.
 		action_timer.timeout.emit()
+		
+		# Reset everything first.
+		state.state_timer_reset()
 		print("DEBUG: MOVE HAVE BEEN FORCED!")
 	print("Time left: ", action_timer.time_left)
 
 ## Happens when a map is changing.
-func _map_changing(_path: String) -> void:
-	action_timer.paused = true
-
-## Happens when a map is finishing changing.
-func _map_changing_end() -> void:
-	#print("DEBUG: Action timer resumed with ", action_timer.time_left)
+func map_changing_start() -> void:
+	# Pause timer first.
+	pause_action_time(true)
+	
+	## Check if there's a need to change the obsessed's state.
+	check_for_next_state()
+	## Check if there's a need to show the obsessed's avatar.
+	check_to_show_obsessed_avatar()
+	
 	# INFO: This is a way to force a move from the Obsessed so the player cannot
 	# take advantage of moving around.
 	print("State after map ended: ", state.name)
-	action_timer.paused = false
 	_obsession_drain_time_from_move()
+	
+
+## Happens when a map is finishing changing.
+func map_changing_end() -> void:
+	#print("DEBUG: Action timer resumed with ", action_timer.time_left)
+	pause_action_time(false)
+
+## Helper function to pause the AI's action timer.
+func pause_action_time(value: bool) -> void:
+	action_timer.paused = value
 
 func obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.

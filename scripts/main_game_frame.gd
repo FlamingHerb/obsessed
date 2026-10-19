@@ -66,6 +66,9 @@ func _deferred_change_area(path: String) -> void:
 	# unless want to rename ofc xD
 	@warning_ignore("shadowed_variable")
 	
+	# Action timer should always be paused first.
+	obsessed_ai.pause_action_time(true)
+	
 	# When change scenes, make sure to reset gab window regardless.
 	gab_window.hide_text(true)
 	
@@ -102,16 +105,17 @@ func _deferred_change_area(path: String) -> void:
 	# New scene must always be the second one.
 	game_layer.move_child(current_scene, 1)
 	
-	## Check if there's a need to change the obsessed's state.
-	obsessed_ai.check_for_next_state()
-	## Check if there's a need to show the obsessed's avatar.
-	obsessed_ai.check_to_show_obsessed_avatar()
+	# Tell the Obsessed AI to change its shit.
+	obsessed_ai.map_changing_start()
 	
 	await _fade_in_to_scene(current_scene)
 	
 	#print("DEBUG: Activating Map Event Base")
 	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
 		map_event_base.input_pickable = true
+	
+	# And once its changing shit is done...
+	obsessed_ai.map_changing_end()
 	
 	Events.area_change_completed.emit()
 	

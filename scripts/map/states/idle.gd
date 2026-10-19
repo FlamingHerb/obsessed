@@ -35,8 +35,8 @@ func exit_chance(s: int) -> float:
 func state_timer_reset() -> void:
 	# Change action timer to appropriate amount.
 	parent.action_timer.stop()
-	parent.action_timer.wait_time = parent.idle_time
-	parent.action_timer.start()
+	#parent.action_timer.wait_time = parent.idle_time
+	parent.action_timer.start(parent.idle_time)
 
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 

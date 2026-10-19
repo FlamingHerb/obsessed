@@ -46,7 +46,14 @@ func _natural_route_generation() -> void:
 	
 	# Then, from its current route, pathfind to its new route randomly chosen.
 	#patrol_line = parent.pathfind(parent.current_location, possible_route.pick_random())
-	patrol_line = find_largest_arrays(route_generator).pick_random()
+	var largest_arrays_found := find_largest_arrays(route_generator)
+	
+	# Just in case:
+	if largest_arrays_found.is_empty():
+		patrol_line = parent.pathfind(parent.current_location, possible_route.pick_random())
+	else:
+		patrol_line = largest_arrays_found.pick_random()
+	
 	# And for some reason remove current route.
 	patrol_line.erase(parent.current_location)
 	
@@ -77,8 +84,8 @@ func find_largest_arrays(grid: Array) -> Array:
 func state_timer_reset() -> void:
 	# Change action timer to appropriate amount.
 	parent.action_timer.stop()
-	parent.action_timer.wait_time = parent.patrol_time
-	parent.action_timer.start()
+	#parent.action_timer.wait_time = parent.patrol_time
+	parent.action_timer.start(parent.patrol_time)
 
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 
