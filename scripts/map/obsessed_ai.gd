@@ -52,6 +52,8 @@ signal initiate_game_over()
 ).call()
 ## Expose Stalking state
 @onready var stalking_state: Stalking = $Stalking
+## Expose Patrolling state
+@onready var patrolling_state: Patrolling = $Patrolling
 ## Sprite2D that we will manipulate
 @onready var obsessed_sprite: AnimatedSprite2D = $ObsessedSprite
 ## Animation player only for us.
@@ -102,9 +104,14 @@ func _obsession_drain_time_from_move() -> void:
 	# If Aggressive or Stalking, stop.
 	if state is Aggressive or state is Stalking: return
 	
+	# NOTE: Does it need to be here?
+	# This only depends when the time given for patrol reaction is lower.
+	#if action_timer.time_left <= patrol_reaction and patrolling_state.reacting: return
+	if action_timer.time_left <= patrol_reaction and patrolling_state.reacting: return
+	
 	# Force a move.
-	if action_timer.time_left - 1.0 > 0.0:
-		action_timer.start(action_timer.time_left - 1.0)
+	if action_timer.time_left - 0.5 > 0.0:
+		action_timer.start(action_timer.time_left - 0.5)
 	else:
 		# Then, emit the following.
 		action_timer.timeout.emit()

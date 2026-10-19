@@ -2,6 +2,7 @@ class_name Patrolling
 extends StateBase
 
 var patrol_line: Array[MapNode]
+var reacting: bool = false
 
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
@@ -20,6 +21,7 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 			print("PATROL DEBUG: Continuing patrol")
 		if new_data.target_area:
 			print("PATROL DEBUG: SNIFFING NEW TARGGET")
+			reacting = true
 			var target: MapNode = parent.game_map.find_child(new_data.target_area)
 			patrol_line = parent.pathfind(parent.current_location, target)
 		
@@ -27,6 +29,7 @@ func enter(previous_state_path: String, data: StateData = null) -> void:
 		parent.action_timer.wait_time = parent.patrol_reaction
 		parent.action_timer.start(parent.patrol_reaction)
 	else:
+		reacting = false
 		_natural_route_generation()
 	
 		# Resume patrol time.
@@ -89,6 +92,7 @@ func state_timer_reset() -> void:
 
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 
+	reacting = false
 	if patrol_line.is_empty():
 		transition_to.emit("Idle")
 	else:
