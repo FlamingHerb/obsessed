@@ -69,6 +69,21 @@ const obsessed_patrol_sfx := [
 	"res://assets/audio/se/obsessed_patrol_2.ogg"
 ]
 
+const obsessed_idle_talk := [
+	"res://assets/audio/va/come_to_me.ogg",
+	"res://assets/audio/va/lets_talk.ogg",
+	"res://assets/audio/va/shouldnt_have_met_you.ogg",
+	"res://assets/audio/va/what_youve_done.ogg"
+]
+
+const obsessed_aggro_talk := [
+	"res://assets/audio/va/dont_you_get_it.ogg",
+	"res://assets/audio/va/if_i_have_to_suffer.ogg",
+	"res://assets/audio/va/know_where_you_are.ogg",
+	"res://assets/audio/va/were_way_past_apologies.ogg",
+	"res://assets/audio/va/were_way_past_apologies_2.ogg"
+]
+
 ## Current location of the obsession
 var current_location: MapNode
 ## Location that the Obsessed AI last visited.

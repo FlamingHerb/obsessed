@@ -133,6 +133,29 @@ func outside_sfx_play(path, vol: float = 1.0):
 	
 	sfx.volume_db = linear_to_db(vol)
 	sfx.play()
+	
+
+# Play for effects that are for the VA of Obsessed.
+func va_sfx_play(path, vol: float = 1.0) -> void:
+	var sfx = AudioStreamPlayer.new()
+	sound_effect_queue.add_child(sfx)
+	sfx.finished.connect(_sfx_free.bind(sfx))
+	sfx.bus = &"VASFX"
+	
+	#print("Working")
+	if path is String:
+		sfx.stream = load(path)
+	else: 
+		sfx.stream = path
+	
+	sfx.volume_db = linear_to_db(vol)
+	sfx.play()
+
+# Enable the bus effects for aggresion.
+func va_sfx_enable_bus_effects(value: bool) -> void:
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("VASFX"), 1, value)
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("VASFX"), 2, value)
+
 #endregion
 
 func pause_game() -> void:
@@ -143,3 +166,12 @@ func pause_game() -> void:
 func resume_game() -> void:
 	#bgm_pause(false)
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, false)
+
+## Reset to old values.
+## Will ONLY be called by Events.
+func reset() -> void:
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("VASFX"), 1, false)
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("VASFX"), 2, false)
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, false)
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGS"), 0, false)
+	

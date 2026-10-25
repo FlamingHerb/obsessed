@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cqre1d7efrq45"]
 
 [ext_resource type="Script" uid="uid://651prkfosia5" path="res://scripts/logic/audio_manager.gd" id="1_qxga5"]
+[ext_resource type="AudioStream" uid="uid://by2b17q7g4i26" path="res://assets/audio/va/know_where_you_are.ogg" id="2_28fqc"]
 
 [node name="AudioManager" type="Node" unique_id=2086503652]
 process_mode = 3
@@ -12,6 +13,7 @@ bus = &"BGM"
 
 [node name="BGS" type="AudioStreamPlayer" parent="." unique_id=594709218]
 unique_name_in_owner = true
-bus = &"BGS"
+stream = ExtResource("2_28fqc")
+bus = &"VASFX"
 
 [node name="SFX" type="Node" parent="." unique_id=899182288]

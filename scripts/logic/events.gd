@@ -80,8 +80,9 @@ func change_area(path: String) -> void:
 	change_map.emit(path)
 
 ## Resets everything when going back to main menu.
+## Is the main reset button.
 func reset()-> void:
-	pass
+	AudioManager.reset()
 
 ## Force state change.
 func force_state_change(target_state_path: String, data: StateData = null) -> void:
