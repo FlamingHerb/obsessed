@@ -276,7 +276,6 @@ func check_if_sound_emitted() -> void:
 		#var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
 		## Get distance from player. Also turn it to float for division.
 		var obsessed_distance := current_player_distance
-		print("Obsessed Distance from player: ", obsessed_distance)
 		
 		# If idle, play the sounds specific to that room.
 		if state is Idle:
@@ -294,9 +293,12 @@ func play_va_sfx() -> void:
 	# This only happens if the Obsessed is not in the same room as of the player.
 	if not _check_if_player_obsessed_in_same_room():
 		# Lower VA time after being allowed to play.
-		current_va_threshold = 0.0
-		
 		var obsessed_distance := current_player_distance
+		
+		# Check first if the player can hear the SFX.
+		if obsessed_distance <= 3: current_va_threshold = 0.0
+		# Else, we will pass.
+		else: return
 		
 		# Finally, play a voice line depending on the stalking state's waiting
 		# period. 
@@ -341,12 +343,13 @@ func start_game_over() -> void:
 	get_tree().change_scene_to_packed(preload("res://scenes/game_over.tscn"))
 
 ## Helper function so that Obsessed don't have to CONSTANTLY calculate for
-## distance from the player.		
+## distance from the player.
 func _calculate_distance_from_player() -> void:
 	var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
 	# Get distance from player. Also turn it to float for division.
 	var obsessed_distance := float(len(pathfind(player_map_node, current_location)))
 	current_player_distance = obsessed_distance
+	print("Obsessed Distance from player: ", current_player_distance)
 
 #endregion Helper functions
 
