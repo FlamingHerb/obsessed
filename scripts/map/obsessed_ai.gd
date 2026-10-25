@@ -38,6 +38,8 @@ signal initiate_game_over()
 @export var aggressive_time: float
 ## How long the Obsessed attacks the player after loading into the map.
 @export var aggression_reaction_time: float
+## How the VA sound effect occurs. There will be a threshold to how it happens.
+@export var set_va_threshold: float = 0.0
 @export_category("Debugging")
 ## Debug for Pathfinding
 @export var starting_node_debug: MapNode
@@ -46,6 +48,8 @@ signal initiate_game_over()
 
 ## Action timer.
 @onready var action_timer: Timer = $ActionTimer
+## VA timer.
+@onready var va_timer: Timer = $VATimer
 ## The current state of the state machine.
 @onready var state: StateBase = (func get_initial_state() -> StateBase:
 	return initial_state if initial_state != null else get_child(0)
@@ -93,6 +97,10 @@ var previous_state: StateBase
 ## It MUST have an idea the current GameArea loaded.
 ## This is only a variable that the MAINGAMEFRAME will touch.
 var player_game_area: GameArea
+## How the VA sound effect occurs. There will be a threshold to how it happens.
+var current_va_threshold: float = 0.0
+## Current distance from player.
+var current_player_distance: int = 0
 
 func _ready() -> void:
 	stalking_state.waiting_period = aggressive_time
@@ -112,6 +120,7 @@ func _ready() -> void:
 	state.enter("")
 	
 	action_timer.start()
+	va_timer.start()
 
 ## Allow the obsession to make a move during transition.
 ## NOTE: Only when Idle and Patrolling!
@@ -139,7 +148,7 @@ func _obsession_drain_time_from_move() -> void:
 ## Happens when a map is changing.
 func map_changing_start() -> void:
 	# Pause timer first.
-	pause_action_time(true)
+	pause_timer(true)
 	
 	## Check if there's a need to change the obsessed's state.
 	check_for_next_state()
@@ -154,12 +163,16 @@ func map_changing_start() -> void:
 
 ## Happens when a map is finishing changing.
 func map_changing_end() -> void:
+	## Check for current distance from the player AFTER moving.
+	_calculate_distance_from_player()
+	
 	#print("DEBUG: Action timer resumed with ", action_timer.time_left)
-	pause_action_time(false)
+	pause_timer(false)
 
 ## Helper function to pause the AI's action timer.
-func pause_action_time(value: bool) -> void:
+func pause_timer(value: bool) -> void:
 	action_timer.paused = value
+	va_timer.paused = value
 
 func obsession_moving(target_area: MapNode) -> void:
 	# Tell the other parts that the obsessed is exiting the area.
@@ -174,6 +187,9 @@ func obsession_moving(target_area: MapNode) -> void:
 	
 	# Check if obsessed is going to that location.
 	check_to_show_obsessed_avatar()
+	
+	# Change current distance before doing sounds.
+	_calculate_distance_from_player()
 	
 	# Check to see if sound will be emitted when moving.
 	check_if_sound_emitted()
@@ -243,6 +259,7 @@ func check_for_next_state() -> void:
 				#_transition_to_next_state("Idle")
 
 ## Checks if a sound should be emitted if the Obsessed is anywhere.
+## Does not account for VA sounds.
 func check_if_sound_emitted() -> void:
 	if not _null_check(): return
 	
@@ -255,22 +272,39 @@ func check_if_sound_emitted() -> void:
 		
 	# If not, check if it is hovering over a neighbouring area.
 	else:
-		# Get the player's map node.
-		var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
-		# Get distance from player. Also turn it to float for division.
-		var obsessed_distance := float(len(pathfind(player_map_node, current_location)))
+		## Get the player's map node.
+		#var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
+		## Get distance from player. Also turn it to float for division.
+		var obsessed_distance := current_player_distance
 		print("Obsessed Distance from player: ", obsessed_distance)
 		
 		# If idle, play the sounds specific to that room.
 		if state is Idle:
 			# If it is empty, don't bother.
-			if current_location.idle_audio_pack.is_empty(): return
+			if current_location.idle_audio_pack.is_empty(): pass
 			
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling and obsessed_distance <= 2:
 			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * obsessed_distance)))
 			AudioManager.outside_sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
+	
+
+## Plays VA SFX. Has its own action timer to account for the following.
+func play_va_sfx() -> void:
+	# This only happens if the Obsessed is not in the same room as of the player.
+	if not _check_if_player_obsessed_in_same_room():
+		# Lower VA time after being allowed to play.
+		current_va_threshold = 0.0
 		
+		var obsessed_distance := current_player_distance
+		
+		# Finally, play a voice line depending on the stalking state's waiting
+		# period. 
+		if stalking_state.waiting_period > 0: # if state == Idle
+			AudioManager.va_sfx_play(obsessed_idle_talk.pick_random())
+		else: # if state == Aggressive
+			AudioManager.va_sfx_enable_bus_effects(true)
+			AudioManager.va_sfx_play(obsessed_aggro_talk.pick_random())
 
 #region Helper functions
 # Helper function
@@ -305,7 +339,14 @@ func start_game_over() -> void:
 	await Events.wait(1)
 	
 	get_tree().change_scene_to_packed(preload("res://scenes/game_over.tscn"))
-		
+
+## Helper function so that Obsessed don't have to CONSTANTLY calculate for
+## distance from the player.		
+func _calculate_distance_from_player() -> void:
+	var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
+	# Get distance from player. Also turn it to float for division.
+	var obsessed_distance := float(len(pathfind(player_map_node, current_location)))
+	current_player_distance = obsessed_distance
 
 #endregion Helper functions
 
@@ -357,4 +398,17 @@ func _on_action_timer_timeout() -> void:
 	# Finally, call the current state.
 	#print("State: ", state.name, " | Time: ", action_timer.wait_time)
 	state.action_timer_timeout(action_timer)
+
+# Increases chances of VA sound effect to play over time.
+func _on_va_timer_timeout() -> void:
+	if _null_check(): return
+	
+	# Increase VA threshold.
+	if randf() < 0.67: current_va_threshold += randi_range(1, 5)
+	
+	# When threshold is high, then play VA SFX.
+	# However, we will NOT be the ones decreasing it.
+	# It only decreases when VA SFX is played.
+	if current_va_threshold > set_va_threshold: play_va_sfx()
+	
 #endregion

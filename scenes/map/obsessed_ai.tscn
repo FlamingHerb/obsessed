@@ -344,6 +344,8 @@ initial_state = NodePath("Sleeping")
 
 [node name="ActionTimer" type="Timer" parent="." unique_id=1314048613]
 
+[node name="VATimer" type="Timer" parent="." unique_id=97850597]
+
 [node name="Sleeping" type="Node" parent="." unique_id=569402701]
 script = ExtResource("2_252wt")
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
@@ -392,3 +394,4 @@ stream = ExtResource("10_feyml")
 stream = ExtResource("11_feyml")
 
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
+[connection signal="timeout" from="VATimer" to="." method="_on_va_timer_timeout"]

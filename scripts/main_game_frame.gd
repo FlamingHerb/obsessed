@@ -67,7 +67,7 @@ func _deferred_change_area(path: String) -> void:
 	@warning_ignore("shadowed_variable")
 	
 	# Action timer should always be paused first.
-	obsessed_ai.pause_action_time(true)
+	obsessed_ai.pause_timer(true)
 	
 	# When change scenes, make sure to reset gab window regardless.
 	gab_window.hide_text(true)
