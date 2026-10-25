@@ -211,6 +211,7 @@ patrol_reaction = 0.5
 idle_time = 2.5
 aggressive_time = 20.0
 aggression_reaction_time = 2.0
+set_va_threshold = 140.0
 
 [node name="DebugTimer" type="Label" parent="AnythingElse" unique_id=169193626 node_paths=PackedStringArray("obsessed_ai")]
 offset_right = 40.0

@@ -126,6 +126,7 @@ func _ready() -> void:
 ## NOTE: Only when Idle and Patrolling!
 func _obsession_drain_time_from_move() -> void:
 	# If Aggressive or Stalking, stop.
+	#if state is Aggressive or state is Stalking or state is Sleeping: return
 	if state is Aggressive or state is Stalking: return
 	
 	# NOTE: Does it need to be here?
@@ -303,10 +304,10 @@ func play_va_sfx() -> void:
 		# Finally, play a voice line depending on the stalking state's waiting
 		# period. 
 		if stalking_state.waiting_period > 0: # if state == Idle
-			AudioManager.va_sfx_play(obsessed_idle_talk.pick_random())
+			AudioManager.va_sfx_play(obsessed_idle_talk.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
 		else: # if state == Aggressive
 			AudioManager.va_sfx_enable_bus_effects(true)
-			AudioManager.va_sfx_play(obsessed_aggro_talk.pick_random())
+			AudioManager.va_sfx_play(obsessed_aggro_talk.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
 
 #region Helper functions
 # Helper function
@@ -345,6 +346,8 @@ func start_game_over() -> void:
 ## Helper function so that Obsessed don't have to CONSTANTLY calculate for
 ## distance from the player.
 func _calculate_distance_from_player() -> void:
+	if not _null_check(): return
+	
 	var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
 	# Get distance from player. Also turn it to float for division.
 	var obsessed_distance := float(len(pathfind(player_map_node, current_location)))
@@ -404,10 +407,12 @@ func _on_action_timer_timeout() -> void:
 
 # Increases chances of VA sound effect to play over time.
 func _on_va_timer_timeout() -> void:
-	if _null_check(): return
+	if not _null_check(): return
 	
 	# Increase VA threshold.
-	if randf() < 0.67: current_va_threshold += randi_range(1, 5)
+	if randf() < 0.67: 
+		current_va_threshold += randi_range(1, 5)
+		print("Current VA Threshold increased: ", current_va_threshold)
 	
 	# When threshold is high, then play VA SFX.
 	# However, we will NOT be the ones decreasing it.
