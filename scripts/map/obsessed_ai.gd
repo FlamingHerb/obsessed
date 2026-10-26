@@ -285,8 +285,8 @@ func check_if_sound_emitted() -> void:
 			
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling and obsessed_distance <= 2:
-			print("Sound: ", linear_to_db(1.0 / (obsessed_distance * obsessed_distance)))
-			AudioManager.outside_sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
+			print("Sound: ", linear_to_db(1.0 / (obsessed_distance ** 2)))
+			AudioManager.outside_sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance ** 2))
 	
 
 ## Plays VA SFX. Has its own action timer to account for the following.
@@ -296,18 +296,18 @@ func play_va_sfx() -> void:
 		# Lower VA time after being allowed to play.
 		var obsessed_distance := current_player_distance
 		
-		# Check first if the player can hear the SFX.
-		if obsessed_distance <= 3: current_va_threshold = 0.0
-		# Else, we will pass.
-		else: return
+		## Check first if the player can hear the SFX.
+		#if obsessed_distance <= 3: current_va_threshold = 0.0
+		## Else, we will pass.
+		#else: return
 		
 		# Finally, play a voice line depending on the stalking state's waiting
 		# period. 
 		if stalking_state.waiting_period > 0: # if state == Idle
-			AudioManager.va_sfx_play(obsessed_idle_talk.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
+			AudioManager.va_sfx_play(obsessed_idle_talk.pick_random(), 1.0 / (obsessed_distance ** 3))
 		else: # if state == Aggressive
 			AudioManager.va_sfx_enable_bus_effects(true)
-			AudioManager.va_sfx_play(obsessed_aggro_talk.pick_random(), 1.0 / (obsessed_distance * obsessed_distance))
+			AudioManager.va_sfx_play(obsessed_aggro_talk.pick_random(), 1.0 / (obsessed_distance ** 3))
 
 #region Helper functions
 # Helper function
