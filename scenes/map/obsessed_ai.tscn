@@ -352,6 +352,7 @@ metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Idle" type="Node" parent="." unique_id=1084771201]
 script = ExtResource("3_sthe2")
+idle_sound_chance = 0.5
 metadata/_custom_type_script = "uid://biaf2k1w0j8hq"
 
 [node name="Stalking" type="Node" parent="." unique_id=2060034014]

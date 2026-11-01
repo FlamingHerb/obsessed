@@ -7,6 +7,8 @@ extends StateBase
 @export var min_idle_steps := 2
 ## How fast the probability ramps up.
 @export var ramp_steps := 20
+## The chance to trigger an idling sound.
+@export var idle_sound_chance := 0.2
 
 var idle_steps := 0
 
@@ -40,11 +42,23 @@ func state_timer_reset() -> void:
 
 ## Called when the action timer from the Obsessed AI parent is calling.
 func action_timer_timeout(action_timer: Timer) -> void: 
-	# if lower than idling probability, start patrolling.
+	
 	var randomizer := randf()
-	#print("Idling chance: ", randomizer)
+	
+	# Have the chance to play the sound.
+	if randomizer < idle_sound_chance: play_idle_sfx()
+	
 	if randomizer < exit_chance(idle_steps):
 		transition_to.emit("Patrolling")
 	else:
+		# Add to idle step.
 		idle_steps += 1
-		#print("Currently idling")
+
+## Activate sound when needed.
+func play_idle_sfx() -> void:
+	var obsessed_distance := parent.current_player_distance
+	# Play the sounds specific to that room.
+	if not parent.current_location.idle_audio_pack.is_empty(): 
+		var randomized_sfx: AudioStream = parent.current_location.idle_audio_pack.pick_random()
+		AudioManager.outside_sfx_play(randomized_sfx, obsessed_distance ** 2)
+		

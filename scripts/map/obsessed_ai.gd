@@ -273,16 +273,12 @@ func check_if_sound_emitted() -> void:
 		
 	# If not, check if it is hovering over a neighbouring area.
 	else:
+		var obsessed_distance := current_player_distance
 		## Get the player's map node.
 		#var player_map_node: MapNode = game_map.return_equivalent_map_node(player_game_area.name)
 		## Get distance from player. Also turn it to float for division.
-		var obsessed_distance := current_player_distance
 		
-		# If idle, play the sounds specific to that room.
-		if state is Idle:
-			# If it is empty, don't bother.
-			if current_location.idle_audio_pack.is_empty(): pass
-			
+		# NOTE: Originally, the idle sound is here but I moved it elsewhere.
 		# If patrolling, play the sounds specific to patrolling.
 		if state is Patrolling and obsessed_distance <= 2:
 			print("Sound: ", linear_to_db(1.0 / (obsessed_distance ** 2)))
