@@ -5,6 +5,7 @@ extends Node
 
 @onready var background_music: AudioStreamPlayer = %BGM
 @onready var background_sound: AudioStreamPlayer = %BGS
+@onready var breathing_background_sound: AudioStreamPlayer = %BreathingBGS
 @onready var sound_effect_queue = $SFX
 
 
@@ -89,6 +90,32 @@ func bgs_stop():
 
 func bgs_volume(volume: float):
 	background_sound.volume_db = linear_to_db(volume)
+	#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGS"),linear_to_db(volume))
+	
+## Plays BGS. Replaces if BGS currently playing.
+func breathing_bgs_play(path: String):
+	var new_music = load(path)
+	
+	# Check if BGM is the same
+	if breathing_background_sound.stream == new_music:
+		#print("The same music.")
+		return
+	
+	# Switches BGM.
+	if breathing_background_sound.playing:
+		breathing_bgs_stop()
+	
+	breathing_background_sound.stream = load(path)
+	#background_sound.stream.loop = true
+	breathing_background_sound.play()
+
+## Stops BGS, as expected.
+func breathing_bgs_stop():
+	breathing_background_sound.stop()
+	breathing_background_sound.stream = null
+
+func breathing_bgs_volume(volume: float):
+	breathing_background_sound.volume_db = linear_to_db(volume)
 	#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGS"),linear_to_db(volume))
 #endregion
 
