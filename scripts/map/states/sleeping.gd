@@ -16,3 +16,10 @@ func action_timer_timeout(action_timer: Timer) -> void:
 		# Change switch.
 		DataManager.set_switch(DataManager.SWCH_NAME.OBSESSED_AWAKE, true)
 		transition_to.emit("Idle")
+
+## Reset the timer given that a move has been force.
+func state_timer_reset() -> void:
+	# Change action timer to appropriate amount.
+	parent.action_timer.stop()
+	#parent.action_timer.wait_time = parent.idle_time
+	parent.action_timer.start(1.0)

@@ -126,8 +126,8 @@ func _ready() -> void:
 ## NOTE: Only when Idle and Patrolling!
 func _obsession_drain_time_from_move() -> void:
 	# If Aggressive or Stalking, stop.
-	#if state is Aggressive or state is Stalking or state is Sleeping: return
 	if state is Aggressive or state is Stalking: return
+	#if state is Aggressive or state is Stalking: return
 	
 	# NOTE: Does it need to be here?
 	# This only depends when the time given for patrol reaction is lower.
@@ -164,6 +164,9 @@ func map_changing_start() -> void:
 
 ## Happens when a map is finishing changing.
 func map_changing_end() -> void:
+	# TODO: To do later.
+	## Stop any possible noise from playing.
+	
 	## Check for current distance from the player AFTER moving.
 	_calculate_distance_from_player()
 	
