@@ -161,7 +161,6 @@ func map_changing_start() -> void:
 	print("State after map ended: ", state.name)
 	_obsession_drain_time_from_move()
 	
-
 ## Happens when a map is finishing changing.
 func map_changing_end() -> void:
 	# TODO: To do later.
@@ -287,7 +286,6 @@ func check_if_sound_emitted() -> void:
 			print("Sound: ", linear_to_db(1.0 / (obsessed_distance ** 2)))
 			AudioManager.outside_sfx_play(obsessed_patrol_sfx.pick_random(), 1.0 / (obsessed_distance ** 2))
 	
-
 ## Plays VA SFX. Has its own action timer to account for the following.
 func play_va_sfx() -> void:
 	# This only happens if the Obsessed is not in the same room as of the player.
@@ -354,7 +352,6 @@ func _calculate_distance_from_player() -> void:
 	print("Obsessed Distance from player: ", current_player_distance)
 
 #endregion Helper functions
-
 # I can't believe I'm using BFS now.
 func pathfind(start: MapNode, target: MapNode) -> Array[MapNode]:
 	var parent := {start: null}
