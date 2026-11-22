@@ -44,9 +44,9 @@ polygon = PackedVector2Array(351, 36, 355, 428, 521, 488, 525, -5)
 position = Vector2(72.000015, 319.99997)
 rotation = 3.1415927
 scale = Vector2(2.4, 2.4)
-poly_sprite = NodePath("Sprite2D2")
+poly_sprite = NodePath("ObsessedSprite")
 
-[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=2085541065]
+[node name="ObsessedSprite" type="Polygon2D" parent="ObsessedAvatar" unique_id=2085541065]
 position = Vector2(-116, 46)
 scale = Vector2(0.35115424, 0.3511542)
 texture = ExtResource("7_h8d3f")

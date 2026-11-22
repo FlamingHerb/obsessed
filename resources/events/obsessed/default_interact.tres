@@ -14,5 +14,6 @@ metadata/_custom_type_script = "uid://dg2l4x6x7w44q"
 [resource]
 resource_name = "Obsessed Default Interact"
 script = ExtResource("2_vml4e")
+graphic = "ObsessedSprite"
 commands = Array[ExtResource("1_olwkj")]([SubResource("Resource_olwkj")])
 metadata/_custom_type_script = "uid://bdpj5h4j8eq0h"

@@ -32,9 +32,9 @@ texture = ExtResource("2_4e2xn")
 [node name="ObsessedAvatar" parent="." unique_id=77851537 node_paths=PackedStringArray("poly_sprite") instance=ExtResource("6_5aqx1")]
 position = Vector2(24, 221)
 scale = Vector2(1.5, 1.5)
-poly_sprite = NodePath("Sprite2D2")
+poly_sprite = NodePath("ObsessedSprite")
 
-[node name="Sprite2D2" type="Polygon2D" parent="ObsessedAvatar" unique_id=1156369839]
+[node name="ObsessedSprite" type="Polygon2D" parent="ObsessedAvatar" unique_id=1156369839]
 position = Vector2(-116, 46)
 scale = Vector2(0.35115424, 0.3511542)
 texture = ExtResource("4_1fm6j")
