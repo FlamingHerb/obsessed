@@ -327,6 +327,7 @@ func start_game_over() -> void:
 	action_timer.stop() # Shuts down action timer.
 	
 	# NOTE: Might be faulty.
+	Events.toggle_map_interactivity(false)
 	#get_viewport().set_process_input(false) # Disable player input.
 	
 	# Either quick death or not.
