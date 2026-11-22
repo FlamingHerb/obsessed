@@ -8,6 +8,6 @@ extends Commands
 @export var value: bool = false
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	DataManager.set_switch(switch, value)
-	return true
+	super(node)

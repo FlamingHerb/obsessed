@@ -9,7 +9,7 @@ extends Commands
 @export var arguments: Array[String]
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	var callable = Callable(node.get_parent(), function_name)
 	callable.call(arguments)
-	return true
+	super(node)

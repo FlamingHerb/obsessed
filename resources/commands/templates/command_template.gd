@@ -3,6 +3,8 @@
 class_name Commands
 extends Resource
 
+signal command_done
+
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
-	return true
+func execute(node: MapEventBase) -> void:
+	command_done.emit()

@@ -11,10 +11,10 @@ extends Commands
 @export_file_path(".ogg", ".mp3", ".wav") var close_sfx: String = "res://assets/audio/se/close_queit.ogg"
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	if open_sfx: AudioManager.sfx_play(open_sfx)
 	Events.change_area(destination)
 	await Events.area_change_completed
 	if close_sfx: AudioManager.sfx_play(close_sfx)
 	
-	return true
+	#super(node)

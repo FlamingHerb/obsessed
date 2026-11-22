@@ -7,6 +7,6 @@ extends Commands
 @export var seconds: float = 0
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	await Events.wait(seconds)
-	return true
+	super(node)

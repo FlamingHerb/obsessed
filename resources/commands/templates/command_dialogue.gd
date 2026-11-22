@@ -9,5 +9,5 @@ extends Commands
 @export var label: String = ""
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
-	return true
+func execute(node: MapEventBase) -> void:
+	super(node)

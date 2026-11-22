@@ -10,6 +10,6 @@ extends Commands
 @export var fight_route_initiate: bool = false
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	Events.obsessed_alert(target_area, fight_route_initiate)
-	return true
+	super(node)

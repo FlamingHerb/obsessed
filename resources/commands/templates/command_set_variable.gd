@@ -17,7 +17,7 @@ enum OPERATION {
 @export var operation: OPERATION = OPERATION.SET
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	var data = DataManager.get_variable(variable)
 	
 	match OPERATION:
@@ -29,4 +29,4 @@ func execute(node: MapEventBase) -> bool:
 	# NO OPERATION SET. BECAUSE WE ARE OPTIMIZING IDIOTS
 	DataManager.set_variable(variable, data)
 	
-	return true
+	super(node)

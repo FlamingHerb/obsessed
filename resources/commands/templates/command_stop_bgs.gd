@@ -4,6 +4,6 @@ class_name StopBGSCommand
 extends Commands
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	AudioManager.bgs_stop()
-	return true
+	super(node)

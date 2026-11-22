@@ -9,6 +9,6 @@ extends Commands
 @export var seconds: float = 5
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	Events.show_gab_window_text(window_text, seconds)
-	return true
+	super(node)

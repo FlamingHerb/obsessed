@@ -37,6 +37,7 @@ func _ready() -> void:
 	
 	# INFO: Initialize connections to the Events scene.
 	Events.change_map.connect(_goto_area)
+	Events.enable_interactivity.connect(_enable_map_interactivity)
 	
 	Events.current_scene_context = Events.SCENE_CONTEXT.IN_GAME
 
@@ -93,14 +94,11 @@ func _deferred_change_area(path: String) -> void:
 	# Add child...
 	game_layer.add_child(current_scene)
 	
-	#print("DEBUG: Deactivating Map Event Base")
-	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
-		map_event_base.input_pickable = false
-	
 	# Before naming it...!
 	current_area_name = current_scene.name
-	#current_scene.name = "GameArea"
-	#current_scene.modulate = Color.BLACK
+	
+	#print("DEBUG: Deactivating Map Event Base")
+	_enable_map_interactivity(false)
 	
 	# New scene must always be the second one.
 	game_layer.move_child(current_scene, 1)
@@ -111,8 +109,7 @@ func _deferred_change_area(path: String) -> void:
 	await _fade_in_to_scene(current_scene)
 	
 	#print("DEBUG: Activating Map Event Base")
-	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
-		map_event_base.input_pickable = true
+	_enable_map_interactivity(true)
 	
 	# And once its changing shit is done...
 	obsessed_ai.map_changing_end()
@@ -122,6 +119,11 @@ func _deferred_change_area(path: String) -> void:
 #endregion
 
 #region Custom function
+
+func _enable_map_interactivity(value: bool) -> void:
+	var current_scene = game_layer.get_node(current_area_name)
+	for map_event_base: MapEventBase in current_scene.find_children("*", "MapEventBase"):
+		map_event_base.input_pickable = value
 
 func _fade_out_from_scene(new_area: Node2D) -> void:
 	animation_player.play("fade_to_black")

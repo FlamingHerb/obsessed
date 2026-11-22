@@ -9,6 +9,6 @@ extends Commands
 @export var volume: float = 1.0
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	AudioManager.sfx_play(audio_file, volume)
-	return true
+	super(node)

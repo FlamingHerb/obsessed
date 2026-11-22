@@ -4,6 +4,6 @@ class_name StopSFXAllCommand
 extends Commands
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	AudioManager.sfx_stop_all()
-	return true
+	super(node)

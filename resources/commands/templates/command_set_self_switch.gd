@@ -8,9 +8,9 @@ extends Commands
 @export var value: bool = false
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	# Set up hash.
 	var hash_key: String = node.get_parent().name + node.name + switch
 	
 	DataManager.set_self_switch(hash_key, value)
-	return true
+	super(node)

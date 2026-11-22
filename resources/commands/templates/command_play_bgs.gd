@@ -9,7 +9,7 @@ extends Commands
 @export var volume: float = 1.0
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	AudioManager.bgs_play(audio_file)
 	AudioManager.bgs_volume(volume)
-	return true
+	super(node)

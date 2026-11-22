@@ -12,6 +12,8 @@ extends Area2D
 
 ## The page list to run. It will run the bottom-most first, and then stop.
 @export var event_page_list: Array[EventPage]
+## Ignore interactivity toggles if a menu is needed for this.
+@export var ignore_interactivity: bool = false
 
 ## Used to track the current command that is running.
 var index: int = 0
@@ -37,6 +39,13 @@ func _ready() -> void:
 
 func _another_event_running(running: bool) -> void:
 	pass
+
+## Hide other graphics.
+func _hide_other_graphics() -> void:
+	# Hide all graphic images not needed.
+	for graphic in get_children():
+		#print("Graphic hidden: ", graphic.name)
+		graphic.hide()
 
 func _process(_delta: float) -> void:
 	if current_page:
@@ -64,6 +73,9 @@ func _on_mouse_exited() -> void:
 
 # When DataManager changes, find a better page host.
 func _find_suitable_page() -> void:
+	# Hide other stuff in case.
+	_hide_other_graphics()
+	
 	for i in range(event_page_list.size() - 1, -1, -1):
 		var event_page: EventPage = event_page_list[i]
 		if _meets_conditions(event_page):
@@ -71,6 +83,13 @@ func _find_suitable_page() -> void:
 			if event_page.transparent:
 				var hidden_node := get_node(event_page.graphic)
 				hidden_node.visible = not event_page.transparent
+			
+			if event_page.graphic:
+				# Find the graphic
+				var graphic = find_child(event_page.graphic)
+				#print("Showing graphic: ", graphic)
+				
+				graphic.show()
 			
 			position += event_page.offset_issued
 			
@@ -94,7 +113,8 @@ func _activate_event_page(event_page: EventPage) -> void:
 	lock = true
 	index = 0
 	
-	# REFACTOR this.
+	if event_page.trigger == EventPage.TRIGGER_TYPE.CONTACT and not ignore_interactivity:
+		Events.call_deferred("toggle_map_interactivity", false)
 	
 	while index < len(event_page.commands):
 		var command = event_page.commands[index]
@@ -103,14 +123,30 @@ func _activate_event_page(event_page: EventPage) -> void:
 		# Debugging
 		#print("Running command #", index, ": " , command.get_script().get_global_name())
 		
-		@warning_ignore("redundant_await")
-		await command.execute(self)
+		# If it is a SceneChangeCommand, just break.
+		if command is SceneChangeCommand:
+			command.call_deferred("execute", self)
+			break	
+		
+		command.call_deferred("execute", self)
+		
+		# Debugging
+		await command.command_done
+		
 		index += 1 
 	
-	print("DEBUG: Event ended.")
+	print(name, " DEBUG: Event ended.")
+	
+	if event_page.trigger == EventPage.TRIGGER_TYPE.CONTACT and not ignore_interactivity:
+		Events.call_deferred("toggle_map_interactivity", true)
+	
 	lock = false
 
 # Run the interaction.
 func interact() -> void:
+	print("This activated.")
+	# Ignore interactions if we are transparent.
+	if current_page.transparent: return
+	
 	if current_page and current_page.trigger == EventPage.TRIGGER_TYPE.CONTACT:
 		_activate_event_page(current_page)

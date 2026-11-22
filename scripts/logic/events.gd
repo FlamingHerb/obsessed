@@ -17,6 +17,8 @@ signal event_running(running: bool)
 ## When you want to force the state change
 signal state_change_force(target_state_path: String, data: StateData)
 signal alert_obsessed_of_happening(target_area: String, fight_route_initiate: bool)
+## Enable interactivity.
+signal enable_interactivity(value: bool)
 #endregion
 
 ## Signal for gab window text
@@ -87,6 +89,10 @@ func reset()-> void:
 ## Force state change.
 func force_state_change(target_state_path: String, data: StateData = null) -> void:
 	state_change_force.emit(target_state_path, data)
+
+## Toggle map interactivity.
+func toggle_map_interactivity(value: bool) -> void:
+	enable_interactivity.emit(value)
 
 ## Tell the obsessed to do jack by telling where to go [target_area] and
 ## if fight route actually starts.

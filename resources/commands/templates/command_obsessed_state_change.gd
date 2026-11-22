@@ -10,6 +10,6 @@ extends Commands
 @export var data: StateData
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	Events.force_state_change(target_state, data)
-	return true
+	super(node)

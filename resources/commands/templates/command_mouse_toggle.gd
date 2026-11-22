@@ -7,7 +7,7 @@ extends Commands
 @export var toggle_mouse_mode: bool = false
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	if toggle_mouse_mode: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else: Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	return true
+	super(node)

@@ -10,9 +10,9 @@ extends Commands
 @export var animation_string: String
 
 @warning_ignore("unused_parameter")
-func execute(node: MapEventBase) -> bool:
+func execute(node: MapEventBase) -> void:
 	var actual_player: AnimationPlayer = node.get_parent().get_node(animation_player)
 	actual_player.play(animation_string)
 	await actual_player.animation_finished
 	
-	return true
+	super(node)
